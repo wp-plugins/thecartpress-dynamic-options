@@ -112,10 +112,17 @@ function tcp_delete_dynamic_option( $post_id ) {
 /**
  * Returns the dynamic product options
  * @param $post_id
+ * @param $ids, if true the function returns only dynamic option ids, if false the dynamic option posts
  * @since 1.0.0 
  */
-function tcp_get_dynamic_options( $post_id ) {
-	return get_posts( array( 'post_type' => TCP_DYNAMIC_OPTIONS_POST_TYPE, 'post_parent' => $post_id, 'numberposts' => -1 ) );
+function tcp_get_dynamic_options( $post_id, $ids = false ) {
+	$args = array(
+		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+		'post_parent'	=> $post_id,
+		'numberposts'	=> -1,
+	);
+	if ( $ids ) $args['fields'] = 'ids';
+	return get_posts( $args );
 }
 
 /**
