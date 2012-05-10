@@ -1,0 +1,423 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TheCartPress-DyamicOptions\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-13 09:44+0100\n"
+"PO-Revision-Date: 2012-04-13 09:59+0100\n"
+"Last-Translator: Sensei <sensei@thecartpress.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: DynamicOptions.class.php:55
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin activated."
+msgstr "<strong>Optiones Dinámicas para TheCartPress</strong> requiere el plugin activado de TheCartPress."
+
+#: DynamicOptions.class.php:60
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin"
+msgstr "<strong>Opciones Dinámicas para TheCartPress</strong> requiere el plugin para TheCartPress"
+
+#: DynamicOptions.class.php:66
+msgid "Dynamic options type"
+msgstr "Tipo de Opciones Dinámicas"
+
+#: DynamicOptions.class.php:73
+#: admin/AttributeSets.php:91
+#: admin/AttributeSets.php:121
+#: admin/AttributeSets.php:129
+#: admin/AttributeList.php:65
+msgid "Attributes"
+msgstr "Atributos"
+
+#: DynamicOptions.class.php:74
+msgid "Option list"
+msgstr "Lista de Opciones"
+
+#: DynamicOptions.class.php:75
+msgid "Attribute list"
+msgstr "Lista de Atributos"
+
+#: DynamicOptions.class.php:84
+msgid "List"
+msgstr "Lista"
+
+#: DynamicOptions.class.php:85
+msgid "Single"
+msgstr "Sencilla"
+
+#: DynamicOptions.class.php:86
+msgid "Double"
+msgstr "Doble"
+
+#: DynamicOptions.class.php:96
+#: DynamicOptions.class.php:132
+msgid "dynamic options"
+msgstr "Opciones dynámicas"
+
+#: DynamicOptions.class.php:103
+#: admin/AttributeSets.php:78
+#: admin/DynamicOptionsList.php:108
+msgid "Attribute Sets"
+msgstr "Conjuntos de Atributos"
+
+#: DynamicOptions.class.php:106
+msgid "none"
+msgstr "ninguna"
+
+#: DynamicOptions.class.php:112
+msgid "Manage Attribute Sets"
+msgstr "Edite los Conjuntos de Atributos "
+
+#: DynamicOptions.class.php:185
+msgid "Options"
+msgstr "Opciones"
+
+#: DynamicOptions.class.php:228
+msgid "Combination not valid"
+msgstr "Combinación no válida"
+
+#: DynamicOptions.class.php:316
+#, php-format
+msgid "%s unit(s) <a href=\"%s\">in your cart</a>"
+msgstr "%s unida(des) <a href=\"%s\">en su carrito</a>"
+
+#: admin/AttributeSets.php:32
+msgid "The Set has not been inserted. The title has been omitted."
+msgstr "El conjunto no ha sido insertado. El título ha sido omitido"
+
+#: admin/AttributeSets.php:38
+msgid "The Set has not been inserted, it already exists."
+msgstr "El Conjunto no ha sido insertado. ya existe."
+
+#: admin/AttributeSets.php:49
+msgid "The Set has been inserted sucesfuly."
+msgstr "El Conjunto ha sido insertado satisfactoriamente"
+
+#: admin/AttributeSets.php:66
+msgid "The Sets have been updated sucesfuly."
+msgstr "Los conjuntos han sido modificados satisfactoriamente"
+
+#: admin/AttributeSets.php:73
+msgid "The Set has been deleted sucesfuly."
+msgstr "El Conjunto ha sido borrado satisfactoriamente"
+
+#: admin/AttributeSets.php:80
+#: admin/AttributeSets.php:104
+msgid "Manage attributes"
+msgstr "Edite los atributos"
+
+#: admin/AttributeSets.php:84
+msgid "New Attribute Set"
+msgstr "Nuevo Conjunto de Atributos"
+
+#: admin/AttributeSets.php:89
+#: admin/AttributeSets.php:119
+#: admin/AttributeSets.php:127
+msgid "Title"
+msgstr "Título"
+
+#: admin/AttributeSets.php:90
+#: admin/AttributeSets.php:120
+#: admin/AttributeSets.php:128
+#: admin/AttributeList.php:77
+#: admin/AttributeList.php:96
+#: admin/AttributeList.php:103
+msgid "Description"
+msgstr "Descriptión"
+
+#: admin/AttributeSets.php:106
+msgid "Insert"
+msgstr "Insertar"
+
+#: admin/AttributeSets.php:142
+#: admin/AttributeList.php:114
+msgid "edit attribute"
+msgstr "Editar Atributo"
+
+#: admin/AttributeSets.php:142
+#: admin/AttributeList.php:114
+msgid "edit"
+msgstr "Editar"
+
+#: admin/AttributeSets.php:147
+#: admin/DynamicOptionsList.php:234
+#: admin/AttributeList.php:116
+msgid "delete"
+msgstr "Borrar"
+
+#: admin/AttributeSets.php:149
+msgid "Do you really want to delete this Attribute Set?"
+msgstr "Realmente desea borrar el Conjunto de Atributos"
+
+#: admin/AttributeSets.php:153
+#: admin/DynamicOptionsList.php:240
+#: admin/AttributeList.php:122
+msgid "Yes"
+msgstr "Si"
+
+#: admin/AttributeSets.php:154
+#: admin/DynamicOptionsList.php:241
+#: admin/AttributeList.php:123
+msgid "No, I don't"
+msgstr "No"
+
+#: admin/AttributeSets.php:161
+msgid "The Attribute Sets list is empty"
+msgstr "La lista de Conjuntos de Atributos está vacía"
+
+#: admin/AttributeSets.php:167
+msgid "Save"
+msgstr "Guardar"
+
+#: admin/DynamicOptionsList.php:26
+msgid "To create options, you need, first, to assign a Set of Attributes to the product."
+msgstr "Para crear Optiones, necesita en primer lugar, asignar un Conjunto de Atributos al producto"
+
+#: admin/DynamicOptionsList.php:27
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:35
+#, php-format
+msgid "return to %s"
+msgstr "Volver a %s"
+
+#: admin/DynamicOptionsList.php:38
+msgid "The term has been inserted"
+msgstr "El término ha diso insertado"
+
+#: admin/DynamicOptionsList.php:79
+msgid "The options have been modified"
+msgstr "La opción ha sido modificada"
+
+#: admin/DynamicOptionsList.php:86
+msgid "The option has been inserted"
+msgstr "La opciḉon ha sido insertada"
+
+#: admin/DynamicOptionsList.php:90
+msgid "The option has not been inserted. The option already exists."
+msgstr "La Opción no ha sido insertada. La Opción ya existe"
+
+#: admin/DynamicOptionsList.php:95
+msgid "The option has not been inserted."
+msgstr "La Opción no ha sido insertada"
+
+#: admin/DynamicOptionsList.php:104
+#, php-format
+msgid "Options for %s"
+msgstr "Opciones para %s"
+
+#: admin/DynamicOptionsList.php:106
+#, php-format
+msgid "Return to %s"
+msgstr "Volcer a %s"
+
+#: admin/DynamicOptionsList.php:110
+msgid "Manage Attributes"
+msgstr "Editar Atributos"
+
+#: admin/DynamicOptionsList.php:123
+#: admin/DynamicOptionsList.php:185
+#: metaboxes/DynamicOptionsMetabox.class.php:44
+msgid "Edit attribute"
+msgstr "Editar Atributo"
+
+#: admin/DynamicOptionsList.php:128
+#: admin/DynamicOptionsList.php:189
+#: metaboxes/DynamicOptionsMetabox.class.php:48
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+msgid "Price"
+msgstr "Precio"
+
+#: admin/DynamicOptionsList.php:135
+#: customposttypes/DynamicOptionPostType.class.php:30
+msgid "New Option"
+msgstr "Nueva Opción"
+
+#: admin/DynamicOptionsList.php:140
+#: admin/DynamicOptionsList.php:219
+msgid "No one"
+msgstr "Ninguna"
+
+#: admin/DynamicOptionsList.php:160
+msgid "New terms"
+msgstr "Nuevo término"
+
+#: admin/DynamicOptionsList.php:165
+#: admin/DynamicOptionsList.php:174
+#: admin/AttributeList.php:84
+msgid "insert"
+msgstr "Insertar"
+
+#: admin/DynamicOptionsList.php:210
+#: metaboxes/DynamicOptionsMetabox.class.php:65
+msgid "edit option"
+msgstr "Editar Opción"
+
+#: admin/DynamicOptionsList.php:212
+msgid "Set featured image"
+msgstr "Asignar miniatura"
+
+#: admin/DynamicOptionsList.php:236
+msgid "Do you really want to delete this option?"
+msgstr "¿Realmente desea borrar esta opción?"
+
+#: admin/DynamicOptionsList.php:248
+msgid "save"
+msgstr "Guardar"
+
+#: admin/AttributeList.php:27
+msgid "The \"name\" field must be completed"
+msgstr "El campo \"nombre\" debe ser completado"
+
+#: admin/AttributeList.php:40
+#, php-format
+msgid "Search %s"
+msgstr "Buscar %s"
+
+#: admin/AttributeList.php:41
+#, php-format
+msgid "All %s"
+msgstr "todo %s"
+
+#: admin/AttributeList.php:44
+#, php-format
+msgid "Edit %s"
+msgstr "Editar %s"
+
+#: admin/AttributeList.php:45
+#, php-format
+msgid "Update %s"
+msgstr "Modificar %s"
+
+#: admin/AttributeList.php:46
+#, php-format
+msgid "Add new %s"
+msgstr "Añadir nuevo %s"
+
+#: admin/AttributeList.php:47
+#, php-format
+msgid "New %s name"
+msgstr "Nuevo nombre %s"
+
+#: admin/AttributeList.php:54
+msgid "Taxonomy saved"
+msgstr "Categoría guardada"
+
+#: admin/AttributeList.php:60
+msgid "The taxonomy has been deleted"
+msgstr "La Categoría ha sido borrada"
+
+#: admin/AttributeList.php:67
+msgid "Return to Attributes Sets"
+msgstr "Volver a los Conjuntos de Atributos"
+
+#: admin/AttributeList.php:71
+msgid "Create new attribute"
+msgstr "Crear Nuevo Atributo"
+
+#: admin/AttributeList.php:76
+#: admin/AttributeList.php:95
+#: admin/AttributeList.php:102
+msgid "Name"
+msgstr "Nombre"
+
+#: admin/AttributeList.php:115
+msgid "add terms"
+msgstr "Añadir Términos"
+
+#: admin/AttributeList.php:115
+msgid "add"
+msgstr "Añadir"
+
+#: admin/AttributeList.php:121
+msgid "Do you really want to delete this taxonomy?"
+msgstr "¿Realmente quiere borrar esta categoría?"
+
+#: admin/AttributeList.php:131
+msgid "The list is empty"
+msgstr "La lista está vacía"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:25
+msgid "Products Dynamic options"
+msgstr "Opciones Dinámicas de Productos"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "manage options list"
+msgstr "Edite la lista de Opciones"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "Manage Options list"
+msgstr "Edite la lista de Opciones"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:22
+msgid "Option Custom Fields"
+msgstr "Campos personalizados de las Opciones"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:38
+msgid "return to options list"
+msgstr "Volver a la lista de Opciones"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:38
+msgid "Options list"
+msgstr "Lista de Opciones"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:48
+msgid "This price will be added to the price of the parent."
+msgstr "Esta cantidad será añadida al precio del padre"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:51
+msgid "Weight"
+msgstr "Peso"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:53
+msgid "If value is zero then the weight will be the weight of the parent. This weight will not be added to the weight of the parent anyway."
+msgstr "Si el valor es cero entonces el peso será el peso del padre. Este peso no será añadido al peso del padre."
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:56
+msgid "Order"
+msgstr "Pedido"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:60
+msgid "Sku"
+msgstr "SKU"
+
+#: customposttypes/DynamicOptionPostType.class.php:23
+msgid "Dynamic Options"
+msgstr "Opciones Diámicas"
+
+#: customposttypes/DynamicOptionPostType.class.php:24
+msgid "Options for TheCartPress Dynamic Options"
+msgstr "Opciones para Dynami cOptions"
+
+#: customposttypes/DynamicOptionPostType.class.php:26
+msgid "Option"
+msgstr "Opción"
+
+#: customposttypes/DynamicOptionPostType.class.php:27
+#: customposttypes/DynamicOptionPostType.class.php:28
+msgid "Add New"
+msgstr "Añadir una nueva"
+
+#: customposttypes/DynamicOptionPostType.class.php:29
+msgid "Edit Option"
+msgstr "Editar Opción"
+
+#: customposttypes/DynamicOptionPostType.class.php:31
+msgid "View Option"
+msgstr "Ver Opción"
+
+#: customposttypes/DynamicOptionPostType.class.php:32
+msgid "Search Options"
+msgstr "buscar Opciones"
+
+#: customposttypes/DynamicOptionPostType.class.php:33
+msgid "No options found"
+msgstr "No se han encontrado opciones"
+
+#: customposttypes/DynamicOptionPostType.class.php:34
+msgid "No options found in Trash"
+msgstr "No se han encontrado opciones en la papelera"
+

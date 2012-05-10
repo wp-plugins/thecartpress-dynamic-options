@@ -64,13 +64,14 @@ function tcp_insert_dynamic_option( $args ) {
 	);
 	$post_id = wp_insert_post( $post );
 	if ( isset( $args['terms'] ) && is_array( $args['terms'] ) ) {
-		$terms = $args['terms'];
+		$terms = &$args['terms'];
 		foreach( $terms as $taxonomy => $term )
 			$ids = wp_set_object_terms( $post_id, $term, $taxonomy );
 	}
 	update_post_meta( $post_id, 'tcp_price', $args['price'] );
+	update_post_meta( $post_id, 'tcp_order', $args['order'] );
 	do_action( 'tcp_insert_option', $post_id, $args );
-	return $post_id; 
+	return $post_id;
 }
 
 /**
@@ -93,6 +94,7 @@ function tcp_update_dynamic_option( $args ) {
 	);
 	wp_update_post( $post );
 	update_post_meta( $post_id, 'tcp_price', $args['price'] );
+	update_post_meta( $post_id, 'tcp_order', $args['order'] );
 	do_action( 'tcp_update_option', $post_id, $args );
 	return $post_id;
 }
@@ -120,6 +122,9 @@ function tcp_get_dynamic_options( $post_id, $ids = false ) {
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_parent'	=> $post_id,
 		'numberposts'	=> -1,
+		'orderby'		=> 'meta_value',
+		'meta_key'		=> 'tcp_order',
+		'order'			=> 'ASC',
 	);
 	if ( $ids ) $args['fields'] = 'ids';
 	return get_posts( $args );
@@ -206,12 +211,81 @@ function tcp_get_terms_slugs( $taxonomy ) {
  * @param $product id
  * @since 1.0.0
  */
-function tcp_the_buy_button_dyamic_options( $product_id, $echo = true ) {
+function tcp_the_buy_button_dyamic_options( $product_id, $parent_id = 0, $echo = true ) {
 	global $tcp_dynamic_options;
 	if ( isset( $tcp_dynamic_options ) ) {
-		$html = $tcp_dynamic_options->tcp_the_add_to_cart_unit_field( '', $product_id );
+		$html = $tcp_dynamic_options->tcp_the_add_to_cart_unit_field( '', $product_id, $parent_id );
 		if ( $echo ) echo $html;
 		else return $html;
 	}
+}
+
+/**
+ * Returns the id of an attribute
+ * @since 1.0.3
+ */
+function tcp_att_set_get_id( $title ) {
+	$title = strtolower( $title );
+	$title = str_replace( ' ', '-', $title );
+	$title = str_replace( '_', '-', $title );
+	return $title;
+}
+
+/**
+ * Returns an attribute set
+ * @since 1.0.3
+ */
+function tcp_get_attribute_set( $id ) {
+	$attribute_sets	= get_option( 'tcp_attribute_sets', array() );
+	if ( isset( $attribute_sets[$id] ) ) return $attribute_sets[$id];
+	else return false;
+}
+
+/**
+ * Inserts a new attribute set
+ * @since 1.0.3
+ */
+function tcp_insert_attribute_set( $title, $desc = '', $taxonomies = array() ) {
+	$attribute_sets	= get_option( 'tcp_attribute_sets', array() );
+	$id = tcp_att_set_get_id( $title );
+	if ( isset( $attribute_sets[$id] ) ) return false;
+	$new_set = array(
+		'title'			=> $title,
+		'desc'			=> $desc,
+		'taxonomies'	=> $taxonomies,
+	);
+	$attribute_sets[$id] = $new_set;
+	update_option( 'tcp_attribute_sets', $attribute_sets);
+	return true;
+}
+
+/**
+ * Updates a new attribute set
+ * @since 1.0.3
+ */
+function tcp_update_attribute_set( $id, $title, $desc = '', $taxonomies = array() ) {
+	$attribute_sets	= get_option( 'tcp_attribute_sets', array() );
+	if ( ! isset( $attribute_sets[$id] ) ) {
+		return tcp_insert_attribute_set( $title, $desc, $taxonomies );
+	} else {
+		$new_set = array(
+			'title'			=> $title,
+			'desc'			=> $desc,
+			'taxonomies'	=> $taxonomies,
+		);
+		$attribute_sets[$id] = $new_set;
+		update_option( 'tcp_attribute_sets', $attribute_sets);
+		return true;
+	}
+}
+
+/**
+ * Removes an attribute set
+ * @since 1.0.3
+ */
+function tcp_delete_attribute_set( $id ) {
+	$attribute_sets	= get_option( 'tcp_attribute_sets', array() );
+	unset( $attribute_sets[$id] );
+	update_option( 'tcp_attribute_sets', $attribute_sets);
 }
 ?>
