@@ -16,7 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$attribute_sets	= get_option( 'tcp_attribute_sets', array() );
 if ( isset( $_REQUEST['tcp_insert'] ) ) {
 	$title = trim( $_REQUEST['tcp_title'] );
 	if ( strlen( $title ) == 0 ) : ?>
@@ -89,7 +88,8 @@ if ( isset( $_REQUEST['tcp_insert'] ) ) {
 </tr>
 </tfoot>
 <tbody>
-<?php if ( is_array( $attribute_sets ) && count( $attribute_sets ) > 0 ) :
+<?php $attribute_sets	= get_option( 'tcp_attribute_sets', array() );
+if ( is_array( $attribute_sets ) && count( $attribute_sets ) > 0 ) :
 	$attributes = tcp_get_attributes( 'objects' );
 	foreach( $attribute_sets as $id => $attribute_set ) : ?>
 <tr>
