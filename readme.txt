@@ -50,7 +50,7 @@ This plugin is released under a GPL license.
 == Changelog ==
 = 1.0.4 =
 * minor bugs
-* Dynamic options order by setting: title or order field
+* Dynamic options order by setting: title, price or order field (ascending or descending)
 
 = 1.0.3 =
 * UI improvements

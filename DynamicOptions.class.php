@@ -74,6 +74,7 @@ class TCPDynamicOptions {
 		$file = TCP_ADMIN_FOLDER . 'Settings.class.php';
 		add_settings_field( 'dynamic_options_type', __( 'Dynamic options type', 'tcp-do' ), array( $this, 'show_dynamic_options_type' ), $file, 'tcp_theme_compatibility_section' );
 		add_settings_field( 'dynamic_options_order_by', __( 'Dynamic options order by', 'tcp-do' ), array( $this, 'show_dynamic_options_order_by' ), $file, 'tcp_theme_compatibility_section' );
+		add_settings_field( 'dynamic_options_order_asc', __( 'Dynamic options order', 'tcp-do' ), array( $this, 'show_dynamic_options_order' ), $file, 'tcp_theme_compatibility_section' );
 	}
 
 	function admin_menu() {
@@ -88,7 +89,7 @@ class TCPDynamicOptions {
 	function show_dynamic_options_type() {
 		global $thecartpress;
 		if ( ! isset( $thecartpress ) ) return;
-		$dynamic_options_type = $thecartpress->get_setting( 'dynamic_options_type', 'radio' );?>
+		$dynamic_options_type = $thecartpress->get_setting( 'dynamic_options_type', 'radio' ); ?>
 		<select id="dynamic_options_type" name="tcp_settings[dynamic_options_type]">
 			<option value="list" <?php selected( $dynamic_options_type, 'list' ); ?>><?php _e( 'List', 'tcp-do' ); ?></option>
 			<option value="single" <?php selected( $dynamic_options_type, 'single' ); ?>><?php _e( 'Single', 'tcp-do' ); ?></option>
@@ -99,9 +100,19 @@ class TCPDynamicOptions {
 	function show_dynamic_options_order_by() {
 		global $thecartpress;
 		if ( ! isset( $thecartpress ) ) return;
-		$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );?>
-		<input type="radio" id="dynamic_options_order_by_order" name="tcp_settings[dynamic_options_order_by]" value="order" <?php checked( 'order', $dynamic_options_order_by ); ?> /> <?php _e( 'order field', 'tcp-do' ); ?><br/>
-		<input type="radio" id="dynamic_options_order_by_title" name="tcp_settings[dynamic_options_order_by]" value="title" <?php checked( 'title', $dynamic_options_order_by ); ?> /> <?php _e( 'title', 'tcp-do' ); ?>
+		$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ); ?>
+		<input type="radio" id="dynamic_options_order_by_order" name="tcp_settings[dynamic_options_order_by]" value="order" <?php checked( 'order', $dynamic_options_order_by ); ?> /> <?php _e( 'Order field', 'tcp-do' ); ?><br/>
+		<input type="radio" id="dynamic_options_order_by_title" name="tcp_settings[dynamic_options_order_by]" value="title" <?php checked( 'title', $dynamic_options_order_by ); ?> /> <?php _e( 'Title', 'tcp-do' ); ?><br/>
+		<input type="radio" id="dynamic_options_order_by_price" name="tcp_settings[dynamic_options_order_by]" value="price" <?php checked( 'price', $dynamic_options_order_by ); ?> /> <?php _e( 'Price', 'tcp-do' ); ?>
+		<?php
+	}
+
+	function show_dynamic_options_order() {
+		global $thecartpress;
+		if ( ! isset( $thecartpress ) ) return;
+		$dynamic_options_order = $thecartpress->get_setting( 'dynamic_options_order', 'asc' ); ?>
+		<input type="radio" id="dynamic_options_order_asc" name="tcp_settings[dynamic_options_order]" value="asc" <?php checked( 'asc', $dynamic_options_order ); ?> /> <?php _e( 'Ascending', 'tcp-do' ); ?><br/>
+		<input type="radio" id="dynamic_options_order_desc" name="tcp_settings[dynamic_options_order]" value="desc" <?php checked( 'desc', $dynamic_options_order ); ?> /> <?php _e( 'Descending', 'tcp-do' ); ?>
 		<?php
 	}
 
