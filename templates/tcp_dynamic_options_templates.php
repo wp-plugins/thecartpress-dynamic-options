@@ -127,13 +127,17 @@ function tcp_get_dynamic_options( $post_id, $ids = false ) {
 		'numberposts'	=> -1,
 	);
 	global $thecartpress;
-	if ( 'title' == $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) ) {
+	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );
+	if ( 'title' == $dynamic_options_order_by ) {
 		$args['orderby'] = 'name';
+	} elseif ( 'price' == $dynamic_options_order_by ) {
+		$args['orderby'] = 'meta_value';
+		$args['meta_key'] = 'tcp_price';
 	} else {
 		$args['orderby'] = 'meta_value';
 		$args['meta_key'] = 'tcp_order';
 	}
-	$args['order'] = 'ASC';
+	$args['order'] = $thecartpress->get_setting( 'dynamic_options_order', 'asc' );
 	if ( $ids ) $args['fields'] = 'ids';
 	return get_posts( $args );
 }

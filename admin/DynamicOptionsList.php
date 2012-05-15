@@ -257,8 +257,8 @@ endforeach; ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Order', 'tcp-do' ); ?>
 		<span class="description"><?php global $thecartpress;
-		if ( 'title' == $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) )
-			_e( 'Options will be ordered by title, this field will not be considered', 'tcp-do' ); ?></span>
+		if ( 'field' != $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) )
+			_e( 'Options will be ordered by title or price, this field will not be considered', 'tcp-do' ); ?></span>
 	</th>
 	<th scope="col" class="manage-column">
 		<input type="checkbox" class="tcp_select_delete_all" onclick="if (jQuery('.tcp_select_delete_all').attr('checked') ) jQuery('.tcp_delete').attr('checked', true); else jQuery('.tcp_delete').attr('checked', false);" value="1"/> <?php _e( 'Delete', 'tcp-do' ); ?>
