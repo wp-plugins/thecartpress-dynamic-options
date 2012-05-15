@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.0.3
+Version: 1.0.4
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -59,6 +59,15 @@ class TCPDynamicOptions {
 		if ( ! function_exists( 'is_plugin_active' ) ) require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		if ( ! is_plugin_active( 'thecartpress/TheCartPress.class.php' ) ) exit( __( '<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin', 'tcp-do' ) );
 		TCPDynamicOptionPostType::create_default_custom_post_type_and_taxonomies();
+		$ids = get_posts( array(
+			'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+			'numberposts'	=> -1,
+			'fields'		=> 'ids',
+		) );
+		foreach( $ids as $id ) {
+			$order = get_post_meta( $id, 'tcp_order', true );
+			if ( $order == '' ) update_post_meta( $id, 'tcp_order', 0 );
+		}
 	}
 
 	function admin_init() {
@@ -108,7 +117,7 @@ class TCPDynamicOptions {
 					<option value="<?php echo $id; ?>" <?php tcp_selected_multiple( $tcp_attribute_sets, $id ); ?>><?php echo $attribute_set['title']; ?></option>
 				<?php endforeach; ?>
 				</select>
-				<a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSets.php"><?php _e( 'Manage Attribute Sets', 'tcp-do' ); ?></a>
+				<a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSetsList.php"><?php _e( 'Manage Attribute Sets', 'tcp-do' ); ?></a>
 			</td>
 		</tr><?php
 	}

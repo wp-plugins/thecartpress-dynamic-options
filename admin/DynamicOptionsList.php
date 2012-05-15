@@ -20,10 +20,9 @@ $original_post_id	= isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : 0;
 $post_id	= tcp_get_default_id( $original_post_id );
 $post		= get_post( $post_id );
 $attributes	= tcp_get_attributes_by_product( $post_id );
-
 if ( count( $attributes ) == 0 ) : ?>
 	<div id="message" class="error">
-	<p><?php _e( 'To create options, you need, first, to assign a Set of Attributes to the product.', 'tcp-do' ); ?></p>
+	<p><?php _e( 'To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned.', 'tcp-do' ); ?></p>
 	<p><a href="post.php?action=edit&post=<?php echo $post->ID;?>"><?php printf( __( 'return to %s', 'tcp-do' ), $post->post_title ); ?></a></p>
 	</div>
 	<?php exit;
@@ -66,6 +65,7 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 				'price'		=> $price,
 				'terms'		=> $terms,
 				'order'		=> $tcp_order = $_REQUEST['tcp_order'][$id],
+				'delete'	=> isset( $_REQUEST['tcp_delete'][$id] ),
 			);
 		}
 		//$options = apply_filters( 'tcp_dynamic_options_save', $options, $id, $_REQUEST );
@@ -74,7 +74,9 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 	if ( isset( $_REQUEST['tcp_save'] ) ) {
 		if ( count( $options ) > 0 )
 			foreach( $options as $option )
-				if ( ! tcp_exists_dynamic_option( $option ) )
+				if ( $option['delete'] )
+					tcp_delete_dynamic_option( $option['ID'] );
+				elseif ( ! tcp_exists_dynamic_option( $option ) )
 					tcp_update_dynamic_option( $option ); ?>
 		<div id="message" class="updated"><p>
 		<?php _e( 'The options have been modified', 'tcp-do' ); ?>
@@ -96,14 +98,14 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 		<?php _e( 'The option has not been inserted.', 'tcp-do' ); ?>
 		</p></div><?php
 	}
-} elseif ( isset( $_REQUEST['tcp_delete'] ) ) {
-	$option_id = $_REQUEST['option_id'];
-	tcp_delete_dynamic_option( $option_id );
+//} elseif ( isset( $_REQUEST['tcp_delete'] ) ) {
+//	$option_id = $_REQUEST['option_id'];
+//	tcp_delete_dynamic_option( $option_id );
 } elseif( isset( $_REQUEST['tcp_create_all'] ) ) {
 	$variations = array();
 	foreach( $attributes as $attribute ) if ( $attribute ) {
 		$terms = get_terms( $attribute->name, array( 'hide_empty' => false, 'fields' => 'ids' ) );
-		$variations = tcp_do_mix_variations( $variations, $terms, $attribute->name );
+		$variations = tcp_do_mix_variations( $variations, $terms );//, $attribute->name );
 	}
 	tcp_do_add_variations( $variations, $post_id, $attributes );
 }
@@ -129,6 +131,7 @@ function tcp_do_add_variations( $variations, $post_id, $attributes ) {
 	$post = get_post( $post_id );
 	$options = array();
 	foreach( $variations as $variation ) {
+		if ( ! is_array( $variation ) ) $variation = array( $variation );
 		$terms = array();
 		$title = $post->post_title;
 		foreach( $attributes as $id => $attribute ) if ( $attribute ) {
@@ -145,13 +148,10 @@ function tcp_do_add_variations( $variations, $post_id, $attributes ) {
 			'order'		=> 0,
 		);
 	}
-
-	foreach( $options as $option ){
-		
-		tcp_insert_dynamic_option( $option );
-	}
-}
-?>
+	foreach( $options as $option )
+		if ( ! tcp_exists_dynamic_option( $option ) )
+			tcp_insert_dynamic_option( $option );
+} ?>
 
 <div class="wrap">
 <h2><?php printf( __( 'Options for %s', 'tcp-do' ), $post->post_title ); ?></h2>
@@ -242,7 +242,7 @@ endforeach; ?>
 <form method="post">
 <table class="widefat fixed">
 <thead>
-<?php ob_start(); ?>
+
 <tr>
 	<th>&nbsp;</th>
 <?php foreach( $attributes as $attribute ) : if ( !$attribute ) continue; ?>
@@ -257,14 +257,32 @@ endforeach; ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Order', 'tcp-do' ); ?>
 	</th>
-	<th scope="col">&nbsp;</th>
+	<th scope="col" class="manage-column">
+		<input type="checkbox" class="tcp_select_delete_all" onclick="if (jQuery('.tcp_select_delete_all').attr('checked') ) jQuery('.tcp_delete').attr('checked', true); else jQuery('.tcp_delete').attr('checked', false);" value="1"/> <?php _e( 'Delete', 'tcp-do' ); ?>
+	</th>
+	<!--<th scope="col">&nbsp;</th>-->
 </tr>
-<?php $thead = ob_get_clean(); ?>
-<?php echo $thead; ?>
 </thead>
 
 <tfoot>
-<?php echo $thead; ?>
+	<th>&nbsp;</th>
+<?php foreach( $attributes as $attribute ) : if ( !$attribute ) continue; ?>
+	<th scope="col" class="manage-column">
+		<a href="<?php echo 'edit-tags.php?taxonomy=' . $attribute->name . '&post_type=' . TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'Edit attribute', 'tcp-do' ); ?>"><?php echo $attribute->labels->name; ?></a>
+	</th>
+<?php endforeach; ?>
+	<th scope="col" class="manage-column">
+		<?php _e( 'Price', 'tcp-do' ); ?>
+		<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
+	</th>
+	<th scope="col" class="manage-column">
+		<?php _e( 'Order', 'tcp-do' ); ?>
+	</th>
+	<th scope="col" class="manage-column">
+		<?php _e( 'Delete', 'tcp-do' ); ?>
+	</th>
+	<!--<th scope="col">&nbsp;</th>-->
+</tr>
 </tfoot>
 <tbody>
 
@@ -303,6 +321,9 @@ if ( is_array( $children ) && count( $children > 0 ) )
 		<input type="text" name="tcp_order[]" class="tcp_order" size="3" maxlength="9" value="<?php echo tcp_get_the_order( $child->ID );?>"/>
 	</td>
 	<td>
+		<input type="checkbox" name="tcp_delete[]" class="tcp_delete" value="yes"/>
+	</td>
+	<!--<td>
 		<div><a href="#" onclick="jQuery('.delete_options').hide();jQuery('#delete_<?php echo $child->ID; ?>').show(200);return false;" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
 		<div id="delete_<?php echo $child->ID; ?>" class="delete_options" style="display:none; border: 1px dotted orange; padding: 2px">
 			<p><?php _e( 'Do you really want to delete this option?', 'tcp-do' ); ?></p>
@@ -313,12 +334,13 @@ if ( is_array( $children ) && count( $children > 0 ) )
 			<a href="<?php echo $url; ?>" class="delete"><?php _e( 'Yes' , 'tcp-do' ); ?></a> |
 			<a href="#" onclick="jQuery('#delete_<?php echo $child->ID; ?>').hide(100);return false;"><?php _e( 'No, I don\'t' , 'tcp-do' ); ?></a>
 		</div>
-	</td>
+	</td>-->
 </tr>
 <?php endforeach; ?>
 </tbody>
 </table>
-<p><input type="submit" name="tcp_save" value="<?php _e( 'save', 'tcp-do' ); ?>" class="button-primary"/></p>
+<p><input type="submit" name="tcp_save" value="<?php _e( 'save', 'tcp-do' ); ?>" class="button-primary"/>
+<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp' ); ?></span></p>
 </form>
 
 </div><!-- .wrap -->

@@ -110,15 +110,15 @@ if ( is_array( $taxonomies ) && count( $taxonomies ) > 0 ) :
 	<td><?php echo $taxonomy['desc']; ?>&nbsp;</td>
 	<td>
 		<a href="admin.php?page=thecartpress/admin/TaxonomyEdit.php&taxonomy=<?php echo $taxonomy_id; ?>" title="<?php _e( 'edit attribute', 'tcp-do' ); ?>"><?php _e( 'edit', 'tcp-do' ); ?></a> |
-		<a href="edit-tags.php?taxonomy=<?php echo $taxonomy_id; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'add terms', 'tcp-do' ); ?>"><?php _e( 'add', 'tcp-do' ); ?></a> |
-		<a href="#" onclick="jQuery('.delete_taxonomy').hide();jQuery('#delete_<?php echo $taxonomy_id; ?>').show();" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
+		<a href="edit-tags.php?taxonomy=<?php echo $taxonomy_id; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'add terms', 'tcp-do' ); ?>"><?php _e( 'add terms', 'tcp-do' ); ?></a> |
+		<a href="#" onclick="jQuery('.delete_taxonomy').hide();jQuery('#delete_<?php echo $taxonomy_id; ?>').show(200);" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
 		<div id="delete_<?php echo $taxonomy_id; ?>" class="delete_taxonomy" style="display:none; border: 1px dotted orange; padding: 2px">
 			<form method="post" name="frm_delete_<?php echo $taxonomy_id; ?>">
 				<input type="hidden" name="taxonomy_id" value="<?php echo $taxonomy_id; ?>" />
 				<input type="hidden" name="tcp_delete_taxonomy" value="y" />
 				<p><?php _e( 'Do you really want to delete this taxonomy?', 'tcp-do' ); ?></p>
 				<a href="javascript:document.frm_delete_<?php echo $taxonomy_id; ?>.submit();" class="delete"><?php _e( 'Yes' , 'tcp-do' ); ?></a> |
-				<a href="#" onclick="jQuery('#delete_<?php echo $taxonomy_id; ?>').hide();"><?php _e( 'No, I don\'t' , 'tcp-do' ); ?></a>
+				<a href="#" onclick="jQuery('#delete_<?php echo $taxonomy_id; ?>').hide(100);"><?php _e( 'No, I don\'t' , 'tcp-do' ); ?></a>
 			</form>
 		</div>
 	</td>

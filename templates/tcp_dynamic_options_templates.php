@@ -23,8 +23,10 @@
  */
 function tcp_exists_dynamic_option( $args ) {
 	$post_arg = array(
-		'post_type'			=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
-		'post_parent'		=> $args['parent_id'],
+		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+		'post_parent'	=> $args['parent_id'],
+		'numberposts'	=> 1,
+		'fields'		=> 'ids',
 	);
 	if ( isset( $args['ID'] ) ) $post_arg['exclude'] = $args['ID'];
 	$post_arg['tax_query'] = array( 'relation' => 'AND' );
@@ -68,8 +70,8 @@ function tcp_insert_dynamic_option( $args ) {
 		foreach( $terms as $taxonomy => $term )
 			$ids = wp_set_object_terms( $post_id, $term, $taxonomy );
 	}
-	update_post_meta( $post_id, 'tcp_price', $args['price'] );
-	update_post_meta( $post_id, 'tcp_order', $args['order'] );
+	update_post_meta( $post_id, 'tcp_price', isset( $args['price'] ) ? $args['price'] : 0 );
+	update_post_meta( $post_id, 'tcp_order', isset( $args['order'] ) ? $args['order'] : 0 );
 	do_action( 'tcp_insert_option', $post_id, $args );
 	return $post_id;
 }
@@ -108,6 +110,7 @@ function tcp_update_dynamic_option( $args ) {
 function tcp_delete_dynamic_option( $post_id ) {
 	wp_delete_post( $post_id, true );
 	delete_post_meta( $post_id, 'tcp_price' );
+	delete_post_meta( $post_id, 'tcp_order' );
 	do_action( 'tcp_delete_option', $post_id );
 }
 

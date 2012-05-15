@@ -97,21 +97,25 @@ if ( is_array( $attribute_sets ) && count( $attribute_sets ) > 0 ) :
 	<td><?php echo $attribute_set['desc']; ?></td>
 	<td>
 	<?php $attributes_to_display = array();
-	if ( is_array( $attribute_set['taxonomies'] ) && count( $attribute_set['taxonomies'] ) > 0 ) foreach( $attribute_set['taxonomies'] as $tax_id ) :
-		$attribute = $attributes[$tax_id];
-		$attributes_to_display[] = $attribute->labels->name;
-	endforeach;
-	echo implode( $attributes_to_display, ',&nbsp;' ); ?>
+	if ( is_array( $attribute_set['taxonomies'] ) && count( $attribute_set['taxonomies'] ) > 0 ) {
+		foreach( $attribute_set['taxonomies'] as $tax_id ) {
+			$attribute = $attributes[$tax_id];
+			$attributes_to_display[] = $attribute->labels->name;
+		}
+		echo implode( $attributes_to_display, ',&nbsp;' );
+	 } else {
+	 	_e( 'No Attributes', 'tcp-do' );
+	 } ?>
 	</td>
 	<td>
-		<div><a href="<?php echo add_query_arg( 'id', $id, TCP_DYNAMIC_OPTIONS_ADMIN_PATH . 'AttributeSetEdit.php' ); ?>"><?php _e( 'edit', 'tcp-do' ); ?></a> | <a href="#" onclick="jQuery('.delete_att_set').hide();jQuery('#delete_att_set_<?php echo $id; ?>').show();return false;" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
+		<div><a href="<?php echo add_query_arg( 'id', $id, TCP_DYNAMIC_OPTIONS_ADMIN_PATH . 'AttributeSetEdit.php' ); ?>"><?php _e( 'edit', 'tcp-do' ); ?></a> | <a href="#" onclick="jQuery('.delete_att_set').hide();jQuery('#delete_att_set_<?php echo $id; ?>').show(200);return false;" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
 		<div id="delete_att_set_<?php echo $id; ?>" class="delete_att_set" style="display:none; border: 1px dotted orange; padding: 2px">
 			<p><?php _e( 'Do you really want to delete this Attribute Set?', 'tcp-do' ); ?></p>
 			<?php
 			$url = add_query_arg( 'id', $id );
 			$url = add_query_arg( 'tcp_delete', '', $url ); ?>
 			<a href="<?php echo $url; ?>" class="delete"><?php _e( 'Yes' , 'tcp-do' ); ?></a> |
-			<a href="#" onclick="jQuery('#delete_att_set_<?php echo $id; ?>').hide();return false;"><?php _e( 'No, I don\'t' , 'tcp-do' ); ?></a>
+			<a href="#" onclick="jQuery('#delete_att_set_<?php echo $id; ?>').hide(100);return false;"><?php _e( 'No, I don\'t' , 'tcp-do' ); ?></a>
 		</div>
 	</td>
 </tr>
