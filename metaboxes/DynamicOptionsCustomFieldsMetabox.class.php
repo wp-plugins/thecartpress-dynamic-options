@@ -19,7 +19,7 @@
 class TCPDynamicOptionsCustomFieldsMetabox {
 
 	function register_metabox() {
-		add_meta_box( 'tcp-dyn-option-custom-fields', __( 'Option Custom Fields', 'tcp' ), array( &$this, 'showCustomFields' ), TCP_DYNAMIC_OPTIONS_POST_TYPE, 'normal', 'high' );
+		add_meta_box( 'tcp-dyn-option-custom-fields', __( 'Option Custom Fields', 'tcp-do' ), array( &$this, 'showCustomFields' ), TCP_DYNAMIC_OPTIONS_POST_TYPE, 'normal', 'high' );
 	}
 
 	function showCustomFields() {
@@ -32,10 +32,10 @@ class TCPDynamicOptionsCustomFieldsMetabox {
 		$is_translation = $lang != $source_lang;
 		$parent_id = tcp_get_parent_from_dynamic_option( $post_id ); ?>
 		<ul class="subsubsub">
-			<li><a href="post.php?action=edit&post=<?php echo $parent_id; ?>"><?php printf( __( 'return to %s', 'tcp' ), get_the_title( $parent_id ) ); ?></a></li>
+			<li><a href="post.php?action=edit&post=<?php echo $parent_id; ?>"><?php printf( __( 'return to %s', 'tcp-do' ), get_the_title( $parent_id ) ); ?></a></li>
 			<li>|</li>
 			<?php $admin_path = 'admin.php?page=' . plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/admin/'; ?>
-			<li><a href="<?php echo $admin_path; ?>DynamicOptionsList.php&post_id=<?php echo $parent_id; ?>" title="<?php echo __( 'return to options list', 'tcp' ); ?>"><?php echo __( 'Options list', 'tcp' ); ?></a></li>
+			<li><a href="<?php echo $admin_path; ?>DynamicOptionsList.php&post_id=<?php echo $parent_id; ?>" title="<?php echo __( 'return to options list', 'tcp-do' ); ?>"><?php echo __( 'Options list', 'tcp-do' ); ?></a></li>
 			<?php do_action( 'tcp_dynamic_option_custom_metabox_toolbar', $post_id ); ?>
 		</ul>
 
@@ -43,21 +43,21 @@ class TCPDynamicOptionsCustomFieldsMetabox {
 			<?php wp_nonce_field( 'tcp-dynamic-option-custom-fields', 'tcp-dynamic-option-custom-fields_wpnonce', false, true ); ?>
 			<table class="form-table"><tbody>
 			<tr valign="top">
-				<th scope="row"><label for="tcp_price"><?php _e( 'Price', 'tcp' ); ?>:</label></th>
+				<th scope="row"><label for="tcp_price"><?php _e( 'Price', 'tcp-do' ); ?>:</label></th>
 				<td><input type="text" min="0" placeholder="<?php tcp_get_number_format_example(); ?>" name="tcp_price" id="tcp_price" value="<?php echo tcp_number_format( tcp_get_the_price( $post_id ) ); ?>" class="regular-text" style="width:12em">&nbsp;<?php tcp_the_currency(); ?>
-				<p class="description"><?php _e( 'This price will be added to the price of the parent.', 'tcp' ); ?></p></td>
+				<p class="description"><?php _e( 'This price will be added to the price of the parent.', 'tcp-do' ); ?></p></td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><label for="tcp_weight"><?php _e( 'Weight', 'tcp' ); ?>:</label></th>
+				<th scope="row"><label for="tcp_weight"><?php _e( 'Weight', 'tcp-do' ); ?>:</label></th>
 				<td><input type="text" min="0" placeholder="<?php tcp_get_number_format_example(); ?>" name="tcp_weight" id="tcp_weight" value="<?php echo tcp_number_format( tcp_get_the_weight( $post_id ) ); ?>" class="regular-text" style="width:12em" />&nbsp;<?php tcp_the_unit_weight(); ?>
-				<p class="description"><?php _e( 'If value is zero then the weight will be the weight of the parent. This weight will not be added to the weight of the parent anyway.', 'tcp' ); ?></p></td>
+				<p class="description"><?php _e( 'If value is zero then the weight will be the weight of the parent. This weight will not be added to the weight of the parent anyway.', 'tcp-do' ); ?></p></td>
 			</tr>
 			<!--<tr valign="top">
-				<th scope="row"><label for="tcp_order"><?php _e( 'Order', 'tcp' ); ?>:</label></th>
+				<th scope="row"><label for="tcp_order"><?php _e( 'Order', 'tcp-do' ); ?>:</label></th>
 				<td><input name="tcp_order" id="tcp_order" value="<?php echo htmlspecialchars( tcp_get_the_order( $post_id ) ); ?>" class="regular-text" type="text" min="0" style="width:4em" /></td>
 			</tr>-->
 			<tr valign="top">
-				<th scope="row"><label for="tcp_sku"><?php _e( 'Sku', 'tcp' ); ?>:</label></th>
+				<th scope="row"><label for="tcp_sku"><?php _e( 'Sku', 'tcp-do' ); ?>:</label></th>
 				<td><input name="tcp_sku" id="tcp_sku" value="<?php echo htmlspecialchars( tcp_get_the_sku( $post_id ) ); ?>" class="regular-text" type="text" style="width:12em" /></td>
 			</tr>
 			<?php do_action( 'tcp_dynamic_options_metabox_custom_fields', $post_id ); ?>
