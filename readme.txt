@@ -48,6 +48,10 @@ This plugin is released under a GPL license.
 == Screenshots ==
 
 == Changelog ==
+= 1.0.4 =
+* minor bugs
+* Dynamic options order by setting: title or order field
+
 = 1.0.3 =
 * UI improvements
 
