@@ -125,10 +125,15 @@ function tcp_get_dynamic_options( $post_id, $ids = false ) {
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_parent'	=> $post_id,
 		'numberposts'	=> -1,
-		'orderby'		=> 'meta_value',
-		'meta_key'		=> 'tcp_order',
-		'order'			=> 'ASC',
 	);
+	global $thecartpress;
+	if ( 'title' == $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) ) {
+		$args['orderby'] = 'name';
+	} else {
+		$args['orderby'] = 'meta_value';
+		$args['meta_key'] = 'tcp_order';
+	}
+	$args['order'] = 'ASC';
 	if ( $ids ) $args['fields'] = 'ids';
 	return get_posts( $args );
 }

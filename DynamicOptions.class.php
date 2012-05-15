@@ -67,12 +67,13 @@ class TCPDynamicOptions {
 		foreach( $ids as $id ) {
 			$order = get_post_meta( $id, 'tcp_order', true );
 			if ( $order == '' ) update_post_meta( $id, 'tcp_order', 0 );
-		}
+		}//Deprecated
 	}
 
 	function admin_init() {
 		$file = TCP_ADMIN_FOLDER . 'Settings.class.php';
 		add_settings_field( 'dynamic_options_type', __( 'Dynamic options type', 'tcp-do' ), array( $this, 'show_dynamic_options_type' ), $file, 'tcp_theme_compatibility_section' );
+		add_settings_field( 'dynamic_options_order_by', __( 'Dynamic options order by', 'tcp-do' ), array( $this, 'show_dynamic_options_order_by' ), $file, 'tcp_theme_compatibility_section' );
 	}
 
 	function admin_menu() {
@@ -93,6 +94,15 @@ class TCPDynamicOptions {
 			<option value="single" <?php selected( $dynamic_options_type, 'single' ); ?>><?php _e( 'Single', 'tcp-do' ); ?></option>
 			<option value="double" <?php selected( $dynamic_options_type, 'double' ); ?>><?php _e( 'Multiple', 'tcp-do' ); ?></option>
 		</select><?php
+	}
+
+	function show_dynamic_options_order_by() {
+		global $thecartpress;
+		if ( ! isset( $thecartpress ) ) return;
+		$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );?>
+		<input type="radio" id="dynamic_options_order_by_order" name="tcp_settings[dynamic_options_order_by]" value="order" <?php checked( 'order', $dynamic_options_order_by ); ?> /> <?php _e( 'order field', 'tcp-do' ); ?><br/>
+		<input type="radio" id="dynamic_options_order_by_title" name="tcp_settings[dynamic_options_order_by]" value="title" <?php checked( 'title', $dynamic_options_order_by ); ?> /> <?php _e( 'title', 'tcp-do' ); ?>
+		<?php
 	}
 
 	function tcp_product_metabox_toolbar( $post_id ) {
