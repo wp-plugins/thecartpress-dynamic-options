@@ -359,8 +359,7 @@ jQuery(document).ready(function() {
 		if ( isset( $_REQUEST['tcp_dynamic_option_' . $post_id][$i] ) ) {
 			$dynamic_option_id	= $_REQUEST['tcp_dynamic_option_' . $post_id][$i];
 			$unit_price 		+= tcp_get_the_price( $dynamic_option_id );
-			$dynamic_weight	= tcp_get_the_weight( $dynamic_option_id );
-			if ( $dynamic_weight > 0 ) $unit_weight = $dynamic_weight;//not add to the original weight
+			$unit_weight		= tcp_get_the_weight( $dynamic_option_id );//not add to the original weight
 			$post_id			= $dynamic_option_id;
 		}
 		$args = compact( 'i', 'post_id', 'count', 'unit_price', 'unit_weight' );
