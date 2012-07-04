@@ -22,7 +22,7 @@ class TCPDynamicOptionsMetabox {
 		$saleable_post_types = tcp_get_saleable_post_types();
 		if ( is_array( $saleable_post_types ) && count( $saleable_post_types ) )
 			foreach( $saleable_post_types as $post_type )
-				add_meta_box( 'tcp-product-dynamic-options', __( 'Products Dynamic options', 'tcp-do' ), array( $this, 'show' ), $post_type, 'normal', 'high' );
+				add_meta_box( 'tcp-product-dynamic-options', __( 'Product Dynamic options', 'tcp-do' ), array( $this, 'show' ), $post_type, 'normal', 'high' );
 	}
 
 	function show() {

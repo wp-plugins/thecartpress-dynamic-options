@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of TheCartPress.
+ * This file is part of TheCartPress-dynamicoptions.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -118,14 +118,18 @@ function tcp_delete_dynamic_option( $post_id ) {
  * Returns the dynamic product options
  * @param $post_id
  * @param $ids, if true the function returns only dynamic option ids, if false the dynamic option posts
+ * @param $filters, to filter the result
  * @since 1.0.0 
  */
-function tcp_get_dynamic_options( $post_id, $ids = false ) {
+function tcp_get_dynamic_options( $post_id, $ids = false, $filters = array() ) {
 	$args = array(
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_parent'	=> $post_id,
 		'numberposts'	=> -1,
 	);
+	foreach( $filters as $key => $filter ) {
+		$args[$key] = $filter;
+	}
 	global $thecartpress;
 	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );
 	if ( 'title' == $dynamic_options_order_by ) {

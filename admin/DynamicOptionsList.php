@@ -72,12 +72,15 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 	}
 
 	if ( isset( $_REQUEST['tcp_save'] ) ) {
-		if ( count( $options ) > 0 )
-			foreach( $options as $option )
-				if ( $option['delete'] )
+		if ( count( $options ) > 0 ) {
+			foreach( $options as $option ) {
+				if ( $option['delete'] ) {
 					tcp_delete_dynamic_option( $option['ID'] );
-				elseif ( ! tcp_exists_dynamic_option( $option ) )
-					tcp_update_dynamic_option( $option ); ?>
+				} else { //if ( ! tcp_exists_dynamic_option( $option ) ) {
+					tcp_update_dynamic_option( $option );
+				}
+			}
+		} ?>
 		<div id="message" class="updated"><p>
 		<?php _e( 'The options have been modified', 'tcp-do' ); ?>
 		</p></div>
@@ -193,7 +196,7 @@ function tcp_do_add_variations( $variations, $post_id, $attributes ) {
 <?php foreach( $attributes as $attribute ) : 
 	if ( $attribute ) : ?>
 	<td>
-		<select name="tcp_attributes_<?php echo $attribute->name; ?>[]" class="tcp_attributes tcp_attributes_<?php echo $attribute->name; ?>[]">
+		<select name="tcp_attributes_<?php echo $attribute->name; ?>[]" class="tcp_attributes tcp_attributes_<?php echo $attribute->name; ?>">
 			<option value=""><?php _e( 'No one', 'tcp-do' ); ?></option>
 		<?php $args = array( 'hide_empty' => false );
 		$terms = get_terms( $attribute->name, $args );
@@ -240,14 +243,54 @@ endforeach; ?>
 <br/>
 
 <form method="post">
+
+<div class="tablenav top">
+
+<?php foreach( $attributes as $attribute ) : if ( ! $attribute ) continue; ?>
+
+	<div class="alignleft actions">
+
+		<?php $name = 'tcp_filter_' . $attribute->name; ?>
+		<label><?php echo $attribute->labels->name; ?>:&nbsp;
+		
+		<select name="<?php echo $name; ?>" class="tcp_attributes tcp_attributes_<?php echo $attribute->name; ?>">
+
+			<option value=""><?php _e( 'No one', 'tcp-do' ); ?></option>
+
+		<?php $args = array( 'hide_empty' => false );
+		$terms = get_terms( $attribute->name, $args );
+		if ( is_array( $terms ) && count( $terms ) > 0 ) foreach( $terms as $term ) : ?>
+
+			<option value="<?php echo $term->slug; ?>" <?php selected( $term->slug, $_REQUEST[$name] ); ?>><?php echo $term->name; ?></option>
+
+		<?php endforeach; ?>
+
+		</select>
+		</label>
+
+	</div>
+
+<?php endforeach; ?>
+
+	<div class="alignleft actions">
+
+		<input type="submit" name="tcp_filter" value="<?php _e( 'Filter', 'tcp' ); ?>" class="button-secondary"/>
+
+	</div>
+
+	<br class="clear"/>
+
+</div><!-- .tablenav .top -->
+
 <table class="widefat fixed">
 <thead>
-
 <tr>
 	<th>&nbsp;</th>
 <?php foreach( $attributes as $attribute ) : if ( !$attribute ) continue; ?>
 	<th scope="col" class="manage-column">
+
 		<a href="<?php echo 'edit-tags.php?taxonomy=' . $attribute->name . '&post_type=' . TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'Edit attribute', 'tcp-do' ); ?>"><?php echo $attribute->labels->name; ?></a>
+
 	</th>
 <?php endforeach; ?>
 	<th scope="col" class="manage-column">
@@ -257,8 +300,10 @@ endforeach; ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Order', 'tcp-do' ); ?>
 		<span class="description"><?php global $thecartpress;
-		if ( 'field' != $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) )
-			_e( 'Options will be ordered by title or price, this field will not be considered', 'tcp-do' ); ?></span>
+		if ( 'order' != $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) )
+			_e( 'Options will be ordered by title or price, this field will not be considered.', 'tcp-do' ); ?>
+			<?php printf( __( 'To change the order, visit <a href="%s">Theme compatibility</a> page.', 'tcp-do' ), get_admin_url() . 'admin.php?page=thecartpress/TheCartPress.class.php/appearance#dynamic_options_settings' ); ?>
+		</span>
 	</th>
 	<th scope="col" class="manage-column">
 		<input type="checkbox" class="tcp_select_delete_all" onclick="if (jQuery('.tcp_select_delete_all').attr('checked') ) jQuery('.tcp_delete').attr('checked', true); else jQuery('.tcp_delete').attr('checked', false);" value="1"/> <?php _e( 'Delete', 'tcp-do' ); ?>
@@ -269,7 +314,7 @@ endforeach; ?>
 
 <tfoot>
 	<th>&nbsp;</th>
-<?php foreach( $attributes as $attribute ) : if ( !$attribute ) continue; ?>
+<?php foreach( $attributes as $attribute ) : if ( ! $attribute ) continue; ?>
 	<th scope="col" class="manage-column">
 		<a href="<?php echo 'edit-tags.php?taxonomy=' . $attribute->name . '&post_type=' . TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'Edit attribute', 'tcp-do' ); ?>"><?php echo $attribute->labels->name; ?></a>
 	</th>
@@ -290,7 +335,22 @@ endforeach; ?>
 <tbody>
 
 <?php
-$children = tcp_get_dynamic_options( $post_id );
+$filter['tax_query'] = array( 'relation' => 'AND' );
+foreach( $attributes as $attribute ) {
+	if ( ! $attribute ) continue;
+	if ( isset( $_REQUEST['tcp_filter_' . $attribute->name] ) ) {
+		$term = $_REQUEST['tcp_filter_' . $attribute->name];
+		if ( strlen( $term ) > 0 ) {
+			$filter['tax_query'][] = array(
+				'taxonomy'	=> $attribute->name,
+				'field'		=> 'slug',
+				'terms'		=> array( $term ),
+			);
+		}
+	}
+}
+
+$children = tcp_get_dynamic_options( $post_id, false, $filter );
 if ( is_array( $children ) && count( $children > 0 ) ) 
 	foreach( $children as $child ) : ?>
 <tr>
