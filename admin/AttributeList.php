@@ -24,11 +24,14 @@ if ( isset( $_REQUEST['tcp_insert'] ) ) :
 	$name = trim( $_REQUEST['tcp_name'] );
 	if ( strlen( $name ) == 0 ) : ?>
 		<div id="message" class="error"><p>
-			<?php _e( 'The "name" field must be completed', 'tcp' );?>
+			<?php _e( 'The "name" field must be completed', 'tcp-do' );?>
 		</p></div><?php	
 	else :
-		$id = strtolower( str_replace( ' ' , '-', $name ) );
-		$id = str_replace( '_' , '-', $id );
+//		$id = strtolower( str_replace( ' ' , '-', $name ) );
+//		$id = str_replace( '_' , '-', $id );
+		
+		$id = sanitize_key( $name );
+		
 		$taxo = array(
 			'post_type'			=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 			'name'				=> $name,
@@ -37,51 +40,49 @@ if ( isset( $_REQUEST['tcp_insert'] ) ) :
 			'label'				=> $name,
 			'singular_label'	=> $name,
 			'singular_name'		=> $name,
-			'search_items'		=> sprintf( __( 'Search %s', 'tcp' ), $name ),
-			'all_items'			=> sprintf( __( 'All %s', 'tcp' ), $name ),
+			'search_items'		=> sprintf( __( 'Search %s', 'tcp-do' ), $name ),
+			'all_items'			=> sprintf( __( 'All %s', 'tcp-do' ), $name ),
 			'parent_item'		=> '',
 			'parent_item_colon'	=> '',
-			'edit_item'			=> sprintf( __( 'Edit %s', 'tcp' ), $name ),
-			'update_item'		=> sprintf( __( 'Update %s', 'tcp' ), $name ),
-			'add_new_item'		=> sprintf( __( 'Add new %s', 'tcp' ), $name ),
-			'new_item_name'		=> sprintf( __( 'New %s name', 'tcp' ), $name ),
+			'edit_item'			=> sprintf( __( 'Edit %s', 'tcp-do' ), $name ),
+			'update_item'		=> sprintf( __( 'Update %s', 'tcp-do' ), $name ),
+			'add_new_item'		=> sprintf( __( 'Add new %s', 'tcp-do' ), $name ),
+			'new_item_name'		=> sprintf( __( 'New %s name', 'tcp-do' ), $name ),
 			'desc'				=> $_REQUEST['tcp_desc'],
 			'hierarchical'		=> false,
 			'rewrite'			=> false,
 		);
 		tcp_update_custom_taxonomy( $id, $taxo ); ?>
 		<div id="message" class="updated"><p>
-			<?php _e( 'Taxonomy saved', 'tcp' );?>
+			<?php _e( 'Taxonomy saved', 'tcp-do' );?>
 		</p></div><?php
 	endif;
 elseif ( isset( $_REQUEST['tcp_delete_taxonomy'] ) && isset( $_REQUEST['taxonomy_id'] ) ) :
 	tcp_delete_custom_taxonomy( $_REQUEST['taxonomy_id'] ); ?>
 	<div id="message" class="updated"><p>
-		<?php _e( 'The taxonomy has been deleted', 'tcp' );?>
+		<?php _e( 'The taxonomy has been deleted', 'tcp-do' );?>
 	</p></div><?php	
 endif;
 ?>
 <div class="wrap">
-<h2><?php _e( 'Attributes', 'tcp' ); ?></h2>
+<h2><?php _e( 'Attributes', 'tcp-do' ); ?></h2>
 <ul class="subsubsub">
-	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSets.php"><?php _e( 'Return to Attributes Sets', 'tcp' ); ?></a></li>
+	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSetsList.php"><?php _e( 'Return to Attributes Sets', 'tcp-do' ); ?></a></li>
 </ul>
 <div class="clear"></div>
 
-<h3><?php _e( 'Create new attribute', 'tcp' ); ?></h3>
+<h3><?php _e( 'Create new attribute', 'tcp-do' ); ?></h3>
 <form method="post">
 <table class="widefat fixed" cellspacing="0">
 <thead>
 <tr>
-	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp' ); ?></th>
-	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp' ); ?></th>
-	<th scope="col" class="manage-column" style="width: 20%;">&nbsp;</th>
+	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp-do' ); ?></th>
+	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
 </tr>
 <tbody>
 <tr>
 	<td><input type="text" name="tcp_name" size="20" maxlength="255" /></td>
-	<td><textarea name="tcp_desc" cols="40" rows="4"></textarea></td>
-	<td><input type="submit" name="tcp_insert" value="<?php _e( 'insert', 'tcp' ); ?>" class="button-primary" /></td>
+	<td><textarea name="tcp_desc" cols="25" rows="2"></textarea><input type="submit" name="tcp_insert" value="<?php _e( 'insert', 'tcp-do' ); ?>" class="button-primary" /></td>
 </tr>
 </tbody>
 </table>
@@ -92,15 +93,15 @@ endif;
 <table class="widefat fixed" cellspacing="0">
 <thead>
 <tr>
-	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp' ); ?></th>
-	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp' ); ?></th>
+	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp-do' ); ?></th>
+	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column" style="width: 20%;">&nbsp;</th>
 </tr>
 </thead>
 <tfoot>
 <tr>
-	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp' ); ?></th>
-	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp' ); ?></th>
+	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp-do' ); ?></th>
+	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column" style="width: 20%;">&nbsp;</th></tr>
 </tfoot>
 <tbody>
@@ -111,16 +112,16 @@ if ( is_array( $taxonomies ) && count( $taxonomies ) > 0 ) :
 	<td><?php echo $taxonomy['name']; ?></td>
 	<td><?php echo $taxonomy['desc']; ?>&nbsp;</td>
 	<td>
-		<a href="admin.php?page=thecartpress/admin/TaxonomyEdit.php&taxonomy=<?php echo $taxonomy_id; ?>" title="<?php _e( 'edit attribute', 'tcp' ); ?>"><?php _e( 'edit', 'tcp' ); ?></a> |
-		<a href="edit-tags.php?taxonomy=<?php echo $taxonomy_id; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'add terms', 'tcp' ); ?>"><?php _e( 'add', 'tcp' ); ?></a> |
-		<a href="#" onclick="jQuery('.delete_taxonomy').hide();jQuery('#delete_<?php echo $taxonomy_id; ?>').show();" class="delete"><?php _e( 'delete', 'tcp' ); ?></a></div>
+		<a href="admin.php?page=thecartpress/admin/TaxonomyEdit.php&taxonomy=<?php echo $taxonomy_id; ?>" title="<?php _e( 'edit attribute', 'tcp-do' ); ?>"><?php _e( 'edit', 'tcp-do' ); ?></a> |
+		<a href="edit-tags.php?taxonomy=<?php echo $taxonomy_id; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'add terms', 'tcp-do' ); ?>"><?php _e( 'add terms', 'tcp-do' ); ?></a> |
+		<a href="#" onclick="jQuery('.delete_taxonomy').hide();jQuery('#delete_<?php echo $taxonomy_id; ?>').show(200);" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
 		<div id="delete_<?php echo $taxonomy_id; ?>" class="delete_taxonomy" style="display:none; border: 1px dotted orange; padding: 2px">
 			<form method="post" name="frm_delete_<?php echo $taxonomy_id; ?>">
 				<input type="hidden" name="taxonomy_id" value="<?php echo $taxonomy_id; ?>" />
 				<input type="hidden" name="tcp_delete_taxonomy" value="y" />
-				<p><?php _e( 'Do you really want to delete this taxonomy?', 'tcp' ); ?></p>
-				<a href="javascript:document.frm_delete_<?php echo $taxonomy_id; ?>.submit();" class="delete"><?php _e( 'Yes' , 'tcp' ); ?></a> |
-				<a href="#" onclick="jQuery('#delete_<?php echo $taxonomy_id; ?>').hide();"><?php _e( 'No, I don\'t' , 'tcp' ); ?></a>
+				<p><?php _e( 'Do you really want to delete this taxonomy?', 'tcp-do' ); ?></p>
+				<a href="javascript:document.frm_delete_<?php echo $taxonomy_id; ?>.submit();" class="delete"><?php _e( 'Yes' , 'tcp-do' ); ?></a> |
+				<a href="#" onclick="jQuery('#delete_<?php echo $taxonomy_id; ?>').hide(100);"><?php _e( 'No, I don\'t' , 'tcp-do' ); ?></a>
 			</form>
 		</div>
 	</td>
@@ -128,7 +129,7 @@ if ( is_array( $taxonomies ) && count( $taxonomies ) > 0 ) :
 	<?php endforeach; ?>
 <?php else : ?>
 <tr>
-	<td colspan="3"><?php _e( 'The list is empty', 'tcp' ); ?></td>
+	<td colspan="3"><?php _e( 'The list is empty', 'tcp-do' ); ?></td>
 </tr>
 <?php endif; ?>
 </tbody>

@@ -22,7 +22,7 @@ class TCPDynamicOptionsMetabox {
 		$saleable_post_types = tcp_get_saleable_post_types();
 		if ( is_array( $saleable_post_types ) && count( $saleable_post_types ) )
 			foreach( $saleable_post_types as $post_type )
-				add_meta_box( 'tcp-product-dynamic-options', __( 'Products Dynamic options', 'tcp-dyn' ), array( $this, 'show' ), $post_type, 'normal', 'high' );
+				add_meta_box( 'tcp-product-dynamic-options', __( 'Product Dynamic options', 'tcp-do' ), array( $this, 'show' ), $post_type, 'normal', 'high' );
 	}
 
 	function show() {
@@ -31,7 +31,7 @@ class TCPDynamicOptionsMetabox {
 		$attributes	= tcp_get_attributes_by_product( $post_id );
 		?>
 <ul class="subsubsub">
-	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>DynamicOptionsList.php&post_id=<?php echo $post_id; ?>" title="<?php echo __( 'manage options list', 'tcp-dyn' ); ?>"><?php echo __( 'Manage Options list', 'tcp-dyn' ); ?></a></li>
+	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>DynamicOptionsList.php&post_id=<?php echo $post_id; ?>" title="<?php echo __( 'manage options list', 'tcp-do' ); ?>"><?php echo __( 'Manage Options list', 'tcp-do' ); ?></a></li>
 	<?php do_action( 'tcp_dynamic_option_metabox_toolbar', $post_id ); ?>
 </ul>
 <table class="widefat fixed">
@@ -41,11 +41,11 @@ class TCPDynamicOptionsMetabox {
 	<th>&nbsp;</th>
 <?php foreach( $attributes as $attribute ) : ?>
 	<th scope="col" class="manage-column">
-		<a href="wp-admin/edit-tags.php?taxonomy=<?php echo $attribute->name; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'Edit attribute', 'tcp-dyn' ); ?>"><?php echo $attribute->labels->name; ?></a>
+		<a href="wp-admin/edit-tags.php?taxonomy=<?php echo $attribute->name; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'Edit attribute', 'tcp-do' ); ?>"><?php echo $attribute->labels->name; ?></a>
 	</th>
 <?php endforeach; ?>
 	<th scope="col" class="manage-column">
-		<?php _e( 'Price', 'tcp-dyn' ); ?>
+		<?php _e( 'Price', 'tcp-do' ); ?>
 		<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
 	</th>
 </tr>
@@ -62,7 +62,7 @@ if ( is_array( $children ) && count( $children > 0 ) )
 <tr>
 	<td>
 	<?php echo tcp_get_the_thumbnail( $child->ID );?>
-	<a href="post.php?action=edit&post=<?php echo $child->ID;?>"><?php _e( 'edit option', 'tcp-dyn' );?></a></td>
+	<a href="post.php?action=edit&post=<?php echo $child->ID;?>"><?php _e( 'edit', 'tcp-do' );?></a></td>
 	<?php foreach( $attributes as $attribute ) : 
 	$child_terms = wp_get_object_terms( $child->ID, $attribute->name );
 	$child_term = isset( $child_terms[0]->name ) ? $child_terms[0]->name : ''; ?>
