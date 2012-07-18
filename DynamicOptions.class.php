@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.0.6
+Version: 1.0.7
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -57,7 +57,6 @@ class TCPDynamicOptions {
 		}
 		add_filter( 'tcp_the_add_to_cart_items_in_the_cart', array( $this, 'tcp_the_add_to_cart_items_in_the_cart' ), 10, 2 );
 		add_filter( 'tcp_get_the_tax_id', array( $this, 'tcp_get_the_tax_id' ), 10, 2 );
-		
 		add_filter( 'tcp_add_item_shopping_cart', array( $this, 'tcp_add_item_shopping_cart' ) );
 		add_filter( 'tcp_get_discount_by_product', array( $this, 'tcp_get_discount_by_product' ), 10, 3 );
 		add_filter( 'tcp_get_the_title', array( $this, 'tcp_get_the_title' ), 10, 4 );
@@ -114,10 +113,10 @@ class TCPDynamicOptions {
 	function tcp_theme_compatibility_settings_page( $suffix ) {
 		global $thecartpress;
 		if ( ! isset( $thecartpress ) ) return;
-		$dynamic_options_type		= $thecartpress->get_setting( 'dynamic_options_type' . $suffix, 'radio' );
-		$dynamic_options_order_by	= $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
-		$dynamic_options_order		= $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'asc' );
-		$dynamic_options_calculate_price = $thecartpress->get_setting( 'dynamic_options_calculate_price' . $suffix, 'complex' ); ?>
+		$dynamic_options_type			= $thecartpress->get_setting( 'dynamic_options_type' . $suffix, 'radio' );
+		$dynamic_options_order_by		= $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
+		$dynamic_options_order			= $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'asc' );
+		$dynamic_options_calculate_price= $thecartpress->get_setting( 'dynamic_options_calculate_price' . $suffix, 'complex' ); ?>
 
 <a name="dynamic_options_settings"></a>
 <h3><?php _e( 'Dynamic Options settings', 'tcp'); ?></h3>
@@ -216,10 +215,10 @@ class TCPDynamicOptions {
 		if ( $post_type == TCP_DYNAMIC_OPTIONS_POST_TYPE ) return; ?>
 		<tr valign="top">
 
-			<th scope="row"><label for="tcp_attribute_sets"><?php _e( 'Attribute Sets', 'tcp-do' ); ?>:</label></th>
-
+			<th scope="row">
+					<label for="tcp_attribute_sets"><?php _e( 'Attribute Sets', 'tcp-do' ); ?>:</label>
+			</th>
 			<td>
-
 				<select name="tcp_attribute_sets[]" id="tcp_attribute_sets">
 					<option value=""><?php _e( 'none', 'tcp-do' ); ?></option>
 				<?php $attribute_sets = get_option( 'tcp_attribute_sets', array() );
@@ -227,9 +226,7 @@ class TCPDynamicOptions {
 					<option value="<?php echo $id; ?>" <?php tcp_selected_multiple( $tcp_attribute_sets, $id ); ?>><?php echo $attribute_set['title']; ?></option>
 				<?php endforeach; ?>
 				</select>
-
 				<a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSetsList.php"><?php _e( 'Manage Attribute Sets', 'tcp-do' ); ?></a>
-
 			</td>
 
 		</tr><?php
@@ -568,7 +565,7 @@ jQuery(document).ready(function() {
 
 	function tcp_get_image_in_grouped( $image, $post_id, $args = false  ) {
 		global $thecartpress;
-		$args['size'] = $thecartpress->get_setting( 'image_size_grouped_by_button', 'post-thumbnail' );
+		$args['size'] = $thecartpress->get_setting( 'image_size_grouped_by_button', 'thumbnail' );
 		return $this->tcp_get_image_in_content( $image, $post_id, $args );
 	}
 	
