@@ -58,7 +58,7 @@ class TCPDynamicOptionsMetabox {
 <tbody>
 <?php $children = tcp_get_dynamic_options( $post_id );
 if ( is_array( $children ) && count( $children > 0 ) ) 
-	foreach( $children as $child ) : ?>
+	foreach( $children as $id ) : $child = get_post( $id ); ?>
 <tr>
 	<td>
 	<?php echo tcp_get_the_thumbnail( $child->ID );?>

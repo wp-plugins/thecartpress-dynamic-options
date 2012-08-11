@@ -65,7 +65,7 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 				'price'		=> $price,
 				'terms'		=> $terms,
 				'order'		=> $tcp_order = $_REQUEST['tcp_order'][$id],
-				'delete'	=> isset( $_REQUEST['tcp_delete'][$id] ),
+				'delete'	=> in_array( $tcp_post_id, isset( $_REQUEST['tcp_delete'] ) ? (array)$_REQUEST['tcp_delete'] : array() ),
 			);
 		}
 		//$options = apply_filters( 'tcp_dynamic_options_save', $options, $id, $_REQUEST );
@@ -332,10 +332,9 @@ endforeach; ?>
 	<!--<th scope="col">&nbsp;</th>-->
 </tr>
 </tfoot>
-<tbody>
 
-<?php
-$filter['tax_query'] = array( 'relation' => 'AND' );
+<tbody>
+<?php $filter['tax_query'] = array( 'relation' => 'AND' );
 foreach( $attributes as $attribute ) {
 	if ( ! $attribute ) continue;
 	if ( isset( $_REQUEST['tcp_filter_' . $attribute->name] ) ) {
@@ -350,9 +349,9 @@ foreach( $attributes as $attribute ) {
 	}
 }
 
-$children = tcp_get_dynamic_options( $post_id, false, $filter );
+$children = tcp_get_dynamic_options( $post_id, $filter );
 if ( is_array( $children ) && count( $children > 0 ) ) 
-	foreach( $children as $child ) : ?>
+	foreach( $children as $id ) : $child = get_post( $id ); ?>
 <tr>
 	<td>
 	<?php echo tcp_get_the_thumbnail( $child->ID );?>
@@ -384,7 +383,7 @@ if ( is_array( $children ) && count( $children > 0 ) )
 		<input type="text" name="tcp_order[]" class="tcp_order" size="3" maxlength="9" value="<?php echo tcp_get_the_order( $child->ID );?>"/>
 	</td>
 	<td>
-		<input type="checkbox" name="tcp_delete[]" class="tcp_delete" value="yes"/>
+		<input type="checkbox" name="tcp_delete[]" class="tcp_delete" value="<?php echo $child->ID; ?>" />
 	</td>
 	<!--<td>
 		<div><a href="#" onclick="jQuery('.delete_options').hide();jQuery('#delete_<?php echo $child->ID; ?>').show(200);return false;" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
