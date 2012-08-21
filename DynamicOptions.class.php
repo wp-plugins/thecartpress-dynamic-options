@@ -167,7 +167,7 @@ class TCPDynamicOptions {
 	<td>
 		<input type="radio" id="dynamic_options_calculate_price_individual" name="dynamic_options_calculate_price" value="individual" <?php checked( 'individual', $dynamic_options_calculate_price ); ?> /> <?php _e( 'Individual', 'tcp-do' ); ?><br/>
 		<input type="radio" id="dynamic_options_calculate_price_complex" name="dynamic_options_calculate_price" value="complex" <?php checked( 'complex', $dynamic_options_calculate_price ); ?> /> <?php _e( 'Complex', 'tcp-do' ); ?>
-		<p class="description"><?php _e( '"Individual" value returns the price of the Option as the price of the product. "Complex" means to add prices to get the final price.', 'tcp-do' ); ?></p>
+		<p class="description"><?php _e( '"Individual" value will return as the price of an option the price of the Product. "Complex" means that prices will be added.', 'tcp-do' ); ?></p>
 	</td>
 </tr>
 
