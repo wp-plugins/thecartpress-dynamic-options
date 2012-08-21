@@ -121,11 +121,12 @@ function tcp_delete_dynamic_option( $post_id ) {
  * @param $filters, to filter the result
  * @since 1.0.0 
  */
-function tcp_get_dynamic_options( $post_id, $ids = false, $filters = array() ) {
+function tcp_get_dynamic_options( $post_id, $filters = array() ) {
 	$args = array(
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_parent'	=> $post_id,
 		'numberposts'	=> -1,
+		'fields'		=> 'ids',
 	);
 	foreach( $filters as $key => $filter ) {
 		$args[$key] = $filter;
@@ -142,7 +143,6 @@ function tcp_get_dynamic_options( $post_id, $ids = false, $filters = array() ) {
 		$args['meta_key'] = 'tcp_order';
 	}
 	$args['order'] = $thecartpress->get_setting( 'dynamic_options_order', 'asc' );
-	if ( $ids ) $args['fields'] = 'ids';
 	return get_posts( $args );
 }
 
@@ -222,12 +222,17 @@ function tcp_get_terms_slugs( $taxonomy ) {
 	return $slugs;
 }
 
+//DEPRECATED
+function tcp_the_buy_button_dyamic_options( $product_id, $parent_id = 0, $echo = true ) {
+	return tcp_the_buy_button_dynamic_options( $product_id, $parent_id, $echo );
+}
+
 /**
  * Display the dynmic product options
  * @param $product id
  * @since 1.0.0
  */
-function tcp_the_buy_button_dyamic_options( $product_id, $parent_id = 0, $echo = true ) {
+function tcp_the_buy_button_dynamic_options( $product_id, $parent_id = 0, $echo = true ) {
 	global $tcp_dynamic_options;
 	if ( isset( $tcp_dynamic_options ) ) {
 		$html = $tcp_dynamic_options->tcp_the_add_to_cart_unit_field( '', $product_id, $parent_id );

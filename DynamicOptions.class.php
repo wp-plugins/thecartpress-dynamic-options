@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.0.7
+Version: 1.0.8
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -27,7 +27,7 @@ Parent: thecartpress
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define( 'TCP_DYNAMIC_OPTIONS_FOLDER'			, dirname( __FILE__) . '/' );
+define( 'TCP_DYNAMIC_OPTIONS_FOLDER'			, dirname( __FILE__ ) . '/' );
 define( 'TCP_DYNAMIC_OPTIONS_ADMIN_FOLDER'		, TCP_DYNAMIC_OPTIONS_FOLDER . 'admin/' );
 define( 'TCP_DYNAMIC_OPTIONS_CLASSES_FOLDER'	, TCP_DYNAMIC_OPTIONS_FOLDER . 'classes/' );
 define( 'TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER'	, TCP_DYNAMIC_OPTIONS_FOLDER . 'templates/' );
@@ -57,6 +57,7 @@ class TCPDynamicOptions {
 		}
 		add_filter( 'tcp_the_add_to_cart_items_in_the_cart', array( $this, 'tcp_the_add_to_cart_items_in_the_cart' ), 10, 2 );
 		add_filter( 'tcp_get_the_tax_id', array( $this, 'tcp_get_the_tax_id' ), 10, 2 );
+
 		add_filter( 'tcp_add_item_shopping_cart', array( $this, 'tcp_add_item_shopping_cart' ) );
 		add_filter( 'tcp_get_discount_by_product', array( $this, 'tcp_get_discount_by_product' ), 10, 3 );
 		add_filter( 'tcp_get_the_title', array( $this, 'tcp_get_the_title' ), 10, 4 );
@@ -73,6 +74,7 @@ class TCPDynamicOptions {
 	}
 
 	function init() {
+		if ( function_exists( 'load_plugin_textdomain' ) ) load_plugin_textdomain( 'tcp-do', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		if ( ! function_exists( 'is_plugin_active' ) ) require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		if ( ! is_plugin_active( 'thecartpress/TheCartPress.class.php' ) ) {
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
@@ -113,13 +115,12 @@ class TCPDynamicOptions {
 	function tcp_theme_compatibility_settings_page( $suffix ) {
 		global $thecartpress;
 		if ( ! isset( $thecartpress ) ) return;
-		$dynamic_options_type			= $thecartpress->get_setting( 'dynamic_options_type' . $suffix, 'radio' );
-		$dynamic_options_order_by		= $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
-		$dynamic_options_order			= $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'asc' );
-		$dynamic_options_calculate_price= $thecartpress->get_setting( 'dynamic_options_calculate_price' . $suffix, 'complex' ); ?>
-
+		$dynamic_options_type		= $thecartpress->get_setting( 'dynamic_options_type' . $suffix, 'radio' );
+		$dynamic_options_order_by	= $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
+		$dynamic_options_order		= $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'asc' );
+		$dynamic_options_calculate_price = $thecartpress->get_setting( 'dynamic_options_calculate_price' . $suffix, 'complex' ); ?>
 <a name="dynamic_options_settings"></a>
-<h3><?php _e( 'Dynamic Options settings', 'tcp'); ?></h3>
+<h3><?php _e( 'Dynamic Option Settings', 'tcp-do'); ?></h3>
 
 <div class="postbox">
 
@@ -127,7 +128,7 @@ class TCPDynamicOptions {
 <tbody>
 <tr valign="top">
 	<th scope="row">
-	<label for="dynamic_options_type"><?php _e( 'Dynamic Options type', 'tcp-do' ); ?></label>
+	<label for="dynamic_options_type"><?php _e( 'Dynamic options type', 'tcp-do' ); ?></label>
 	</th>
 	<td>
 		<select id="dynamic_options_type" name="dynamic_options_type">
@@ -137,10 +138,9 @@ class TCPDynamicOptions {
 		</select>
 	</td>
 </tr>
-
 <tr valign="top">
 	<th scope="row">
-	<label for="dynamic_options_order_by_order"><?php _e( 'Dynamic Options order by', 'tcp-do' ); ?></label>
+	<label for="dynamic_options_order_by_order"><?php _e( 'Dynamic options order by', 'tcp-do' ); ?></label>
 	</th>
 	<td>
 		<input type="radio" id="dynamic_options_order_by_order" name="dynamic_options_order_by" value="order" <?php checked( 'order', $dynamic_options_order_by ); ?> /> <?php _e( 'Order field', 'tcp-do' ); ?><br/>
@@ -161,7 +161,7 @@ class TCPDynamicOptions {
 
 <tr valign="top">
 	<th scope="row">
-	<label for="dynamic_options_calculate_price_individual"><?php _e( 'Dynamic Options calculate price', 'tcp-do' ); ?></label>
+	<label for="dynamic_options_calculate_price_individual"><?php _e( 'Dynamic options calculate price', 'tcp-do' ); ?></label>
 	</th>
 	<td>
 		<input type="radio" id="dynamic_options_calculate_price_individual" name="dynamic_options_calculate_price" value="individual" <?php checked( 'individual', $dynamic_options_calculate_price ); ?> /> <?php _e( 'Individual', 'tcp-do' ); ?><br/>
@@ -214,7 +214,6 @@ class TCPDynamicOptions {
 		$post_type = get_post_type( $post_id );
 		if ( $post_type == TCP_DYNAMIC_OPTIONS_POST_TYPE ) return; ?>
 		<tr valign="top">
-
 			<th scope="row">
 					<label for="tcp_attribute_sets"><?php _e( 'Attribute Sets', 'tcp-do' ); ?>:</label>
 			</th>
@@ -228,7 +227,6 @@ class TCPDynamicOptions {
 				</select>
 				<a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSetsList.php"><?php _e( 'Manage Attribute Sets', 'tcp-do' ); ?></a>
 			</td>
-
 		</tr><?php
 	}
 
@@ -265,13 +263,13 @@ class TCPDynamicOptions {
 			if ( ! isset( $thecartpress ) ) return;
 			$dynamic_options_type	= $thecartpress->get_setting( 'dynamic_options_type', 'list' );
 			$attributes				= tcp_get_attributes_by_product( $post_id );
-			$options				= tcp_get_dynamic_options( $post_id, true );
+			$options				= tcp_get_dynamic_options( $post_id );
 			if ( $thecartpress->get_setting( 'dynamic_options_calculate_price', 'complex' ) == 'complex' ) {
 				$product_price = tcp_get_the_price( $post_id );
 			} else {
 				$product_price = 0;
 			}
-			ob_start();			
+			ob_start();
 			if ( 'list' == $dynamic_options_type ) :
 				if ( isset( $_REQUEST['tcp_dynamic_option'] ) ) {
 					$option_id = $_REQUEST['tcp_dynamic_option'][0];
@@ -308,6 +306,7 @@ class TCPDynamicOptions {
 					function tcp_set_price_<?php echo $id; ?>(e) {
 						var	form = jQuery(e).closest('form');
 						form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
+						//jQuery('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
 					}
 					</script>
 
@@ -358,6 +357,7 @@ class TCPDynamicOptions {
 					jQuery('#tcp_dynamic_option_<?php echo $post_id; ?>').trigger('change');
 				});
 				function tcp_set_price_<?php echo $post_id; ?>(e) {
+					//var id = jQuery('#tcp_dynamic_option_<?php echo $post_id; ?>').val();
 					var	form = jQuery(e).closest('form');
 					var id = form.find('#tcp_dynamic_option_<?php echo $post_id; ?>').val();
 					<?php echo $set_price; ?>
@@ -393,6 +393,10 @@ valid_values_<?php echo $post_id; ?>.push('<?php echo $id, ':', $valid; ?>');
 			<?php $price = tcp_get_the_price( $id ); ?>
 
 function tcp_set_price_<?php echo $id; ?>(e) {
+	<?php //$price = tcp_get_the_price( $id ); ?>
+	//jQuery('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
+	//jQuery('#tcp_add_product_<?php echo $post_id; ?>').show();
+	//jQuery('#tcp_dynamic_option_<?php echo $post_id; ?>').val(<?php echo $id; ?>);
 	var	form = jQuery(e).closest('form');
 	form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
 	form.find('#tcp_add_product_<?php echo $post_id; ?>').show();
@@ -464,7 +468,7 @@ jQuery(document).ready(function() {
 	}
 
 	function tcp_the_add_to_cart_items_in_the_cart( $out, $post_id ) {
-		$options = tcp_get_dynamic_options( $post_id, true );
+		$options = tcp_get_dynamic_options( $post_id );
 		if ( is_array( $options ) && count ( $options ) > 0 ) {
 			$total = 0;
 			$shopingCart = TheCartPress::getShoppingCart();
@@ -570,7 +574,7 @@ jQuery(document).ready(function() {
 	}
 	
 	function tcp_get_image_in_content( $image, $post_id, $args = false  ) {
-		$options = tcp_get_dynamic_options( $post_id, true );
+		$options = tcp_get_dynamic_options( $post_id );
 		if ( is_array( $options ) && count( $options ) > 0 ) {
 			$image = '';
 			foreach( $options as $id ) {
