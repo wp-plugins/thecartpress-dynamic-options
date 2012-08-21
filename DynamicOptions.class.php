@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.0.8
+Version: 1.0.9
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -44,28 +44,29 @@ class TCPDynamicOptions {
 	function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
 		if ( is_admin() ) {
-			register_activation_hook( __FILE__, array( $this, 'activate_plugin' ) );			
-			add_action( 'admin_menu', array( $this, 'admin_menu' ), 20 );
-			add_action( 'tcp_product_metabox_toolbar', array( $this, 'tcp_product_metabox_toolbar' ) );
-			add_action( 'tcp_product_metabox_custom_fields', array( $this, 'tcp_product_metabox_custom_fields' ) );
-			add_action( 'tcp_product_metabox_save_custom_fields', array( $this, 'tcp_product_metabox_save_custom_fields' ) );
-			add_action( 'tcp_product_metabox_delete_custom_fields', array( $this, 'tcp_product_metabox_delete_custom_fields' ) );
-			add_filter( 'tcp_product_row_actions', array( $this, 'product_row_actions' ) );
+			register_activation_hook( __FILE__, array( &$this, 'activate_plugin' ) );			
+			add_action( 'admin_menu', array( &$this, 'admin_menu' ), 20 );
+			add_action( 'tcp_product_metabox_toolbar', array( &$this, 'tcp_product_metabox_toolbar' ) );
+			add_action( 'tcp_product_metabox_custom_fields', array( &$this, 'tcp_product_metabox_custom_fields' ) );
+			add_action( 'tcp_product_metabox_save_custom_fields', array( &$this, 'tcp_product_metabox_save_custom_fields' ) );
+			add_action( 'tcp_product_metabox_delete_custom_fields', array( &$this, 'tcp_product_metabox_delete_custom_fields' ) );
+			add_filter( 'tcp_product_row_actions', array( &$this, 'product_row_actions' ) );
 			add_filter( 'tcp_theme_compatibility_unset_settings_action', array( &$this, 'tcp_theme_compatibility_unset_settings_action' ), 10, 2 );
 			add_filter( 'tcp_theme_compatibility_settings_action', array( &$this, 'tcp_theme_compatibility_settings_action' ), 10, 2 );
 			add_action( 'tcp_theme_compatibility_settings_page', array( &$this, 'tcp_theme_compatibility_settings_page' ) );
 		}
-		add_filter( 'tcp_the_add_to_cart_items_in_the_cart', array( $this, 'tcp_the_add_to_cart_items_in_the_cart' ), 10, 2 );
-		add_filter( 'tcp_get_the_tax_id', array( $this, 'tcp_get_the_tax_id' ), 10, 2 );
+		add_filter( 'tcp_the_add_to_cart_items_in_the_cart', array( &$this, 'tcp_the_add_to_cart_items_in_the_cart' ), 10, 2 );
+		add_filter( 'tcp_get_the_tax_id', array( &$this, 'tcp_get_the_tax_id' ), 10, 2 );
 
-		add_filter( 'tcp_add_item_shopping_cart', array( $this, 'tcp_add_item_shopping_cart' ) );
-		add_filter( 'tcp_get_discount_by_product', array( $this, 'tcp_get_discount_by_product' ), 10, 3 );
-		add_filter( 'tcp_get_the_title', array( $this, 'tcp_get_the_title' ), 10, 4 );
-		add_filter( 'tcp_get_the_thumbnail', array( $this, 'tcp_get_the_thumbnail'), 10, 3 );
-		add_filter( 'tcp_get_permalink', array( $this, 'tcp_get_permalink'), 10, 2 );
-		add_filter( 'tcp_get_image_in_content', array( $this, 'tcp_get_image_in_content' ), 10, 3 );
-		add_filter( 'tcp_get_image_in_excerpt', array( $this, 'tcp_get_image_in_content' ), 10, 3 );
-		add_filter( 'tcp_get_image_in_grouped_buy_button', array( $this, 'tcp_get_image_in_grouped' ), 10, 3 );
+		add_filter( 'tcp_add_item_shopping_cart', array( &$this, 'tcp_add_item_shopping_cart' ) );
+		add_filter( 'tcp_get_discount_by_product', array( &$this, 'tcp_get_discount_by_product' ), 10, 3 );
+		add_filter( 'tcp_get_the_title', array( &$this, 'tcp_get_the_title' ), 10, 4 );
+		add_filter( 'tcp_get_the_thumbnail', array( &$this, 'tcp_get_the_thumbnail'), 10, 3 );
+		add_filter( 'tcp_get_permalink', array( &$this, 'tcp_get_permalink'), 10, 2 );
+		add_filter( 'tcp_get_image_in_content', array( &$this, 'tcp_get_image_in_content' ), 10, 3 );
+		add_filter( 'tcp_get_image_in_excerpt', array( &$this, 'tcp_get_image_in_content' ), 10, 3 );
+		add_filter( 'tcp_get_image_in_grouped_buy_button', array( &$this, 'tcp_get_image_in_grouped' ), 10, 3 );
+		add_filter( 'tcp_get_the_product_price', array( &$this, 'tcp_get_the_product_price' ), 10, 2 );
 	}
 
 	function tcp_get_product_types( $types ) {
@@ -477,7 +478,7 @@ jQuery(document).ready(function() {
 				if ( $item ) $total += $item->getUnits();
 			}
 			if ( $total > 0 )
-				$out = '<span class="tcp_added_product_title tcp_added_product_title_' . $post_id . '">' . sprintf ( __( '%s unit(s) <a href="%s">in your cart</a>', 'tcp' ), $total, tcp_get_the_shopping_cart_url() ) . '</span>';
+				$out = '<span class="tcp_added_product_title tcp_added_product_title_' . $post_id . '">' . sprintf ( __( '%s unit(s) <a href="%s">in your cart</a>', 'tcp-do' ), $total, tcp_get_the_shopping_cart_url() ) . '</span>';
 		}
 		return $out;
 	}
@@ -595,7 +596,7 @@ jQuery(document).ready(function() {
 		}
 		return $image;
 	}
-	
+
 	private function get_thumbnail_link( $post_id, $args, $parent_id, $option_id ) {
 		/*$class = 'class="tcp_thumbnail_' . $parent_id . ' tcp_thumbnail_option_' . $option_id . '"';
 		$image = tcp_get_the_thumbnail_image( $post_id, $args );
@@ -610,6 +611,23 @@ jQuery(document).ready(function() {
 		return $link;
 
 	}
+
+	function tcp_get_the_product_price( $price, $post_id ) {
+		if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
+			$parent_post_id = tcp_get_parent_from_dynamic_option( $post_id );
+			return $price + tcp_get_the_price( $parent_post_id );
+		} else {
+			return $price;
+		}
+	}
+
+	/*function tcp_get_the_product_weight( $weight, $post_id ) {
+		if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
+			$dynamic_option_id	= $post_id;
+			$post_id = tcp_get_parent_from_dynamic_option( $dynamic_option_id );
+			return $weight + tcp_get_the_weight( $post_id );
+		}
+	}*/
 }
 
 $tcp_dynamic_options = new TCPDynamicOptions();

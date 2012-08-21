@@ -274,7 +274,7 @@ endforeach; ?>
 
 	<div class="alignleft actions">
 
-		<input type="submit" name="tcp_filter" value="<?php _e( 'Filter', 'tcp' ); ?>" class="button-secondary"/>
+		<input type="submit" name="tcp_filter" value="<?php _e( 'Filter', 'tcp-do' ); ?>" class="button-secondary"/>
 
 	</div>
 
@@ -402,7 +402,7 @@ if ( is_array( $children ) && count( $children > 0 ) )
 </tbody>
 </table>
 <p><input type="submit" name="tcp_save" value="<?php _e( 'save', 'tcp-do' ); ?>" class="button-primary"/>
-<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp' ); ?></span></p>
+<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp-do' ); ?></span></p>
 </form>
 
 </div><!-- .wrap -->
