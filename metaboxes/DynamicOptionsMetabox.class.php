@@ -22,7 +22,7 @@ class TCPDynamicOptionsMetabox {
 		$saleable_post_types = tcp_get_saleable_post_types();
 		if ( is_array( $saleable_post_types ) && count( $saleable_post_types ) )
 			foreach( $saleable_post_types as $post_type )
-				add_meta_box( 'tcp-product-dynamic-options', __( 'Product Dynamic options', 'tcp-do' ), array( $this, 'show' ), $post_type, 'normal', 'high' );
+				add_meta_box( 'tcp-product-dynamic-options', __( 'Product Dynamic options', 'tcp-do' ), array( $this, 'show' ), $post_type, 'normal', 'core' );
 	}
 
 	function show() {
@@ -59,22 +59,28 @@ class TCPDynamicOptionsMetabox {
 <?php $children = tcp_get_dynamic_options( $post_id );
 if ( is_array( $children ) && count( $children > 0 ) ) 
 	foreach( $children as $id ) : $child = get_post( $id ); ?>
-<tr>
-	<td>
-	<?php echo tcp_get_the_thumbnail( $child->ID );?>
-	<a href="post.php?action=edit&post=<?php echo $child->ID;?>"><?php _e( 'edit', 'tcp-do' );?></a></td>
-	<?php foreach( $attributes as $attribute ) : 
-	$child_terms = wp_get_object_terms( $child->ID, $attribute->name );
-	$child_term = isset( $child_terms[0]->name ) ? $child_terms[0]->name : ''; ?>
-	<td>
-		<?php echo $child_term; ?>
-	</td>
-	<?php endforeach; ?>
-	<td>
-		<?php echo tcp_number_format( tcp_get_the_price( $child->ID ) );?>
-		<?php do_action( 'tcp_dynamic_options_metabox_lists_row', $child->ID ); ?>
-	</td>
-</tr>
+	<tr>
+		<td>
+			<?php $image = tcp_get_the_thumbnail( $child->ID, array( 'size' => 50 ) );
+			if ( $image == '' ) $image = '<img src="' . plugins_url() . '/thecartpress/images/tcp_icon_gray.png" />';
+			echo $image; ?>
+			<div class="tcp_dynamic_options_edit_option">
+			<a href="post.php?action=edit&post=<?php echo $child->ID;?>"><?php _e( 'edit', 'tcp-do' );?></a>
+			<?php do_action( 'tcp_dynamic_options_edit_option', $child->ID ); ?>
+			</div>
+		</td>
+		<?php foreach( $attributes as $attribute ) : 
+		$child_terms = wp_get_object_terms( $child->ID, $attribute->name );
+		$child_term = isset( $child_terms[0]->name ) ? $child_terms[0]->name : ''; ?>
+		<td>
+			<?php echo $child_term; ?>
+		</td>
+		<?php endforeach; ?>
+		<td>
+			<?php echo tcp_format_the_price( tcp_get_the_price( $child->ID ) ); ?>
+			<?php do_action( 'tcp_dynamic_options_metabox_lists_row', $child->ID ); ?>
+		</td>
+	</tr>
 <?php endforeach; ?>
 </tbody>
 </table><?php

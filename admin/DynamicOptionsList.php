@@ -354,9 +354,13 @@ if ( is_array( $children ) && count( $children > 0 ) )
 	foreach( $children as $id ) : $child = get_post( $id ); ?>
 <tr>
 	<td>
-	<?php echo tcp_get_the_thumbnail( $child->ID );?>
-	<br/>
-	<a href="post.php?action=edit&post=<?php echo $child->ID;?>"><?php _e( 'edit option', 'tcp-do' );?></a>
+	<?php $image = tcp_get_the_thumbnail( $child->ID );
+	if ( $image == '' ) $image = '<img src="' . plugins_url() . '/thecartpress/images/tcp_icon_gray.png" />';
+	echo $image; ?>
+	<div class="tcp_dynamic_options_edit_option">
+	<a href="post.php?action=edit&post=<?php echo $child->ID; ?>"><?php _e( 'edit', 'tcp-do' );?></a>
+	<?php do_action( 'tcp_dynamic_options_edit_option', $child->ID ); ?>
+	</div>
 	<!-- |
 	<span class="hide-if-no-js"><a title="<?php _e( 'Set featured image', 'tcp-do' ); ?>" href="<?php admin_url('media-upload.php?post_id=' . $child->ID . '&type=image&TB_iframe=1&width=640&height=876' ); ?>" id="set-post-thumbnail" class="thickbox"><?php _e( 'Set featured image', 'tcp-do' ); ?></a></span>-->
 	</td>

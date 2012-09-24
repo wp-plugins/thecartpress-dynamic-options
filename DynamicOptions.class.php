@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.0.9
+Version: 1.1.0
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -149,7 +149,6 @@ class TCPDynamicOptions {
 		<input type="radio" id="dynamic_options_order_by_price" name="dynamic_options_order_by" value="price" <?php checked( 'price', $dynamic_options_order_by ); ?> /> <?php _e( 'Price', 'tcp-do' ); ?>
 	</td>
 </tr>
-
 <tr valign="top">
 	<th scope="row">
 	<label for="dynamic_options_order_asc"><?php _e( 'Dynamic options order', 'tcp-do' ); ?></label>
@@ -159,7 +158,6 @@ class TCPDynamicOptions {
 		<input type="radio" id="dynamic_options_order_desc" name="dynamic_options_order" value="desc" <?php checked( 'desc', $dynamic_options_order ); ?> /> <?php _e( 'Descending', 'tcp-do' ); ?>
 	</td>
 </tr>
-
 <tr valign="top">
 	<th scope="row">
 	<label for="dynamic_options_calculate_price_individual"><?php _e( 'Dynamic options calculate price', 'tcp-do' ); ?></label>
@@ -216,7 +214,7 @@ class TCPDynamicOptions {
 		if ( $post_type == TCP_DYNAMIC_OPTIONS_POST_TYPE ) return; ?>
 		<tr valign="top">
 			<th scope="row">
-					<label for="tcp_attribute_sets"><?php _e( 'Attribute Sets', 'tcp-do' ); ?>:</label>
+				<label for="tcp_attribute_sets"><?php _e( 'Attribute Sets', 'tcp-do' ); ?>:</label>
 			</th>
 			<td>
 				<select name="tcp_attribute_sets[]" id="tcp_attribute_sets">
@@ -280,16 +278,11 @@ class TCPDynamicOptions {
 				}
 				foreach( $options as $id ) :
 					if ( $option_id == 0 ) $option_id = $id; ?>
-
 					<div class="tcp_dynamic_option_panel">
-
 					<input type="radio" name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $id; ?>" value="<?php echo $id; ?>"
 					onclick="tcp_set_price_<?php echo $id; ?>(this);jQuery('.tcp_thumbnail_<?php echo $post_id; ?>').hide();jQuery('.tcp_thumbnail_option_<?php echo $id; ?>').show();" />
-
 					<label for="tcp_dynamic_option_<?php echo $id; ?>" class="tcp_dynamic_option_label">
-
 					<?php echo tcp_get_the_thumbnail( $id ); ?>
-
 					<?php foreach( $attributes as $attribute ) {
 						$terms = wp_get_object_terms( $id, $attribute->name );
 						if ( is_array( $terms) && count( $terms ) > 0 ) {
@@ -300,9 +293,7 @@ class TCPDynamicOptions {
 						}
 					}
 					$price = tcp_get_the_price( $id ); ?>
-
 					</label>
-
 					<script>
 					function tcp_set_price_<?php echo $id; ?>(e) {
 						var	form = jQuery(e).closest('form');
@@ -310,23 +301,16 @@ class TCPDynamicOptions {
 						//jQuery('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
 					}
 					</script>
-
 					</div>
-
 				<?php endforeach; ?>
-
 				<script type="text/javascript">
 				jQuery(document).ready(function() {
 					jQuery('#tcp_dynamic_option_<?php echo $option_id; ?>').click();
 				});
 				</script>
-
 			<?php elseif ( 'single' == $dynamic_options_type ) : ?>
-
 				<div class="tcp_dynamic_option_panel">
-
 				<label><?php _e( 'Options', 'tcp-do' ); ?>
-
 				<select name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $post_id; ?>" onchange="tcp_set_price_<?php echo $post_id; ?>(this);">
 				<?php if ( isset( $_REQUEST['tcp_dynamic_option'] ) ) {
 					$option_id = $_REQUEST['tcp_dynamic_option'][0];
@@ -350,9 +334,7 @@ class TCPDynamicOptions {
 					$set_price .= 'if (id == ' . $id . ') { jQuery(\'#tcp_unit_price_' . $post_id . '\').html(\'' . tcp_get_the_price_label( $post_id, $product_price + $price ) . '\'); }' . "\n";
 				endforeach; ?>
 				</option>
-
 				</select>
-
 				<script type="text/javascript">
 				jQuery(document).ready(function() {
 					jQuery('#tcp_dynamic_option_<?php echo $post_id; ?>').trigger('change');
@@ -369,9 +351,7 @@ class TCPDynamicOptions {
 				}
 				</script>
 				</label>
-
 				</div>
-
 			<?php elseif ( 'double' == $dynamic_options_type ) : ?>
 <script>
 function set_not_valid_<?php echo $post_id; ?>() {
@@ -394,10 +374,6 @@ valid_values_<?php echo $post_id; ?>.push('<?php echo $id, ':', $valid; ?>');
 			<?php $price = tcp_get_the_price( $id ); ?>
 
 function tcp_set_price_<?php echo $id; ?>(e) {
-	<?php //$price = tcp_get_the_price( $id ); ?>
-	//jQuery('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
-	//jQuery('#tcp_add_product_<?php echo $post_id; ?>').show();
-	//jQuery('#tcp_dynamic_option_<?php echo $post_id; ?>').val(<?php echo $id; ?>);
 	var	form = jQuery(e).closest('form');
 	form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
 	form.find('#tcp_add_product_<?php echo $post_id; ?>').show();
@@ -432,35 +408,31 @@ jQuery(document).ready(function() {
 	jQuery('.tcp_dynamic_options_<?php echo $post_id; ?>').trigger('change');//with only one would be enough TODO
 });
 </script>
-
 				<input type="hidden" name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $post_id; ?>"/>
-
 				<?php foreach( $attributes as $attribute ) : ?>
-
 					<div class="tcp_dynamic_option_panel">
-
 					<label><?php echo $attribute->labels->name; ?>:
-
 					<?php $terms = array();
 					foreach( $options as $id ) {
 						//$terms = array_merge( wp_get_object_terms( $id, $attribute->name ), $terms );
 						$terms_to_add = wp_get_object_terms( $id, $attribute->name );
 						foreach( $terms_to_add as $term_to_add ) {
-							$term_id = $term_to_add->term_id;
-							if ( ! isset( $terms[$term_id] ) ) $terms[$term_id] = $term_to_add;
+							$term_id = tcp_get_current_id( $term_to_add->term_id, $attribute->name );
+							if ( $term_id != $term_to_add->term_id ) {
+								$translated_term_to_add = get_term( $term_id, $attribute->name );
+								$term_to_add->name = $translated_term_to_add->name;
+							}
+							if ( ! isset( $terms[$term_to_add->term_id] ) ) $terms[$term_to_add->term_id] = $term_to_add;
 						}
-					} ?>
-
-					<select name="tcp_dynamic_option_<?php echo $post_id; ?>_<?php echo $attribute->name; ?>[]" id="tcp_dynamic_option_<?php echo $attribute->name; ?>_<?php echo $post_id; ?>" class="tcp_dynamic_options_<?php echo $post_id; ?>">
+					} 
+					$default_post_id = tcp_get_default_id( $post_id ); ?>
+					<select name="tcp_dynamic_option_<?php echo $default_post_id; ?>_<?php echo $attribute->name; ?>[]" id="tcp_dynamic_option_<?php echo $attribute->name; ?>_<?php echo $default_post_id; ?>" class="tcp_dynamic_options_<?php echo $default_post_id; ?>">
 					<?php foreach( $terms as $term ) : ?>
 						<option value="<?php echo $term->slug; ?>"><?php echo $term->name; ?></option>
 					<?php endforeach; ?>
 					</select>
-
 					</label>
-
 					</div>
-
 				<?php endforeach;
 			endif;
 			$out .= ob_get_clean();

@@ -3,8 +3,8 @@ Contributors: thecartpress
 Donate link: http://thecartpress.com/collaborate-to-grow-and-support-thecartpress/
 Tags: options, variations, TheCartPress, ecommerce, e-commerce, store, shop, shopping, shopping cart, cart, custom post type, taxonomy, taxonomies, ecomerce, products, CartPress
 Requires at least: 3.1
-Tested up to: 3.4.1
-Stable Tag: 1.0.9
+Tested up to: 3.4.2
+Stable Tag: 1.1.0
 
 TheCartPress Dynamic Options is a plugin for TheCartPress eCommerce plugin.
 It allows to add n-levels options (or variations) to the products.
@@ -40,7 +40,7 @@ This section describes how to install the plugin and get it working.
 
 = Requirements =
 
-Up to WodPress 3.1 and TheCartPress 1.1.8
+Up to WodPress 3.1 and TheCartPress 2.0.0
 
 = What is the plugin license? =
 
@@ -49,6 +49,9 @@ This plugin is released under a GPL license.
 == Screenshots ==
 
 == Changelog ==
+= 1.1.0 =
+* Thumbnail permalink issue
+
 = 1.0.9 =
 * Language issues
 
