@@ -42,6 +42,8 @@ require_once( TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER . 'tcp_dynamic_options_templa
 class TCPDynamicOptions {
 
 	function __construct() {
+		global $thecartpress;
+		if ( ! $thecartpress ) return;
 		add_action( 'init', array( $this, 'init' ) );
 		if ( is_admin() ) {
 			register_activation_hook( __FILE__, array( &$this, 'activate_plugin' ) );			
