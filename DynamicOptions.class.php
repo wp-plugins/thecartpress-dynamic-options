@@ -252,7 +252,7 @@ class TCPDynamicOptions {
 			$admin_path = 'admin.php?page=' . plugin_basename( TCP_DYNAMIC_OPTIONS_FOLDER ) . '/admin/';
 			$count = tcp_count_dynamic_options( $post->ID );
 			$count = ( $count > 0 ) ? ' (' . $count . ')' : '';
-			$actions['tcp_dynamic_options'] = '<a href="' . $admin_path . 'DynamicOptionsList.php&post_id=' . $post->ID . '" title="' . esc_attr( __( 'dynamic options', 'tcp_op' ) ) . '">' . __( 'dynamic options', 'tcp-do' ) . $count . '</a>';
+			$actions['tcp_dynamic_options'] = '<a href="' . $admin_path . 'DynamicOptionsList.php&post_id=' . $post->ID . '" title="' . esc_attr( __( 'Dynamic options', 'tcp_op' ) ) . '">' . __( 'Dynamic options', 'tcp-do' ) . $count . '</a>';
 		}
 		return $actions;
 	}
