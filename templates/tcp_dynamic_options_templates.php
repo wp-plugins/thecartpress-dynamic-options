@@ -22,9 +22,10 @@
  * @param $args array('title' => 'ss', 'parent_id' => 9, 'price' => 99.9, 'terms' => array( 'taxonomy' => 'term_slug', ...) )
  */
 function tcp_exists_dynamic_option( $args ) {
+	$parent_id = isset( $args['parent_id'] ) ? $args['parent_id'] : get_the_ID();
 	$post_arg = array(
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
-		'post_parent'	=> $args['parent_id'],
+		'post_parent'	=> $parent_id,
 		'numberposts'	=> 1,
 		'fields'		=> 'ids',
 	);
@@ -46,6 +47,10 @@ function tcp_exists_dynamic_option( $args ) {
 		}
 	}
 	$posts = get_posts( $post_arg );
+	if ( count( $posts ) == 0 ) {
+		$post_arg['post_parent'] = tcp_get_default_id( $parent_id, get_post_type( $parent_id ) );
+		$posts = get_posts( $post_arg );
+	}
 	return count( $posts ) > 0;
 }
 
@@ -121,11 +126,12 @@ function tcp_delete_dynamic_option( $post_id ) {
  * @param $filters, to filter the result
  * @since 1.0.0 
  */
-function tcp_get_dynamic_options( $post_id, $ids = false, $filters = array() ) {
+function tcp_get_dynamic_options( $post_id, $filters = array() ) {
 	$args = array(
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_parent'	=> $post_id,
 		'numberposts'	=> -1,
+		'fields'		=> 'ids',
 	);
 	foreach( $filters as $key => $filter ) {
 		$args[$key] = $filter;
@@ -142,8 +148,12 @@ function tcp_get_dynamic_options( $post_id, $ids = false, $filters = array() ) {
 		$args['meta_key'] = 'tcp_order';
 	}
 	$args['order'] = $thecartpress->get_setting( 'dynamic_options_order', 'asc' );
-	if ( $ids ) $args['fields'] = 'ids';
-	return get_posts( $args );
+	$posts = get_posts( $args );
+	if ( count( $posts ) == 0 ) {
+		$args['post_parent'] = tcp_get_default_id( $post_id, get_post_type( $post_id ) );
+		$posts = get_posts( $args );
+	}
+	return $posts;
 }
 
 /**
@@ -192,10 +202,17 @@ function tcp_get_attributes( $type = 'names' ) {
  * @return Array of objects
  * @since 1.0.0
  */ 
-function tcp_get_attributes_by_product( $post_id ) {
+function tcp_get_attributes_by_product( $post_id = 0 ) {
+	if ( $post_id == 0 ) $post_id = get_the_ID();
 	$attributes = array();
 	$product_attribute_sets = get_post_meta( $post_id, 'tcp_attribute_sets', true );
-	if ( is_array( $product_attribute_sets )  && count( $product_attribute_sets ) > 0 ) {
+	if ( ! is_array( $product_attribute_sets ) ) $product_attribute_sets = array();
+	if ( count( $product_attribute_sets ) == 0 ) {
+		$default_id = tcp_get_default_id( $post_id, get_post_type( $post_id ) );
+		$product_attribute_sets = get_post_meta( $default_id, 'tcp_attribute_sets', true );
+		if ( ! is_array( $product_attribute_sets ) ) $product_attribute_sets = array();
+	}
+	if ( is_array( $product_attribute_sets ) && count( $product_attribute_sets ) > 0 ) {
 		$attribute_sets = get_option( 'tcp_attribute_sets', array() );
 		foreach( $product_attribute_sets as $id ) {
 			if ( isset( $attribute_sets[$id] ) ) {
@@ -222,12 +239,17 @@ function tcp_get_terms_slugs( $taxonomy ) {
 	return $slugs;
 }
 
+//DEPRECATED
+function tcp_the_buy_button_dyamic_options( $product_id, $parent_id = 0, $echo = true ) {
+	return tcp_the_buy_button_dynamic_options( $product_id, $parent_id, $echo );
+}
+
 /**
  * Display the dynmic product options
  * @param $product id
  * @since 1.0.0
  */
-function tcp_the_buy_button_dyamic_options( $product_id, $parent_id = 0, $echo = true ) {
+function tcp_the_buy_button_dynamic_options( $product_id, $parent_id = 0, $echo = true ) {
 	global $tcp_dynamic_options;
 	if ( isset( $tcp_dynamic_options ) ) {
 		$html = $tcp_dynamic_options->tcp_the_add_to_cart_unit_field( '', $product_id, $parent_id );
