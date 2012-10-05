@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.1.0
+Version: 1.1.1
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -42,8 +42,6 @@ require_once( TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER . 'tcp_dynamic_options_templa
 class TCPDynamicOptions {
 
 	function __construct() {
-		global $thecartpress;
-		if ( ! $thecartpress ) return;
 		add_action( 'init', array( $this, 'init' ) );
 		if ( is_admin() ) {
 			register_activation_hook( __FILE__, array( &$this, 'activate_plugin' ) );			
@@ -108,6 +106,7 @@ class TCPDynamicOptions {
 	}
 
 	function admin_menu() {
+		if ( ! defined( 'TCP_PRODUCT_POST_TYPE' ) ) return;
 		$base = 'edit.php?post_type=' . TCP_PRODUCT_POST_TYPE;
 		add_submenu_page( $base, __( 'Attribute Sets', 'tcp-do' ), __( 'Attributes Sets', 'tcp-do' ), 'tcp_edit_products', TCP_DYNAMIC_OPTIONS_ADMIN_FOLDER . 'AttributeSetsList.php' );
 		add_submenu_page( $base, __( 'Attributes', 'tcp-do' ), __( 'Attributes', 'tcp-do' ), 'tcp_edit_products', TCP_DYNAMIC_OPTIONS_ADMIN_FOLDER . 'AttributeList.php' );
@@ -210,7 +209,7 @@ class TCPDynamicOptions {
 		}
 	}
 
-	function tcp_product_metabox_custom_fields( $post_id ) { 
+	function tcp_product_metabox_custom_fields( $post_id ) {
 		$tcp_attribute_sets = get_post_meta( $post_id, 'tcp_attribute_sets', true );
 		$post_type = get_post_type( $post_id );
 		if ( $post_type == TCP_DYNAMIC_OPTIONS_POST_TYPE ) return; ?>
