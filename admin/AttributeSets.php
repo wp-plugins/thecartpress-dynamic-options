@@ -76,6 +76,7 @@ if ( isset( $_REQUEST['tcp_insert'] ) ) {
 ?>
 <div class="wrap">
 <h2><?php _e( 'Attribute Sets', 'tcp-do' ); ?></h2>
+
 <ul class="subsubsub">
 	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeList.php"><?php _e( 'Attributes', 'tcp-do' ); ?></a></li>
 </ul>

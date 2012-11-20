@@ -206,7 +206,7 @@ function tcp_get_attributes_by_product( $post_id = 0 ) {
 	if ( $post_id == 0 ) $post_id = get_the_ID();
 	$attributes = array();
 	$product_attribute_sets = get_post_meta( $post_id, 'tcp_attribute_sets', true );
-	if ( ! is_array( $product_attribute_sets ) ) $product_attribute_sets = array();
+	if ( ! is_array( $product_attribute_sets ) ) $product_attribute_sets = array( $product_attribute_sets );
 	if ( count( $product_attribute_sets ) == 0 ) {
 		$default_id = tcp_get_default_id( $post_id, get_post_type( $post_id ) );
 		$product_attribute_sets = get_post_meta( $default_id, 'tcp_attribute_sets', true );
@@ -215,7 +215,7 @@ function tcp_get_attributes_by_product( $post_id = 0 ) {
 	if ( is_array( $product_attribute_sets ) && count( $product_attribute_sets ) > 0 ) {
 		$attribute_sets = get_option( 'tcp_attribute_sets', array() );
 		foreach( $product_attribute_sets as $id ) {
-			if ( isset( $attribute_sets[$id] ) ) {
+			if ( isset( $attribute_sets[$id]['taxonomies'] ) ) {
 				foreach( $attribute_sets[$id]['taxonomies'] as $taxonomy ) {
 					$attributes[] = get_taxonomy( $taxonomy );
 				}
@@ -263,10 +263,11 @@ function tcp_the_buy_button_dynamic_options( $product_id, $parent_id = 0, $echo 
  * @since 1.0.3
  */
 function tcp_att_set_get_id( $title ) {
-	$title = strtolower( $title );
+	return sanitize_key( $title );
+	/*$title = strtolower( $title );
 	$title = str_replace( ' ', '-', $title );
 	$title = str_replace( '_', '-', $title );
-	return $title;
+	return $title;*/
 }
 
 /**
@@ -288,9 +289,9 @@ function tcp_insert_attribute_set( $title, $desc = '', $taxonomies = array() ) {
 	$id = tcp_att_set_get_id( $title );
 	if ( isset( $attribute_sets[$id] ) ) return false;
 	$new_set = array(
-		'title'			=> $title,
-		'desc'			=> $desc,
-		'taxonomies'	=> $taxonomies,
+		'title'		=> $title,
+		'desc'		=> $desc,
+		'taxonomies'=> $taxonomies,
 	);
 	$attribute_sets[$id] = $new_set;
 	update_option( 'tcp_attribute_sets', $attribute_sets);
@@ -301,15 +302,15 @@ function tcp_insert_attribute_set( $title, $desc = '', $taxonomies = array() ) {
  * Updates a new attribute set
  * @since 1.0.3
  */
-function tcp_update_attribute_set( $id, $title, $desc = '', $taxonomies = array() ) {
+function tcp_update_attribute_set( $id, $title, $desc = '', $taxonomies = false ) {
 	$attribute_sets	= get_option( 'tcp_attribute_sets', array() );
 	if ( ! isset( $attribute_sets[$id] ) ) {
 		return tcp_insert_attribute_set( $title, $desc, $taxonomies );
 	} else {
 		$new_set = array(
-			'title'			=> $title,
-			'desc'			=> $desc,
-			'taxonomies'	=> $taxonomies,
+			'title'		=> $title,
+			'desc'		=> $desc,
+			'taxonomies'=> $taxonomies !== false ? $taxonomies : $attribute_sets[$id]['taxonomies'],
 		);
 		$attribute_sets[$id] = $new_set;
 		update_option( 'tcp_attribute_sets', $attribute_sets);

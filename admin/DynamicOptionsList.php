@@ -25,7 +25,7 @@ if ( count( $attributes ) == 0 ) : ?>
 	<p><?php _e( 'To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned.', 'tcp-do' ); ?></p>
 	<p><a href="post.php?action=edit&post=<?php echo $post->ID;?>"><?php printf( __( 'return to %s', 'tcp-do' ), $post->post_title ); ?></a></p>
 	</div>
-	<?php exit;
+	<?php //exit;
 endif;
 
 if ( isset( $_REQUEST['tcp_add_term'] ) ) {
@@ -155,15 +155,14 @@ function tcp_do_add_variations( $variations, $post_id, $attributes ) {
 		if ( ! tcp_exists_dynamic_option( $option ) )
 			tcp_insert_dynamic_option( $option );
 } ?>
-
 <div class="wrap">
 <h2><?php printf( __( 'Options for %s', 'tcp-do' ), $post->post_title ); ?></h2>
 <ul class="subsubsub">
 	<li><a href="post.php?action=edit&post=<?php echo $post->ID;?>"><?php printf( __( 'Return to %s', 'tcp-do' ), $post->post_title ); ?></a></li>
 	<li>|</li>
-	<li><a href="admin.php?page=thecartpress-dynamicoptions/admin/AttributeSetsList.php"><?php _e( 'Attribute Sets', 'tcp-do' ); ?></a></li>
+	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSetsList.php"><?php _e( 'Attribute Sets', 'tcp-do' ); ?></a></li>
 	<li>|</li>
-	<li><a href="admin.php?page=thecartpress-dynamicoptions/admin/AttributeList.php"><?php _e( 'Manage Attributes', 'tcp-do' ); ?></a></li>
+	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeList.php"><?php _e( 'Manage Attributes', 'tcp-do' ); ?></a></li>
 </ul>
 <div class="clear"></div>
 

@@ -103,5 +103,5 @@ class TCPDynamicOptionsCustomFieldsMetabox {
 	}
 }
 
-new TCPDynamicOptionsCustomFieldsMetabox();
+//new TCPDynamicOptionsCustomFieldsMetabox();
 ?>
