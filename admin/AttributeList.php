@@ -27,13 +27,10 @@ if ( isset( $_REQUEST['tcp_insert'] ) ) :
 			<?php _e( 'The "name" field must be completed', 'tcp-do' );?>
 		</p></div><?php	
 	else :
-//		$id = strtolower( str_replace( ' ' , '-', $name ) );
-//		$id = str_replace( '_' , '-', $id );
-		
 		$id = sanitize_key( $name );
-		
+		$post_types = TCP_DYNAMIC_OPTIONS_POST_TYPE;
 		$taxo = array(
-			'post_type'			=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+			'post_type'			=> $post_types,
 			'name'				=> $name,
 			'name_id'			=> $id,
 			'activate'			=> true,

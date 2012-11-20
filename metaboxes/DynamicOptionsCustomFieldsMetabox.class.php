@@ -18,8 +18,15 @@
 		
 class TCPDynamicOptionsCustomFieldsMetabox {
 
+	function __construct() {
+		//add_action( 'admin_init', array( $this, 'register_metabox' ), 99 );
+	}
+
 	function register_metabox() {
 		add_meta_box( 'tcp-dyn-option-custom-fields', __( 'Option Custom Fields', 'tcp-do' ), array( &$this, 'showCustomFields' ), TCP_DYNAMIC_OPTIONS_POST_TYPE, 'normal', 'high' );
+		remove_meta_box( 'tcp-product-custom-fields', TCP_PRODUCT_POST_TYPE, 'normal' );
+		add_action( 'save_post', array( $this, 'saveCustomFields' ), 1, 2 );
+		add_action( 'delete_post', array( $this, 'deleteCustomFields' ) );
 	}
 
 	function showCustomFields() {
@@ -94,13 +101,7 @@ class TCPDynamicOptionsCustomFieldsMetabox {
 		delete_post_meta( $post_id, 'tcp_sku' );
 		do_action( 'tcp_dynamic_options_metabox_delete_custom_fields', $post_id );
 	}
-
-	function __construct() {
-		add_action( 'admin_init', array( $this, 'register_metabox' ) );
-		add_action( 'save_post', array( $this, 'saveCustomFields' ), 1, 2 );
-		add_action( 'delete_post', array( $this, 'deleteCustomFields' ) );
-	}
 }
 
-new TCPDynamicOptionsCustomFieldsMetabox();
+//new TCPDynamicOptionsCustomFieldsMetabox();
 ?>
