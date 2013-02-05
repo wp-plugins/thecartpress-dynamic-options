@@ -22,18 +22,18 @@ tcp_delete_custom_taxonomy( 'compass-rose-36-gallon-corner-fish-tank-beech' );*/
 
 if ( isset( $_REQUEST['tcp_insert'] ) ) :
 	$name = trim( $_REQUEST['tcp_name'] );
+	$key = trim( $_REQUEST['tcp_key'] );
+	if ( $key == '' ) $key = $name;
+	$key = str_replace( '-', '_', $key );
 	if ( strlen( $name ) == 0 ) : ?>
 		<div id="message" class="error"><p>
 			<?php _e( 'The "name" field must be completed', 'tcp-do' );?>
 		</p></div><?php	
 	else :
-//		$id = strtolower( str_replace( ' ' , '-', $name ) );
-//		$id = str_replace( '_' , '-', $id );
-		
-		$id = sanitize_key( $name );
-		
+		$id = sanitize_key( $key );
+		$post_types = TCP_DYNAMIC_OPTIONS_POST_TYPE;
 		$taxo = array(
-			'post_type'			=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+			'post_type'			=> $post_types,
 			'name'				=> $name,
 			'name_id'			=> $id,
 			'activate'			=> true,
@@ -76,11 +76,13 @@ endif;
 <table class="widefat fixed" cellspacing="0">
 <thead>
 <tr>
+	<th scope="col" class="manage-column"><?php _e( 'ID', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
 </tr>
 <tbody>
 <tr>
+	<td><input type="text" name="tcp_key" size="20" maxlength="255" /></td>
 	<td><input type="text" name="tcp_name" size="20" maxlength="255" /></td>
 	<td><textarea name="tcp_desc" cols="25" rows="2"></textarea><input type="submit" name="tcp_insert" value="<?php _e( 'insert', 'tcp-do' ); ?>" class="button-primary" /></td>
 </tr>
@@ -93,6 +95,7 @@ endif;
 <table class="widefat fixed" cellspacing="0">
 <thead>
 <tr>
+	<th scope="col" class="manage-column"><?php _e( 'ID', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column" style="width: 20%;">&nbsp;</th>
@@ -100,6 +103,7 @@ endif;
 </thead>
 <tfoot>
 <tr>
+	<th scope="col" class="manage-column"><?php _e( 'ID', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column" style="width: 20%;">&nbsp;</th></tr>
@@ -109,6 +113,7 @@ endif;
 if ( is_array( $taxonomies ) && count( $taxonomies ) > 0 ) :
 	foreach( $taxonomies as $taxonomy_id => $taxonomy ) : ?>
 <tr>
+	<td><?php echo $taxonomy['name_id']; ?></td>
 	<td><?php echo $taxonomy['name']; ?></td>
 	<td><?php echo $taxonomy['desc']; ?>&nbsp;</td>
 	<td>
