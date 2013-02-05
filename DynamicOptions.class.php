@@ -424,7 +424,6 @@ class TCPDynamicOptions {
 				}
 				foreach( $options as $id ) :
 					if ( $option_id == 0 ) $option_id = $id; ?>
-					if ( tcp_get_the_stock)
 					<div class="tcp_dynamic_option_panel">
 					<input type="radio" name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $id; ?>" value="<?php echo $id; ?>"
 					onclick="tcp_set_price_<?php echo $id; ?>(this);jQuery('.tcp_thumbnail_<?php echo $post_id; ?>').hide();jQuery('.tcp_thumbnail_option_<?php echo $id; ?>').show();" />
