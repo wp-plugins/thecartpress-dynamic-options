@@ -4,7 +4,7 @@ Donate link: http://thecartpress.com/collaborate-to-grow-and-support-thecartpres
 Tags: options, variations, TheCartPress, ecommerce, e-commerce, store, shop, shopping, shopping cart, cart, custom post type, taxonomy, taxonomies, ecomerce, products, CartPress
 Requires at least: 3.1
 Tested up to: 3.4.2
-Stable Tag: 1.1.2
+Stable Tag: 1.1.3
 
 TheCartPress Dynamic Options is a plugin for TheCartPress eCommerce plugin.
 It allows to add n-levels options (or variations) to the products.
@@ -49,6 +49,12 @@ This plugin is released under a GPL license.
 == Screenshots ==
 
 == Changelog ==
+= 1.1.3 =
+* Dynamic Options List: Manage Stock from this page.
+* Remove options from the lists if no stock
+* CSV Loader Integration
+* TheCatPress 1.2.7 compatible
+
 = 1.1.2 =
 * TheCatPress 1.2.6 compatible
 

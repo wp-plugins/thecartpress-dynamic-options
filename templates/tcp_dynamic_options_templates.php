@@ -68,6 +68,7 @@ function tcp_insert_dynamic_option( $args ) {
 		'post_type'			=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_title'		=> $args['title'],
 		'post_parent'		=> $args['parent_id'],
+		'ping_status'		=> 'closed',
 	);
 	$post_id = wp_insert_post( $post );
 	if ( isset( $args['terms'] ) && is_array( $args['terms'] ) ) {
@@ -77,6 +78,8 @@ function tcp_insert_dynamic_option( $args ) {
 	}
 	update_post_meta( $post_id, 'tcp_price', isset( $args['price'] ) ? $args['price'] : 0 );
 	update_post_meta( $post_id, 'tcp_order', isset( $args['order'] ) ? $args['order'] : 0 );
+	update_post_meta( $post_id, 'tcp_is_visible', true );
+	
 	do_action( 'tcp_insert_option', $post_id, $args );
 	return $post_id;
 }
@@ -122,19 +125,18 @@ function tcp_delete_dynamic_option( $post_id ) {
 /**
  * Returns the dynamic product options
  * @param $post_id
- * @param $ids, if true the function returns only dynamic option ids, if false the dynamic option posts
- * @param $filters, to filter the result
+ * @param $args: $ids, if true the function returns only dynamic option ids, if false the dynamic option posts
  * @since 1.0.0 
  */
-function tcp_get_dynamic_options( $post_id, $filters = array() ) {
+function tcp_get_dynamic_options( $post_id, $args = array(), $filters = true ) {
 	$args = array(
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_parent'	=> $post_id,
 		'numberposts'	=> -1,
 		'fields'		=> 'ids',
 	);
-	foreach( $filters as $key => $filter ) {
-		$args[$key] = $filter;
+	foreach( $args as $key => $arg ) {
+		$args[$key] = $arg;
 	}
 	global $thecartpress;
 	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );
@@ -153,6 +155,7 @@ function tcp_get_dynamic_options( $post_id, $filters = array() ) {
 		$args['post_parent'] = tcp_get_default_id( $post_id, get_post_type( $post_id ) );
 		$posts = get_posts( $args );
 	}
+	if ( $filters ) $posts = apply_filters( 'tcp_get_dynamic_options', $posts, $post_id );
 	return $posts;
 }
 
@@ -173,8 +176,8 @@ function tcp_get_parent_from_dynamic_option( $post_id ) {
  * @param $post_id
  * @since 1.0.0
  */
-function tcp_count_dynamic_options( $post_id ) {
-	return count( tcp_get_dynamic_options( $post_id ) );
+function tcp_count_dynamic_options( $post_id, $apply_filters = true ) {
+	return count( tcp_get_dynamic_options( $post_id, array(), $apply_filters ) );
 }
 
 /**

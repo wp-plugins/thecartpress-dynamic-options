@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.1.2
+Version: 1.1.3
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -60,11 +60,80 @@ class TCPDynamicOptions {
 		add_filter( 'tcp_get_the_product_price', array( &$this, 'tcp_get_the_product_price' ), 10, 2 );
 		add_filter( 'tcp_get_product_types', array( &$this, 'tcp_get_product_types' ) );
 		//add_filter( 'tcp_exclude_from_order_discount', array( &$this, 'tcp_exclude_from_order_discount' ), 10, 2 );
+		//add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
+		add_filter( 'tcp_get_product_post_types', array( &$this, 'tcp_get_product_post_types' ) );
+		add_filter( 'tcp_the_tier_price', array( &$this, 'tcp_the_tier_price' ), 10, 2 );
+		add_filter( 'tcp_api_update_product_post', array( &$this, 'tcp_api_update_product_post' ), 10, 2 );
+		add_action( 'tcp_api_update_product', array( &$this, 'tcp_api_update_product' ), 10, 2 );
+		add_filter( 'tcp_get_the_total_sales', array( &$this, 'tcp_get_the_total_sales' ), 10, 2 );
+		add_filter( 'tcp_get_the_stock', array( &$this, 'tcp_get_the_stock' ), 10, 2 );
+
 	}
 
-	function tcp_get_product_types( $types ) {
-		$types['SIMPLE']['tcp_dynamic_options_supported'] = true;
-		return $types;
+	function tcp_get_the_stock( $stock, $post_id ) {
+		$args = array(
+			'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+			'post_parent'	=> $post_id,
+			'numberposts'	=> -1,
+			'fields'		=> 'ids',
+		);
+		$posts = get_posts( $args );
+		if ( is_array( $posts ) && count( $posts ) > 0 ) {
+			$stock = 0;
+			foreach( $posts as $post_id ) {
+				$current_stock = (int)tcp_get_the_stock( $post_id );
+				if ( $current_stock == -1 ) return -1;
+				else $stock += $current_stock;
+			}
+		}
+		return $stock;
+	}
+
+	function tcp_get_the_total_sales( $total_sales, $parent_id ) {
+		$args = array(
+			'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+			'post_parent'	=> $parent_id,
+			'numberposts'	=> -1,
+			'fields'		=> 'ids',
+		);
+		$posts = get_posts( $args );
+		if ( is_array( $posts ) && count( $posts ) > 0 ) {
+			require_once( TCP_DAOS_FOLDER . 'OrdersDetails.class.php' );
+			foreach( $posts as $post_id ) {
+				$post_id = tcp_get_default_id( $post_id );
+				$total_sales += OrdersDetails::get_product_total_sales( $post_id );
+			}
+		}
+		return $total_sales;
+	}
+
+	function tcp_api_update_product_post( $post, $params ) {
+		if ( isset( $params['parent_sku'] ) && strlen( $params['parent_sku'] ) > 0 ) {
+			$parent = tcp_get_product_by_sku( $params['parent_sku'] );
+			if ( $parent > 0 ) $post['post_parent'] = $parent;
+		}
+		return $post;
+	}
+
+	function tcp_api_update_product( $post_id, $params ) {
+		if ( isset( $params['attribute_sets'] ) && strlen( $params['attribute_sets'] ) > 0 ) {
+			update_post_meta( $post_id, 'tcp_attribute_sets', array( $params['attribute_sets'] ) );
+		}
+	}
+
+	function tcp_the_tier_price( $out, $post_id ) {
+		$options = tcp_get_dynamic_options( $post_id );
+		if ( is_array( $options ) && count( $options ) > 0 ) {
+			ob_start();
+			foreach( $options as $option_id ) if ( tcp_has_tier_price( $option_id ) ) : ?>
+			<div class="tcp_do_tier_price">
+				<span class="tcp_do_tier_price_title"><?php echo tcp_get_the_title( $option_id ); ?></span>
+				<?php tcp_the_tier_price( $option_id, true ); ?>
+			</div>
+			<?php endif;
+			$out .= ob_get_clean();
+		}
+		return $out;
 	}
 
 	function init() {
@@ -83,7 +152,7 @@ class TCPDynamicOptions {
 		add_action( 'tcp_product_metabox_custom_fields', array( &$this, 'tcp_product_metabox_custom_fields' ) );
 		add_action( 'tcp_product_metabox_save_custom_fields', array( &$this, 'tcp_product_metabox_save_custom_fields' ) );
 		add_action( 'tcp_product_metabox_delete_custom_fields', array( &$this, 'tcp_product_metabox_delete_custom_fields' ) );
-		add_filter( 'tcp_product_row_actions', array( &$this, 'product_row_actions' ) );
+		add_filter( 'tcp_product_row_actions', array( &$this, 'tcp_product_row_actions' ) );
 		add_filter( 'tcp_theme_compatibility_unset_settings_action', array( &$this, 'tcp_theme_compatibility_unset_settings_action' ), 10, 2 );
 		add_filter( 'tcp_theme_compatibility_settings_action', array( &$this, 'tcp_theme_compatibility_settings_action' ), 10, 2 );
 		add_action( 'tcp_theme_compatibility_settings_page', array( &$this, 'tcp_theme_compatibility_settings_page' ) );
@@ -187,7 +256,7 @@ class TCPDynamicOptions {
 		$options[] = array( 'tcp_do_att_set', strtoupper( $col ) == 'ATTRIBUTE SET', __( 'Attribute set', 'tcp-do' ) );
 		foreach( get_object_taxonomies( TCP_DYNAMIC_OPTIONS_POST_TYPE ) as $taxmy ) {
 			$tax = get_taxonomy( $taxmy );
-			$options[] = array( 'tcp_do_tax_' . $taxmy, $col == $tax->labels->name, 'Taxonomy: ' . $tax->labels->name );
+			$options[] = array( 'tcp_do_tax_' . $taxmy, $col == $tax->labels->name, 'Taxonomy: ' . $tax->labels->name . ' (' . $tax->labels->desc . ')' );
 		}
 		return $options;
 	}
@@ -264,12 +333,12 @@ class TCPDynamicOptions {
 	}
 
 	function tcp_product_metabox_toolbar( $post_id ) {
-		if ( ! current_user_can( 'tcp_edit_products' ) ) return;
+		if ( ! current_user_can( 'tcp_edit_product' ) ) return;
 		$post_type = get_post_type( $post_id );
 		if ( $post_type == TCP_DYNAMIC_OPTIONS_POST_TYPE ) {
 			$post = get_post( $post_id );
 			$post = get_post( $post->post_parent );
-			echo '<li>|</li>', '<a href="', get_edit_post_link( $post->post_parent ), '">', $post->post_title, '</a>';
+			echo '<li>|</li>', '<li>', __( 'Parent: ', 'tcp-do' ), '<a href="', get_edit_post_link( $post->ID ), '">', $post->post_title, '</a>';
 		} else {
 			$type = tcp_get_the_product_type( $post_id );
 			if ( strlen( $type ) == 0 ) return;
@@ -277,7 +346,7 @@ class TCPDynamicOptions {
 			$type = $types[$type];
 			if ( isset( $type['tcp_dynamic_options_supported'] ) && $type['tcp_dynamic_options_supported'] ) {
 				echo '<li>|</li>';
-				$count = tcp_count_dynamic_options( $post_id );
+				$count = tcp_count_dynamic_options( $post_id, false );
 				$count = ( $count > 0 ) ? ' (' . $count . ')' : '';
 				$admin_path = 'admin.php?page=' . plugin_basename( TCP_DYNAMIC_OPTIONS_FOLDER ) . '/admin/';
 				echo '<li><a href="', $admin_path, 'DynamicOptionsList.php&post_id=', $post_id, '">', __( 'dynamic options', 'tcp-do' ), $count, '</a></li>';
@@ -294,10 +363,10 @@ class TCPDynamicOptions {
 				<label for="tcp_attribute_sets"><?php _e( 'Attribute Sets', 'tcp-do' ); ?>:</label>
 			</th>
 			<td>
+				<?php $attribute_sets = get_option( 'tcp_attribute_sets', array() ); ?>
 				<select name="tcp_attribute_sets[]" id="tcp_attribute_sets">
 					<option value=""><?php _e( 'none', 'tcp-do' ); ?></option>
-				<?php $attribute_sets = get_option( 'tcp_attribute_sets', array() );
-				foreach( $attribute_sets as $id => $attribute_set ) : ?>
+				<?php foreach( $attribute_sets as $id => $attribute_set ) : ?>
 					<option value="<?php echo $id; ?>" <?php tcp_selected_multiple( $tcp_attribute_sets, $id ); ?>><?php echo $attribute_set['title']; ?></option>
 				<?php endforeach; ?>
 				</select>
@@ -317,9 +386,9 @@ class TCPDynamicOptions {
 		delete_post_meta( $post_id, 'tcp_attribute_sets' );
 	}
 
-	function product_row_actions( $actions ) {
+	function tcp_product_row_actions( $actions ) {
 		global $post;
-		if ( ! current_user_can( 'tcp_edit_products' ) ) return $actions;
+		if ( ! current_user_can( 'tcp_edit_product' ) ) return $actions;
 		$type = tcp_get_the_product_type( $post->ID );
 		$types = tcp_get_product_types();
 		if ( ! isset( $types[$type] ) ) return $actions;
@@ -337,9 +406,9 @@ class TCPDynamicOptions {
 		if ( tcp_exists_dynamic_option( array( 'parent_id' => $post_id ) ) ) {
 			global $thecartpress;
 			if ( ! isset( $thecartpress ) ) return;
-			$dynamic_options_type	= $thecartpress->get_setting( 'dynamic_options_type', 'list' );
-			$attributes				= tcp_get_attributes_by_product( $post_id );
-			$options				= tcp_get_dynamic_options( $post_id );
+			$dynamic_options_type = $thecartpress->get_setting( 'dynamic_options_type', 'list' );
+			$attributes = tcp_get_attributes_by_product( $post_id );
+			$options = tcp_get_dynamic_options( $post_id );
 			if ( $thecartpress->get_setting( 'dynamic_options_calculate_price', 'complex' ) == 'complex' ) {
 				$product_price = tcp_get_the_price( $post_id );
 			} else {
@@ -355,6 +424,7 @@ class TCPDynamicOptions {
 				}
 				foreach( $options as $id ) :
 					if ( $option_id == 0 ) $option_id = $id; ?>
+					if ( tcp_get_the_stock)
 					<div class="tcp_dynamic_option_panel">
 					<input type="radio" name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $id; ?>" value="<?php echo $id; ?>"
 					onclick="tcp_set_price_<?php echo $id; ?>(this);jQuery('.tcp_thumbnail_<?php echo $post_id; ?>').hide();jQuery('.tcp_thumbnail_option_<?php echo $id; ?>').show();" />
@@ -614,11 +684,14 @@ jQuery(document).ready(function() {
 	}
 
 	function tcp_get_the_thumbnail( $image, $post_id, $size ) {
-		if ( strlen( $image ) == 0 && TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
-			$parent_id = tcp_get_parent_from_dynamic_option( $post_id );
-			$image = tcp_get_the_thumbnail( $image, $parent_id, $size );
-			//$image = str_replace( 'tcp_image_' . $parent_id, 'tcp_image_' . $post_id, $image );
-			return $image;
+		if ( strlen( $image ) == 0 ) {
+			if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
+				$parent_id = tcp_get_parent_from_dynamic_option( $post_id );
+				//$image = tcp_get_the_thumbnail( $image, $parent_id, $size );
+				$image = tcp_get_the_thumbnail( $parent_id, 0, 0, $size );
+				//$image = str_replace( 'tcp_image_' . $parent_id, 'tcp_image_' . $post_id, $image );
+				return $image;
+			}
 		}
 		return $image;
 	}
@@ -691,9 +764,43 @@ jQuery(document).ready(function() {
 			return $weight + tcp_get_the_weight( $post_id );
 		}
 	}*/
+	function tcp_get_product_post_types( $post_types ) {
+		$i = array_search( TCP_DYNAMIC_OPTIONS_POST_TYPE, $post_types );
+		if ( $i !== false ) unset( $post_types[$i] );
+		return $post_types;
+	}
+
+	function tcp_get_the_price_label( $label, $post_id ) {
+		$options = tcp_get_dynamic_options( $post_id );
+		if ( is_array( $options ) && count( $options ) ) {
+			$min_price = 99999999;
+			$equal = null;
+			foreach( $options as $option ) {
+				$price = tcp_get_the_price( $option );
+				if ( $equal == null ) {
+					$equal = $price;
+				} elseif ( $equal !== false ) {
+					if ( $equal == $price ) $equal = $price;
+					else $equal = false;
+				}
+				if ( $price < $min_price ) $min_price = $price;
+			}
+			$price = $min_price + tcp_get_the_price( $post_id );
+		} else {
+			$price = false;
+			$equal = true;
+		}
+		$price = tcp_get_the_price_to_show( $post_id, $price );
+		$label = tcp_format_the_price( $price );
+		if ( $equal !== false ) return $label;
+		else return sprintf( __( 'from %s', 'tcp' ), $label );
+	}
+
+	function tcp_get_product_types( $types ) {
+		$types['SIMPLE']['tcp_dynamic_options_supported'] = true;
+		return $types;
+	}
 }
-
-$tcp_dynamic_options = new TCPDynamicOptions();
-
 require_once( TCP_DYNAMIC_OPTIONS_POST_TYPE_FOLDER . 'DynamicOptionPostType.class.php' );
+$tcp_dynamic_options = new TCPDynamicOptions();
 ?>
