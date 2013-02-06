@@ -145,6 +145,19 @@ class TCPDynamicOptions {
 			require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsCustomFieldsMetabox.class.php' );
 			require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsMetabox.class.php' );
 		}
+		$version = (int)get_option( 'tcp_dynamic_version' );
+		if ( $version < 113 ) {
+			$args = array(
+				'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+				'numberposts'	=> -1,
+				'fields'		=> 'ids',
+			);
+			$posts = get_posts( $args );
+			foreach( $posts as $post_id ) {
+				update_post_meta( $post_id, 'tcp_is_visible', true );
+			}
+		}
+		update_option( 'tcp_dynamic_version', 113 );
 	}
 
 	function admin_init() {
