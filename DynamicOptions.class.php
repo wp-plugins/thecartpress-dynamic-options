@@ -154,6 +154,7 @@ class TCPDynamicOptions {
 			$posts = get_posts( $args );
 			foreach( $posts as $post_id ) {
 				update_post_meta( $post_id, 'tcp_is_visible', true );
+				update_post_meta( $post_id, 'tcp_stock', -1 );
 			}
 		}
 		update_option( 'tcp_dynamic_version', 113 );
