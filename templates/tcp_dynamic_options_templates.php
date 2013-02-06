@@ -139,7 +139,7 @@ function tcp_get_dynamic_options( $post_id, $p_args = array(), $filters = true )
 	global $thecartpress;
 	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );
 	if ( 'title' == $dynamic_options_order_by ) {
-		$args['orderby'] = 'name';
+		$args['orderby'] = 'title';
 	} elseif ( 'price' == $dynamic_options_order_by ) {
 		$args['orderby'] = 'meta_value';
 		$args['meta_key'] = 'tcp_price';
@@ -147,7 +147,7 @@ function tcp_get_dynamic_options( $post_id, $p_args = array(), $filters = true )
 		$args['orderby'] = 'meta_value';
 		$args['meta_key'] = 'tcp_order';
 	}
-	$args['order'] = $thecartpress->get_setting( 'dynamic_options_order', 'asc' );
+	$args['order'] = $thecartpress->get_setting( 'dynamic_options_order', 'ASC' );
 	$posts = get_posts( $args );
 	if ( count( $posts ) == 0 ) {
 		$args['post_parent'] = tcp_get_default_id( $post_id, get_post_type( $post_id ) );

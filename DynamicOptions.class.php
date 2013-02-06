@@ -67,7 +67,6 @@ class TCPDynamicOptions {
 		add_action( 'tcp_api_update_product', array( &$this, 'tcp_api_update_product' ), 10, 2 );
 		add_filter( 'tcp_get_the_total_sales', array( &$this, 'tcp_get_the_total_sales' ), 10, 2 );
 		add_filter( 'tcp_get_the_stock', array( &$this, 'tcp_get_the_stock' ), 10, 2 );
-
 	}
 
 	function tcp_get_the_stock( $stock, $post_id ) {
@@ -146,7 +145,7 @@ class TCPDynamicOptions {
 			require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsMetabox.class.php' );
 		}
 		$version = (int)get_option( 'tcp_dynamic_version' );
-		if ( $version < 113 ) {
+		if ( $version < 113 ) {//move to activate_plugin
 			$args = array(
 				'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 				'numberposts'	=> -1,
@@ -208,7 +207,7 @@ class TCPDynamicOptions {
 		if ( ! isset( $thecartpress ) ) return;
 		$dynamic_options_type		= $thecartpress->get_setting( 'dynamic_options_type' . $suffix, 'radio' );
 		$dynamic_options_order_by	= $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
-		$dynamic_options_order		= $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'asc' );
+		$dynamic_options_order		= $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'ASC' );
 		$dynamic_options_calculate_price = $thecartpress->get_setting( 'dynamic_options_calculate_price' . $suffix, 'complex' ); ?>
 <a name="dynamic_options_settings"></a>
 <h3><?php _e( 'Dynamic Option Settings', 'tcp-do'); ?></h3>
@@ -244,8 +243,8 @@ class TCPDynamicOptions {
 		<label for="dynamic_options_order_asc"><?php _e( 'Dynamic options order', 'tcp-do' ); ?></label>
 		</th>
 		<td>
-			<input type="radio" id="dynamic_options_order_asc" name="dynamic_options_order" value="asc" <?php checked( 'asc', $dynamic_options_order ); ?> /> <?php _e( 'Ascending', 'tcp-do' ); ?><br/>
-			<input type="radio" id="dynamic_options_order_desc" name="dynamic_options_order" value="desc" <?php checked( 'desc', $dynamic_options_order ); ?> /> <?php _e( 'Descending', 'tcp-do' ); ?>
+			<input type="radio" id="dynamic_options_order_asc" name="dynamic_options_order" value="ASC" <?php checked( 'ASC', $dynamic_options_order ); ?> /> <?php _e( 'Ascending', 'tcp-do' ); ?><br/>
+			<input type="radio" id="dynamic_options_order_desc" name="dynamic_options_order" value="DESC" <?php checked( 'DESC', $dynamic_options_order ); ?> /> <?php _e( 'Descending', 'tcp-do' ); ?>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -332,7 +331,7 @@ class TCPDynamicOptions {
 	function tcp_theme_compatibility_settings_action( $settings, $suffix ) {
 		$settings['dynamic_options_type' . $suffix]		= isset( $_POST['dynamic_options_type'] ) ? $_POST['dynamic_options_type'] : 'radio';
 		$settings['dynamic_options_order_by' . $suffix]	= isset( $_POST['dynamic_options_order_by'] ) ? $_POST['dynamic_options_order_by'] : 'title';
-		$settings['dynamic_options_order' . $suffix]	= isset( $_POST['dynamic_options_order'] ) ? $_POST['dynamic_options_order'] : 'asc';
+		$settings['dynamic_options_order' . $suffix]	= isset( $_POST['dynamic_options_order'] ) ? $_POST['dynamic_options_order'] : 'ASC';
 		$settings['dynamic_options_calculate_price' . $suffix] = isset( $_POST['dynamic_options_calculate_price'] ) ? $_POST['dynamic_options_calculate_price'] : 'complex';
 		return $settings;
 	}
