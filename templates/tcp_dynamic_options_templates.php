@@ -128,16 +128,14 @@ function tcp_delete_dynamic_option( $post_id ) {
  * @param $args: $ids, if true the function returns only dynamic option ids, if false the dynamic option posts
  * @since 1.0.0 
  */
-function tcp_get_dynamic_options( $post_id, $args = array(), $filters = true ) {
+function tcp_get_dynamic_options( $post_id, $p_args = array(), $filters = true ) {
 	$args = array(
 		'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
 		'post_parent'	=> $post_id,
 		'numberposts'	=> -1,
 		'fields'		=> 'ids',
 	);
-	foreach( $args as $key => $arg ) {
-		$args[$key] = $arg;
-	}
+	foreach( $p_args as $key => $arg ) $args[$key] = $arg;
 	global $thecartpress;
 	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );
 	if ( 'title' == $dynamic_options_order_by ) {

@@ -145,6 +145,19 @@ class TCPDynamicOptions {
 			require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsCustomFieldsMetabox.class.php' );
 			require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsMetabox.class.php' );
 		}
+		$version = (int)get_option( 'tcp_dynamic_version' );
+		if ( $version < 113 ) {
+			$args = array(
+				'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
+				'numberposts'	=> -1,
+				'fields'		=> 'ids',
+			);
+			$posts = get_posts( $args );
+			foreach( $posts as $post_id ) {
+				update_post_meta( $post_id, 'tcp_is_visible', true );
+			}
+		}
+		update_option( 'tcp_dynamic_version', 113 );
 	}
 
 	function admin_init() {
@@ -424,7 +437,6 @@ class TCPDynamicOptions {
 				}
 				foreach( $options as $id ) :
 					if ( $option_id == 0 ) $option_id = $id; ?>
-					if ( tcp_get_the_stock)
 					<div class="tcp_dynamic_option_panel">
 					<input type="radio" name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $id; ?>" value="<?php echo $id; ?>"
 					onclick="tcp_set_price_<?php echo $id; ?>(this);jQuery('.tcp_thumbnail_<?php echo $post_id; ?>').hide();jQuery('.tcp_thumbnail_option_<?php echo $id; ?>').show();" />
