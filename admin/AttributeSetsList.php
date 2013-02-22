@@ -44,6 +44,9 @@ if ( isset( $_REQUEST['tcp_insert'] ) ) {
 ?>
 <div class="wrap">
 <h2><?php _e( 'Attribute Sets', 'tcp-do' ); ?></h2>
+<p><?php _e( 'Allows to create Attribute sets. These sets will contain attributes as "colour", "size". Each attribute will contain values, as "red", "blue", "Large", etc.', 'tcp-do'); ?></p>
+<p><?php _e( 'To create Color variations for a product (for example, for "Cars") you should create a set called "Car variations", then create an Attribute called "Car Colours", and finally add colours to the attribute.', 'tcp-do'); ?></p>
+<p><?php _e( 'With all these options defined for a product, you should visit "Dynamic Options", for each product, and create variations for the different values ​​and attributes defined.', 'tcp-do'); ?></p>
 <ul class="subsubsub">
 	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeList.php"><?php _e( 'Attributes', 'tcp-do' ); ?></a></li>
 </ul>

@@ -25,7 +25,7 @@ if ( count( $attributes ) == 0 ) : ?>
 	<p><?php _e( 'To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned.', 'tcp-do' ); ?></p>
 	<p><a href="post.php?action=edit&post=<?php echo $post->ID;?>"><?php printf( __( 'return to %s', 'tcp-do' ), $post->post_title ); ?></a></p>
 	</div>
-	<?php exit;
+	<?php //exit;
 endif;
 
 if ( isset( $_REQUEST['tcp_add_term'] ) ) {
@@ -58,17 +58,18 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 			$title .= ': ' . $attribute->labels->name . ': ' . $term->name;
 		}
 		if ( count( $terms ) > 0 ) {
-			$options[] = array (
+			$option = array (
 				'ID'		=> $tcp_post_id,
 				'title'		=> $title,
 				'parent_id'	=> $post_id,
 				'price'		=> $price,
 				'terms'		=> $terms,
 				'order'		=> $tcp_order = $_REQUEST['tcp_order'][$id],
-				'delete'	=> isset( $_REQUEST['tcp_delete'][$id] ),
+				'delete'	=> in_array( $tcp_post_id, isset( $_REQUEST['tcp_delete'] ) ? (array)$_REQUEST['tcp_delete'] : array() ),
 			);
+			$option = apply_filters( 'tcp_dynamic_options_option_to_save', $option, $id, $_REQUEST );
+			$options[] = $option;
 		}
-		//$options = apply_filters( 'tcp_dynamic_options_save', $options, $id, $_REQUEST );
 	}
 
 	if ( isset( $_REQUEST['tcp_save'] ) ) {
@@ -155,15 +156,14 @@ function tcp_do_add_variations( $variations, $post_id, $attributes ) {
 		if ( ! tcp_exists_dynamic_option( $option ) )
 			tcp_insert_dynamic_option( $option );
 } ?>
-
 <div class="wrap">
 <h2><?php printf( __( 'Options for %s', 'tcp-do' ), $post->post_title ); ?></h2>
 <ul class="subsubsub">
 	<li><a href="post.php?action=edit&post=<?php echo $post->ID;?>"><?php printf( __( 'Return to %s', 'tcp-do' ), $post->post_title ); ?></a></li>
 	<li>|</li>
-	<li><a href="admin.php?page=thecartpress-dynamicoptions/admin/AttributeSetsList.php"><?php _e( 'Attribute Sets', 'tcp-do' ); ?></a></li>
+	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeSetsList.php"><?php _e( 'Attribute Sets', 'tcp-do' ); ?></a></li>
 	<li>|</li>
-	<li><a href="admin.php?page=thecartpress-dynamicoptions/admin/AttributeList.php"><?php _e( 'Manage Attributes', 'tcp-do' ); ?></a></li>
+	<li><a href="<?php echo TCP_DYNAMIC_OPTIONS_ADMIN_PATH; ?>AttributeList.php"><?php _e( 'Manage Attributes', 'tcp-do' ); ?></a></li>
 </ul>
 <div class="clear"></div>
 
@@ -183,10 +183,10 @@ function tcp_do_add_variations( $variations, $post_id, $attributes ) {
 	<th scope="col" class="manage-column">
 		<?php _e( 'Price', 'tcp-do' ); ?>
 	</th>
-	<th scope="col" class="manage-column">
-		<?php _e( 'Order', 'tcp-do' ); ?>
-	</th>
 	<?php do_action( 'tcp_dynamic_options_lists_header_new', $post ); ?>
+	<th scope="col" class="manage-column">
+		<?php _e( 'Sorting', 'tcp-do' ); ?>
+	</th>
 	<th scope="col">&nbsp;</th>
 </tr>
 </thead>
@@ -213,13 +213,13 @@ endforeach; ?>
 		<input type="text" min="0" step="any" placeholder="<?php tcp_get_number_format_example(); ?>" name="tcp_price[]" class="tcp_price" size="5" maxlength="9"/>&nbsp;<?php tcp_the_currency();?>
 		<input type="hidden" name="tcp_post_id[]" value="0"/>
 	</td>
+	<?php do_action( 'tcp_dynamic_options_lists_row_new', $post ); ?>
 	<td>
 		<input type="text" name="tcp_order[]" class="tcp_order" size="3" maxlength="9"/>
 	</td>
-	<?php do_action( 'tcp_dynamic_options_lists_row_new', $post ); ?>
 	<td>
 	<input type="submit" name="tcp_insert" value="<?php _e( 'insert', 'tcp-do' ); ?>" class="button-primary"/>
-	<input type="submit" name="tcp_create_all" value="<?php _e( 'create all', 'tcp-do' ); ?>" title="<?php _e( 'create all attribute variations', 'tcp-do' ); ?>" class="button-secondary"/>
+	<input type="submit" name="tcp_create_all" value="<?php _e( 'create all', 'tcp-do' ); ?>" title="<?php _e( 'Create all attribute variations', 'tcp-do' ); ?>" class="button-secondary"/>
 	</td>
 </tr>
 
@@ -273,9 +273,7 @@ endforeach; ?>
 <?php endforeach; ?>
 
 	<div class="alignleft actions">
-
-		<input type="submit" name="tcp_filter" value="<?php _e( 'Filter', 'tcp' ); ?>" class="button-secondary"/>
-
+		<input type="submit" name="tcp_filter" value="<?php _e( 'Filter', 'tcp-do' ); ?>" class="button-secondary"/>
 	</div>
 
 	<br class="clear"/>
@@ -295,8 +293,8 @@ endforeach; ?>
 <?php endforeach; ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Price', 'tcp-do' ); ?>
-		<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
 	</th>
+	<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Order', 'tcp-do' ); ?>
 		<span class="description"><?php global $thecartpress;
@@ -321,8 +319,8 @@ endforeach; ?>
 <?php endforeach; ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Price', 'tcp-do' ); ?>
-		<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
 	</th>
+	<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Order', 'tcp-do' ); ?>
 	</th>
@@ -332,10 +330,9 @@ endforeach; ?>
 	<!--<th scope="col">&nbsp;</th>-->
 </tr>
 </tfoot>
-<tbody>
 
-<?php
-$filter['tax_query'] = array( 'relation' => 'AND' );
+<tbody>
+<?php $filter['tax_query'] = array( 'relation' => 'AND' );
 foreach( $attributes as $attribute ) {
 	if ( ! $attribute ) continue;
 	if ( isset( $_REQUEST['tcp_filter_' . $attribute->name] ) ) {
@@ -350,14 +347,18 @@ foreach( $attributes as $attribute ) {
 	}
 }
 
-$children = tcp_get_dynamic_options( $post_id, false, $filter );
+$children = tcp_get_dynamic_options( $post_id, $filter, false );
 if ( is_array( $children ) && count( $children > 0 ) ) 
-	foreach( $children as $child ) : ?>
+	foreach( $children as $id ) : $child = get_post( $id ); ?>
 <tr>
 	<td>
-	<?php echo tcp_get_the_thumbnail( $child->ID );?>
-	<br/>
-	<a href="post.php?action=edit&post=<?php echo $child->ID;?>"><?php _e( 'edit option', 'tcp-do' );?></a>
+	<div class="tcp_dynamic_options_edit_option">
+	<?php $image = tcp_get_the_thumbnail( $child->ID, 0, 0, 32 );
+	if ( $image == '' ) $image = '<img src="' . plugins_url() . '/thecartpress/images/tcp_icon_gray.png" />';
+	echo $image; ?>
+	<a href="post.php?action=edit&post=<?php echo $child->ID; ?>"><?php _e( 'edit', 'tcp-do' );?></a>
+	<?php do_action( 'tcp_dynamic_options_edit_option', $child->ID ); ?>
+	</div>
 	<!-- |
 	<span class="hide-if-no-js"><a title="<?php _e( 'Set featured image', 'tcp-do' ); ?>" href="<?php admin_url('media-upload.php?post_id=' . $child->ID . '&type=image&TB_iframe=1&width=640&height=876' ); ?>" id="set-post-thumbnail" class="thickbox"><?php _e( 'Set featured image', 'tcp-do' ); ?></a></span>-->
 	</td>
@@ -376,15 +377,15 @@ if ( is_array( $children ) && count( $children > 0 ) )
 	</td>
 	<?php endif; ?>
 	<td>
-		<input type="text" min="0" step="any" placeholder="<?php tcp_get_number_format_example(); ?>" name="tcp_price[]" class="tcp_price" value="<?php echo tcp_number_format( tcp_get_the_price( $child->ID ) );?>" class="regular-text tcp_count" size="5" maxlength="9" />&nbsp;<?php tcp_the_currency();?>
+		<input type="text" min="0" step="any" placeholder="<?php tcp_get_number_format_example(); ?>" name="tcp_price[]" class="tcp_price" value="<?php echo tcp_number_format( tcp_get_the_price( $child->ID, false ) );?>" class="regular-text tcp_count" size="5" maxlength="9" />&nbsp;<?php tcp_the_currency();?>
 		<input type="hidden" name="tcp_post_id[]" value="<?php echo $child->ID; ?>"/>
-		<?php do_action( 'tcp_dynamic_options_lists_row', $child->ID ); ?>
 	</td>
+	<?php do_action( 'tcp_dynamic_options_lists_row', $child->ID ); ?>
 	<td>
 		<input type="text" name="tcp_order[]" class="tcp_order" size="3" maxlength="9" value="<?php echo tcp_get_the_order( $child->ID );?>"/>
 	</td>
 	<td>
-		<input type="checkbox" name="tcp_delete[]" class="tcp_delete" value="yes"/>
+		<input type="checkbox" name="tcp_delete[]" class="tcp_delete" value="<?php echo $child->ID; ?>" />
 	</td>
 	<!--<td>
 		<div><a href="#" onclick="jQuery('.delete_options').hide();jQuery('#delete_<?php echo $child->ID; ?>').show(200);return false;" class="delete"><?php _e( 'delete', 'tcp-do' ); ?></a></div>
@@ -403,7 +404,7 @@ if ( is_array( $children ) && count( $children > 0 ) )
 </tbody>
 </table>
 <p><input type="submit" name="tcp_save" value="<?php _e( 'save', 'tcp-do' ); ?>" class="button-primary"/>
-<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp' ); ?></span></p>
+<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp-do' ); ?></span></p>
 </form>
 
 </div><!-- .wrap -->

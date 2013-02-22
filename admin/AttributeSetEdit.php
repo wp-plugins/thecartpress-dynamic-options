@@ -56,7 +56,7 @@ $attribute_set = tcp_get_attribute_set( $id ); ?>
 	<td>
 <?php $attributes = tcp_get_attributes( 'objects' );
 	foreach( $attributes as $attribute ) : ?>
-		<label><input id="tcp_taxonomies_<?php echo $id;?>" type="checkbox" name="tcp_taxonomies[]" value="<?php echo $attribute->name; ?>" <?php tcp_checked_multiple( $attribute_set['taxonomies'], $attribute->name ); ?>/> <?php echo $attribute->labels->name; ?></label>
+		<label><input id="tcp_taxonomies_<?php echo $id;?>" type="checkbox" name="tcp_taxonomies[]" value="<?php echo $attribute->name; ?>" <?php tcp_checked_multiple( $attribute_set['taxonomies'], $attribute->name ); ?>/> <?php echo $attribute->labels->name; ?> (<?php echo $attribute->labels->desc; ?>)</label>
 		&nbsp;
 		<a href="admin.php?page=thecartpress/admin/TaxonomyEdit.php&taxonomy=<?php echo $attribute->name; ?>" title="<?php _e( 'edit attribute', 'tcp-do' ); ?>"><?php _e( 'edit', 'tcp-do' ); ?></a> |
 		<a href="edit-tags.php?taxonomy=<?php echo $attribute->name; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'add terms', 'tcp-do' ); ?>"><?php _e( 'add', 'tcp-do' ); ?></a>
