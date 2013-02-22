@@ -377,7 +377,7 @@ if ( is_array( $children ) && count( $children > 0 ) )
 	</td>
 	<?php endif; ?>
 	<td>
-		<input type="text" min="0" step="any" placeholder="<?php tcp_get_number_format_example(); ?>" name="tcp_price[]" class="tcp_price" value="<?php echo tcp_number_format( tcp_get_the_price( $child->ID ) );?>" class="regular-text tcp_count" size="5" maxlength="9" />&nbsp;<?php tcp_the_currency();?>
+		<input type="text" min="0" step="any" placeholder="<?php tcp_get_number_format_example(); ?>" name="tcp_price[]" class="tcp_price" value="<?php echo tcp_number_format( tcp_get_the_price( $child->ID, false ) );?>" class="regular-text tcp_count" size="5" maxlength="9" />&nbsp;<?php tcp_the_currency();?>
 		<input type="hidden" name="tcp_post_id[]" value="<?php echo $child->ID; ?>"/>
 	</td>
 	<?php do_action( 'tcp_dynamic_options_lists_row', $child->ID ); ?>

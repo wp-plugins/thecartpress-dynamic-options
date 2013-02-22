@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.1.3
+Version: 1.1.3.1
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -27,15 +27,16 @@ Parent: thecartpress
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define( 'TCP_DYNAMIC_OPTIONS_FOLDER'			, dirname( __FILE__ ) . '/' );
-define( 'TCP_DYNAMIC_OPTIONS_ADMIN_FOLDER'		, TCP_DYNAMIC_OPTIONS_FOLDER . 'admin/' );
-define( 'TCP_DYNAMIC_OPTIONS_CLASSES_FOLDER'	, TCP_DYNAMIC_OPTIONS_FOLDER . 'classes/' );
-define( 'TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER'	, TCP_DYNAMIC_OPTIONS_FOLDER . 'templates/' );
-define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE_FOLDER'	, TCP_DYNAMIC_OPTIONS_FOLDER . 'customposttypes/' );
-define( 'TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER'	, TCP_DYNAMIC_OPTIONS_FOLDER . 'metaboxes/' );
+define( 'TCP_DYNAMIC_OPTIONS_FOLDER', dirname( __FILE__ ) . '/' );
+define( 'TCP_DYNAMIC_OPTIONS_ADMIN_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'admin/' );
+define( 'TCP_DYNAMIC_OPTIONS_CLASSES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'classes/' );
+define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'customposttypes/' );
+define( 'TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'templates/' );
+define( 'TCP_DYNAMIC_OPTIONS_THEMES_TEMPLATES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'themes-templates/' );
+define( 'TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'metaboxes/' );
 
-define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE'			, 'tcp_dynamic_options' );
-define( 'TCP_DYNAMIC_OPTIONS_ADMIN_PATH'		, 'admin.php?page=' . plugin_basename( TCP_DYNAMIC_OPTIONS_FOLDER ) . '/admin/' );
+define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE', 'tcp_dynamic_options' );
+define( 'TCP_DYNAMIC_OPTIONS_ADMIN_PATH', 'admin.php?page=' . plugin_basename( TCP_DYNAMIC_OPTIONS_FOLDER ) . '/admin/' );
 
 require_once( TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER . 'tcp_dynamic_options_templates.php' );
 
@@ -67,6 +68,11 @@ class TCPDynamicOptions {
 		add_action( 'tcp_api_update_product', array( &$this, 'tcp_api_update_product' ), 10, 2 );
 		add_filter( 'tcp_get_the_total_sales', array( &$this, 'tcp_get_the_total_sales' ), 10, 2 );
 		add_filter( 'tcp_get_the_stock', array( &$this, 'tcp_get_the_stock' ), 10, 2 );
+		//Layered Navigation
+		add_filter( 'tcp_the_layered_navigation_get_posts_query', array( &$this, 'tcp_the_layered_navigation_get_posts_query' ), 10, 4 );
+		add_filter( 'tcp_the_layered_navigation_link', array( &$this, 'tcp_the_layered_navigation_link' ), 10, 4 );
+		add_filter( 'tcp_filter_navigation_get_filters_request', array( &$this, 'tcp_filter_navigation_get_filters_request' ) );
+		add_filter( 'tcp_filter_navigation_get_filter', array( &$this, 'tcp_filter_navigation_get_filter' ), 10, 2 );
 	}
 
 	function tcp_get_the_stock( $stock, $post_id ) {
@@ -124,12 +130,9 @@ class TCPDynamicOptions {
 		$options = tcp_get_dynamic_options( $post_id );
 		if ( is_array( $options ) && count( $options ) > 0 ) {
 			ob_start();
-			foreach( $options as $option_id ) if ( tcp_has_tier_price( $option_id ) ) : ?>
-			<div class="tcp_do_tier_price">
-				<span class="tcp_do_tier_price_title"><?php echo tcp_get_the_title( $option_id ); ?></span>
-				<?php tcp_the_tier_price( $option_id, true ); ?>
-			</div>
-			<?php endif;
+			$located = locate_template( 'tcp_dynamic_tier_price.php' );
+			if ( strlen( $located ) == 0 ) $located = TCP_DYNAMIC_OPTIONS_THEMES_TEMPLATES_FOLDER . 'tcp_dynamic_tier_price.php';
+			require( $located );
 			$out .= ob_get_clean();
 		}
 		return $out;
@@ -154,7 +157,8 @@ class TCPDynamicOptions {
 			$posts = get_posts( $args );
 			foreach( $posts as $post_id ) {
 				update_post_meta( $post_id, 'tcp_is_visible', true );
-				update_post_meta( $post_id, 'tcp_stock', -1 );
+				$stock = get_post_meta( $post_id, 'tcp_stock', true );
+				if ( $stock == '') update_post_meta( $post_id, 'tcp_stock', -1 );
 			}
 		}
 		update_option( 'tcp_dynamic_version', 113 );
@@ -470,7 +474,7 @@ class TCPDynamicOptions {
 			<?php elseif ( 'single' == $dynamic_options_type ) : ?>
 				<div class="tcp_dynamic_option_panel">
 				<label><?php _e( 'Options', 'tcp-do' ); ?>
-				<select name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $post_id; ?>" onchange="tcp_set_price_<?php echo $post_id; ?>(this);">
+				<select name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $post_id; ?>" class="tcp_dynamic_options_<?php echo $post_id; ?>" onchange="tcp_set_price_<?php echo $post_id; ?>(this);">
 				<?php if ( isset( $_REQUEST['tcp_dynamic_option'] ) ) {
 					$option_id = $_REQUEST['tcp_dynamic_option'][0];
 					$_REQUEST['tcp_dynamic_option'] = array_shift( $_REQUEST['tcp_dynamic_option'] );
@@ -812,7 +816,80 @@ jQuery(document).ready(function() {
 		$types['SIMPLE']['tcp_dynamic_options_supported'] = true;
 		return $types;
 	}
+	
+	//Layeredº Navigation
+	function tcp_the_layered_navigation_get_posts_query( $query, $post_type, $taxonomy, $term_slug ) {
+		if ( $post_type == 'tcp_dynamic_options' ) {
+			$posts_ids = array();
+			unset( $query[$taxonomy] );
+			$products = get_posts( $query );
+			$args = array(
+				'post_type' => 'tcp_dynamic_options',
+				'posts_per_page' => -1,
+				'fields' => 'ids',
+				$taxonomy => $term_slug,
+			);
+			foreach( $products as $product_id ) {
+				$args['post_parent'] = $product_id;
+				$posts = get_posts( $args );
+				if ( count( $posts ) > 0 ) $posts_ids[] = $product_id;
+			}
+			$query['post__in'] = $posts_ids;
+		}
+		return $query;
+	}
+
+	function tcp_the_layered_navigation_link( $link, $post_type, $taxonomy, $term_slug ) {
+		if ( $post_type == 'tcp_dynamic_options' ) {
+			$link = remove_query_arg( 'tcp_filter_' . $taxonomy, $link );
+			$link = add_query_arg( 'tcp_dynamic_filter_' . $taxonomy, $term_slug, $link );
+		}
+		return $link;
+	}
+
+	function tcp_filter_navigation_get_filters_request( $filters ) {
+		foreach( $_REQUEST as $key => $value )
+			if ( $pos = strpos( $key, 'tcp_dynamic_filter' ) === 0 ) {
+				$taxonomy = substr( $key, $pos + 18 );
+				$args = array(
+					'post_type' => 'tcp_dynamic_options',
+					'posts_per_page' => -1,
+					'fields' => 'ids',
+					$taxonomy => $value
+				);
+				$posts = get_posts( $args );
+				global $wpdb;
+				$sql = 'select post_parent from ' . $wpdb->posts . ' where ID in ( ';
+				$sql .= $wpdb->prepare( str_repeat( '%d, ', count( $posts ) -1 ) . '%d )' , $posts );
+				//$sql .= $wpdb->prepare( ' id in (' . implode( ',', $posts ) . ')' );
+				$res = $wpdb->get_results( $sql );
+				if ( is_array( $res ) && count( $res ) ) {
+					$filter = array(
+						'type' => 'dynamic_options',
+						'taxonomy' => $taxonomy,
+						'term' => $value,
+						'post__in' => array(),
+					);
+					foreach( $res as $row ) $filter['post__in'][] = $row->post_parent;
+					$filters[] = $filter;
+				}
+			}
+		return $filters;
+	}
+	
+	function tcp_filter_navigation_get_filter( $filter, $f ) {
+		if ( isset( $f['type'] ) && 'dynamic_options' == $f['type'] ) { //dynamic options
+			$filter['layered']['dynamic_options'][] = array(
+				'type' => 'dynamic_options',
+				'taxonomy' => $f['taxonomy'],
+				'term' => $f['term'],
+				'post__in' => $f['post__in'],
+			);
+			return $filter;
+		}
+	}
 }
+
 require_once( TCP_DYNAMIC_OPTIONS_POST_TYPE_FOLDER . 'DynamicOptionPostType.class.php' );
 $tcp_dynamic_options = new TCPDynamicOptions();
 ?>
