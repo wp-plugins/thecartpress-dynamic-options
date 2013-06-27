@@ -113,7 +113,7 @@ endif;
 if ( is_array( $taxonomies ) && count( $taxonomies ) > 0 ) :
 	foreach( $taxonomies as $taxonomy_id => $taxonomy ) : ?>
 <tr>
-	<td><?php echo $taxonomy['name_id']; ?></td>
+	<td><?php echo $taxonomy_id; //$taxonomy['name_id']; ?></td>
 	<td><?php echo $taxonomy['name']; ?></td>
 	<td><?php echo $taxonomy['desc']; ?>&nbsp;</td>
 	<td>
@@ -124,7 +124,7 @@ if ( is_array( $taxonomies ) && count( $taxonomies ) > 0 ) :
 			<form method="post" name="frm_delete_<?php echo $taxonomy_id; ?>">
 				<input type="hidden" name="taxonomy_id" value="<?php echo $taxonomy_id; ?>" />
 				<input type="hidden" name="tcp_delete_taxonomy" value="y" />
-				<p><?php _e( 'Do you really want to delete this taxonomy?', 'tcp-do' ); ?></p>
+				<p><?php _e( 'Do you really want to delete this attribute?', 'tcp-do' ); ?></p>
 				<a href="javascript:document.frm_delete_<?php echo $taxonomy_id; ?>.submit();" class="delete"><?php _e( 'Yes' , 'tcp-do' ); ?></a> |
 				<a href="#" onclick="jQuery('#delete_<?php echo $taxonomy_id; ?>').hide(100);"><?php _e( 'No, I don\'t' , 'tcp-do' ); ?></a>
 			</form>

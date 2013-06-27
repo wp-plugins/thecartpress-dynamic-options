@@ -46,22 +46,32 @@ $attribute_set = tcp_get_attribute_set( $id ); ?>
 <table class="form-table">
 <thead>
 <tr>
-	<th scope="row" class="manage-column"><?php _e( 'Title', 'tcp-do' ); ?></th>
-	<td><input type="text" name="tcp_title" size="20" maxlength="40" value="<?php echo $attribute_set['title']; ?>"/></td>
+	<th scope="row" class="manage-column"><label for="tcp_title"><?php _e( 'Title', 'tcp-do' ); ?></label>:</th>
+	<td><input type="text" name="tcp_title" id="tcp_title" size="20" maxlength="40" value="<?php echo $attribute_set['title']; ?>"/></td>
 </tr><tr>
-	<th scope="row" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
-	<td><textarea name="tcp_desc" maxlength="40" cols="32" rows="2"><?php echo $attribute_set['desc']; ?></textarea></td>
+	<th scope="row" class="manage-column"><label for="tcp_desc"><?php _e( 'Description', 'tcp-do' ); ?></label>:</th>
+	<td><textarea name="tcp_desc" id="tcp_desc" maxlength="40" cols="32" rows="2"><?php echo $attribute_set['desc']; ?></textarea></td>
 </tr><tr>
-	<th scope="row" class="manage-column"><?php _e( 'Attributes', 'tcp-do' ); ?></th>
+	<th scope="row" class="manage-column"><label><?php _e( 'Attributes', 'tcp-do' ); ?></label>:</th>
 	<td>
-<?php $attributes = tcp_get_attributes( 'objects' );
-	foreach( $attributes as $attribute ) : ?>
-		<label><input id="tcp_taxonomies_<?php echo $id;?>" type="checkbox" name="tcp_taxonomies[]" value="<?php echo $attribute->name; ?>" <?php tcp_checked_multiple( $attribute_set['taxonomies'], $attribute->name ); ?>/> <?php echo $attribute->labels->name; ?> (<?php echo $attribute->labels->desc; ?>)</label>
-		&nbsp;
-		<a href="admin.php?page=thecartpress/admin/TaxonomyEdit.php&taxonomy=<?php echo $attribute->name; ?>" title="<?php _e( 'edit attribute', 'tcp-do' ); ?>"><?php _e( 'edit', 'tcp-do' ); ?></a> |
-		<a href="edit-tags.php?taxonomy=<?php echo $attribute->name; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'add terms', 'tcp-do' ); ?>"><?php _e( 'add', 'tcp-do' ); ?></a>
-		<br />
-	<?php endforeach; ?>
+
+<?php //var_dump( $attribute_set['taxonomies'] ); echo '<br><br>'; ?>
+
+
+	<?php $attributes = tcp_get_attributes( 'objects' );
+	if ( is_array( $attributes ) && count( $attributes ) > 0 ) {
+		foreach( $attributes as $attribute_id => $attribute ) { ?>
+<?php //echo $attribute_id, '<br>'; var_dump($attribute); echo '<br><br>'; ?>
+			<label><input id="tcp_taxonomies_<?php echo $id;?>" type="checkbox" name="tcp_taxonomies[]" value="<?php echo $attribute_id; ?>" <?php tcp_checked_multiple( $attribute_set['taxonomies'], $attribute->name ); ?>/> <?php echo $attribute->labels->name; ?></label>
+			&nbsp;
+			<a href="admin.php?page=thecartpress/admin/TaxonomyEdit.php&taxonomy=<?php echo $attribute->name; ?>" title="<?php _e( 'edit attribute', 'tcp-do' ); ?>"><?php _e( 'edit attribute', 'tcp-do' ); ?></a> |
+			<a href="edit-tags.php?taxonomy=<?php echo $attribute->name; ?>&post_type=<?php echo TCP_DYNAMIC_OPTIONS_POST_TYPE; ?>" title="<?php _e( 'add terms', 'tcp-do' ); ?>"><?php _e( 'add terms', 'tcp-do' ); ?></a>
+			<br />
+		<?php }
+	} else { ?>
+		<p class="description"><?php printf( __( 'You need to create <a href="%s">attributes</a> for Dynamic Options, as Colours, Sizes, etc.', 'tcp-do' ), TCP_DYNAMIC_OPTIONS_ADMIN_PATH . 'AttributeList.php' ); ?></p>
+	<?php } ?>
+
 	</td>
 </tr>
 </thead>

@@ -16,10 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$original_post_id	= isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : 0;
-$post_id	= tcp_get_default_id( $original_post_id );
-$post		= get_post( $post_id );
-$attributes	= tcp_get_attributes_by_product( $post_id );
+$original_post_id = isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : 0;
+$post_id = tcp_get_default_id( $original_post_id );
+$post = get_post( $post_id );
+$attributes = tcp_get_attributes_by_product( $post_id );
 if ( count( $attributes ) == 0 ) : ?>
 	<div id="message" class="error">
 	<p><?php _e( 'To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned.', 'tcp-do' ); ?></p>
@@ -64,7 +64,7 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 				'parent_id'	=> $post_id,
 				'price'		=> $price,
 				'terms'		=> $terms,
-				'order'		=> $tcp_order = $_REQUEST['tcp_order'][$id],
+				'order'		=> $_REQUEST['tcp_order'][$id],
 				'delete'	=> in_array( $tcp_post_id, isset( $_REQUEST['tcp_delete'] ) ? (array)$_REQUEST['tcp_delete'] : array() ),
 			);
 			$option = apply_filters( 'tcp_dynamic_options_option_to_save', $option, $id, $_REQUEST );
@@ -144,13 +144,16 @@ function tcp_do_add_variations( $variations, $post_id, $attributes ) {
 			$terms[$attribute->name] = $term->slug;
 			$title .= ': ' . $attribute->labels->name . ': ' . $term->name;
 		}
-		$options[] = array (
-			'title'		=> $title,
+		$option = array(
+			'title' => $title,
 			'parent_id'	=> $post_id,
-			'price'		=> 0,
-			'terms'		=> $terms,
-			'order'		=> 0,
+			'price' => 0,
+			'order'	=> '',
+			'terms' => $terms,
+			'order' => 0,
 		);
+		$option = apply_filters( 'tcp_dynamic_options_option_to_save', $option, $id, $_REQUEST );
+		$options[] = $option;
 	}
 	foreach( $options as $option )
 		if ( ! tcp_exists_dynamic_option( $option ) )
