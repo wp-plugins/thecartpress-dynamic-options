@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.2.1
+Version: 1.2.2
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -421,6 +421,7 @@ class TCPDynamicOptions {
 	}
 
 	function tcp_the_add_to_cart_unit_field( $out, $post_id ) {
+		remove_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
 		if ( tcp_exists_dynamic_option( array( 'parent_id' => $post_id ) ) ) {
 			global $thecartpress;
 			if ( ! isset( $thecartpress ) ) return;
@@ -461,7 +462,7 @@ class TCPDynamicOptions {
 					<script>
 					function _tcp_set_price_<?php echo $id; ?>(e) {
 						var	form = jQuery(e).closest('form');
-						form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price, false ); ?>');
+						form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price, true ); ?>');
 						//jQuery('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price ); ?>');
 					}
 					</script>
@@ -494,7 +495,7 @@ class TCPDynamicOptions {
 						}
 					endforeach; ?>
 					<?php $price = tcp_get_the_price( $id );
-					$set_price .= 'if (id == ' . $id . ') { jQuery(\'#tcp_unit_price_' . $post_id . '\').html(\'' . tcp_get_the_price_label( $post_id, $product_price + $price, false ) . '\'); }' . "\n";
+					$set_price .= 'if (id == ' . $id . ') { jQuery(\'#tcp_unit_price_' . $post_id . '\').html(\'' . tcp_get_the_price_label( $post_id, $product_price + $price, true ) . '\'); }' . "\n";
 				endforeach; ?>
 				</option>
 				</select>
@@ -537,7 +538,7 @@ valid_values_<?php echo $post_id; ?>.push('<?php echo $id, ':', $valid; ?>');
 
 function tcp_set_price_<?php echo $id; ?>(e) {
 	var	form = jQuery(e).closest('form');
-	form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price, false ); ?>');
+	form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price, true ); ?>');
 	form.find('#tcp_add_product_<?php echo $post_id; ?>').show();
 	form.find('#tcp_dynamic_option_<?php echo $post_id; ?>').val(<?php echo $id; ?>);
 	jQuery('.tcp_thumbnail_<?php echo $post_id; ?>').hide();
@@ -599,6 +600,7 @@ jQuery(document).ready(function() {
 			endif;
 			$out .= ob_get_clean();
 		}
+		add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
 		return $out;
 	}
 
@@ -807,11 +809,15 @@ jQuery(document).ready(function() {
 				$price = $min_price;
 			}
 		} else {
-			$price = false;
-			$equal = true;
+			return $label;
+			//$price = false;
+			//$equal = true;
 		}
 		$price = tcp_get_the_price_to_show( $post_id, $price );
-		$label = tcp_format_the_price( $price );
+		//$label = tcp_format_the_price( $price );
+remove_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
+$label = tcp_get_the_price_label( '', $price );
+add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
 		if ( $equal !== false ) return $label;
 		else return sprintf( __( 'From %s', 'tcp-do' ), $label );
 	}
