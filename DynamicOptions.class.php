@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.2
+Version: 1.2.1
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 License: GPL
@@ -60,7 +60,7 @@ class TCPDynamicOptions {
 		add_filter( 'tcp_get_image_in_grouped_buy_button', array( &$this, 'tcp_get_image_in_grouped' ), 10, 3 );
 		add_filter( 'tcp_get_the_product_price', array( &$this, 'tcp_get_the_product_price' ), 10, 2 );
 		add_filter( 'tcp_get_product_types', array( &$this, 'tcp_get_product_types' ) );
-			//add_filter( 'tcp_exclude_from_order_discount', array( &$this, 'tcp_exclude_from_order_discount' ), 10, 2 );
+		//add_filter( 'tcp_exclude_from_order_discount', array( &$this, 'tcp_exclude_from_order_discount' ), 10, 2 );
 		add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
 		add_filter( 'tcp_get_product_post_types', array( &$this, 'tcp_get_product_post_types' ) );
 		add_filter( 'tcp_the_tier_price', array( &$this, 'tcp_the_tier_price' ), 10, 2 );
@@ -813,7 +813,7 @@ jQuery(document).ready(function() {
 		$price = tcp_get_the_price_to_show( $post_id, $price );
 		$label = tcp_format_the_price( $price );
 		if ( $equal !== false ) return $label;
-		else return sprintf( __( 'From %s', 'tcp' ), $label );
+		else return sprintf( __( 'From %s', 'tcp-do' ), $label );
 	}
 
 	function tcp_get_product_types( $types ) {
