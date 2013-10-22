@@ -20,13 +20,13 @@ $original_post_id = isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : 0;
 $post_id = tcp_get_default_id( $original_post_id );
 $post = get_post( $post_id );
 $attributes = tcp_get_attributes_by_product( $post_id );
-if ( count( $attributes ) == 0 ) : ?>
+if ( count( $attributes ) == 0 ) { ?>
 	<div id="message" class="error">
 	<p><?php _e( 'To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned.', 'tcp-do' ); ?></p>
 	<p><a href="post.php?action=edit&post=<?php echo $post->ID;?>"><?php printf( __( 'return to %s', 'tcp-do' ), $post->post_title ); ?></a></p>
 	</div>
 	<?php //exit;
-endif;
+}
 
 if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 	foreach( $_REQUEST['tcp_add_term'] as $taxonomy => $value ) {
@@ -71,7 +71,6 @@ if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 			$options[] = $option;
 		}
 	}
-
 	if ( isset( $_REQUEST['tcp_save'] ) ) {
 		if ( count( $options ) > 0 ) {
 			foreach( $options as $option ) {
@@ -300,11 +299,8 @@ endforeach; ?>
 	<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Order', 'tcp-do' ); ?>
-		<span class="description"><?php global $thecartpress;
-		if ( 'order' != $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) )
-			_e( 'Options will be ordered by title or price, this field will not be considered.', 'tcp-do' ); ?>
-			<?php printf( __( 'To change the order, visit <a href="%s">Theme compatibility</a> page.', 'tcp-do' ), get_admin_url() . 'admin.php?page=thecartpress/TheCartPress.class.php/appearance#dynamic_options_settings' ); ?>
-		</span>
+		<?php global $thecartpress;
+		if ( $thecartpress && 'order' != $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) ) echo '*'; ?>
 	</th>
 	<th scope="col" class="manage-column">
 		<input type="checkbox" class="tcp_select_delete_all" onclick="if (jQuery('.tcp_select_delete_all').attr('checked') ) jQuery('.tcp_delete').attr('checked', true); else jQuery('.tcp_delete').attr('checked', false);" value="1"/> <?php _e( 'Delete', 'tcp-do' ); ?>
@@ -326,6 +322,8 @@ endforeach; ?>
 	<?php do_action( 'tcp_dynamic_options_lists_header', $post ); ?>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Order', 'tcp-do' ); ?>
+		<?php global $thecartpress;
+		if ( $thecartpress && 'order' != $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) ) echo '*'; ?>
 	</th>
 	<th scope="col" class="manage-column">
 		<?php _e( 'Delete', 'tcp-do' ); ?>
@@ -406,6 +404,13 @@ if ( is_array( $children ) && count( $children > 0 ) )
 <?php endforeach; ?>
 </tbody>
 </table>
+<?php global $thecartpress;
+if ( $thecartpress && 'order' != $thecartpress->get_setting( 'dynamic_options_order_by', 'title' ) ) { ?>
+<span class="description">
+(*) <?php _e( 'Options will be ordered by title or price, this field will not be considered.', 'tcp-do' ); ?>
+&nbsp;<?php printf( __( 'To change the order, visit <a href="%s">Theme compatibility</a> page.', 'tcp-do' ), get_admin_url() . 'admin.php?page=thecartpress/TheCartPress.class.php/appearance#dynamic_options_settings' ); ?>
+</span>
+<?php } ?>
 <p><input type="submit" name="tcp_save" value="<?php _e( 'save', 'tcp-do' ); ?>" class="button-primary"/>
 <span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp-do' ); ?></span></p>
 </form>

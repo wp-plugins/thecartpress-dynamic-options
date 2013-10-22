@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tcp_po\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-11 13:10+0100\n"
+"POT-Creation-Date: 2013-08-12 17:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: sensei <sensei@thecartpress.com>\n"
 "Language-Team: \n"
@@ -14,27 +14,27 @@ msgstr ""
 "X-Poedit-Basepath: ../../\n"
 "X-Poedit-SearchPath-0: thecartpress-dynamic-options\n"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:183
+#: thecartpress-dynamic-options/DynamicOptions.class.php:187
 msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin activated."
 msgstr "Das TheCartPress-Plugin muss aktiviert sein, um <strong>Dynamic Options for TheCartPress</strong> verwenden zu können."
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:188
+#: thecartpress-dynamic-options/DynamicOptions.class.php:192
 msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin"
 msgstr "<strong>Dynamic Options f&uuml;r TheCartPress</strong> ben&ouml;tigen das TheCartPress-Plugin"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:204
-#: thecartpress-dynamic-options/DynamicOptions.class.php:380
+#: thecartpress-dynamic-options/DynamicOptions.class.php:208
+#: thecartpress-dynamic-options/DynamicOptions.class.php:384
 #: thecartpress-dynamic-options/admin/AttributeSets.php:78
 #: thecartpress-dynamic-options/admin/DynamicOptionsList.php:167
 #: thecartpress-dynamic-options/admin/AttributeSetsList.php:46
 msgid "Attribute Sets"
 msgstr "Attribut-Gruppe"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:204
+#: thecartpress-dynamic-options/DynamicOptions.class.php:208
 msgid "Attributes Sets"
 msgstr "Attribut-Gruppen"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:205
+#: thecartpress-dynamic-options/DynamicOptions.class.php:209
 #: thecartpress-dynamic-options/admin/AttributeList.php:68
 #: thecartpress-dynamic-options/admin/AttributeSets.php:81
 #: thecartpress-dynamic-options/admin/AttributeSets.php:92
@@ -49,40 +49,40 @@ msgstr "Attribut-Gruppen"
 msgid "Attributes"
 msgstr "Attribute"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:206
-#: thecartpress-dynamic-options/DynamicOptions.class.php:207
+#: thecartpress-dynamic-options/DynamicOptions.class.php:210
+#: thecartpress-dynamic-options/DynamicOptions.class.php:211
 msgid "Option list"
 msgstr "Liste der Optionen"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:218
+#: thecartpress-dynamic-options/DynamicOptions.class.php:222
 msgid "Dynamic Option Settings"
 msgstr "Dynamic Options"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:226
+#: thecartpress-dynamic-options/DynamicOptions.class.php:230
 msgid "Dynamic options type"
 msgstr "Dynamic Options Typ"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:230
+#: thecartpress-dynamic-options/DynamicOptions.class.php:234
 msgid "List"
 msgstr "Liste"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:231
+#: thecartpress-dynamic-options/DynamicOptions.class.php:235
 msgid "Single"
 msgstr "Einzeln"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:232
+#: thecartpress-dynamic-options/DynamicOptions.class.php:236
 msgid "Multiple"
 msgstr "Mehrfach"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:238
+#: thecartpress-dynamic-options/DynamicOptions.class.php:242
 msgid "Dynamic options order by"
 msgstr "Dynamic Options sortieren nach"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:241
+#: thecartpress-dynamic-options/DynamicOptions.class.php:245
 msgid "Order field"
 msgstr "Ordnungsfeld"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:242
+#: thecartpress-dynamic-options/DynamicOptions.class.php:246
 #: thecartpress-dynamic-options/admin/AttributeSets.php:90
 #: thecartpress-dynamic-options/admin/AttributeSets.php:118
 #: thecartpress-dynamic-options/admin/AttributeSets.php:126
@@ -93,7 +93,7 @@ msgstr "Ordnungsfeld"
 msgid "Title"
 msgstr "Titel"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:243
+#: thecartpress-dynamic-options/DynamicOptions.class.php:247
 #: thecartpress-dynamic-options/admin/DynamicOptionsList.php:187
 #: thecartpress-dynamic-options/admin/DynamicOptionsList.php:298
 #: thecartpress-dynamic-options/admin/DynamicOptionsList.php:324
@@ -102,76 +102,76 @@ msgstr "Titel"
 msgid "Price"
 msgstr "Preis"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:248
+#: thecartpress-dynamic-options/DynamicOptions.class.php:252
 msgid "Dynamic options order"
 msgstr "Reihenfolge der Dynamic Options"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:251
+#: thecartpress-dynamic-options/DynamicOptions.class.php:255
 msgid "Ascending"
 msgstr "aufsteigend"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:252
+#: thecartpress-dynamic-options/DynamicOptions.class.php:256
 msgid "Descending"
 msgstr "absteigend"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:257
+#: thecartpress-dynamic-options/DynamicOptions.class.php:261
 msgid "Dynamic options calculate price"
 msgstr "Dynamic Options Preisberechnung"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:260
+#: thecartpress-dynamic-options/DynamicOptions.class.php:264
 msgid "Individual"
 msgstr "individuell"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:261
+#: thecartpress-dynamic-options/DynamicOptions.class.php:265
 msgid "Complex"
 msgstr "komplex"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:262
+#: thecartpress-dynamic-options/DynamicOptions.class.php:266
 msgid "\"Individual\" value will return as the price of an option the price of the Product. \"Complex\" means that prices will be added."
 msgstr "\"Individuell\" gibt als Ergebnis den Preis der Option eines Produkts. \"Komplex\" bedeuted, dass die Preise addiert werden."
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:272
+#: thecartpress-dynamic-options/DynamicOptions.class.php:276
 msgid "Parent"
 msgstr "Eltern"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:273
+#: thecartpress-dynamic-options/DynamicOptions.class.php:277
 msgid "Attribute set"
 msgstr "Attribut-Gruppe"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:358
+#: thecartpress-dynamic-options/DynamicOptions.class.php:362
 msgid "Parent: "
 msgstr "Eltern:"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:369
+#: thecartpress-dynamic-options/DynamicOptions.class.php:373
 msgid "dynamic options"
 msgstr "dynamic options"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:385
+#: thecartpress-dynamic-options/DynamicOptions.class.php:389
 msgid "none"
 msgstr "keine"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:390
+#: thecartpress-dynamic-options/DynamicOptions.class.php:394
 msgid "Manage Attribute Sets"
 msgstr "Attribut Gruppen verwalten"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:391
+#: thecartpress-dynamic-options/DynamicOptions.class.php:395
 msgid "This field helps us to join the product with its Dynamic Options"
 msgstr "Dieses Feld hilft uns, das Produkt mit den dynamischen Optionen zu verknüpfen"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:418
+#: thecartpress-dynamic-options/DynamicOptions.class.php:422
 msgid "Dynamic options"
 msgstr "Dynamische Optionen"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:520
+#: thecartpress-dynamic-options/DynamicOptions.class.php:525
 msgid "Combination not valid"
 msgstr "ungültige Kombination"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:615
+#: thecartpress-dynamic-options/DynamicOptions.class.php:636
 #, php-format
 msgid "%s unit(s) <a href=\"%s\">in your cart</a>"
 msgstr "%s Stück <a href=\"%s\">im Warenkorb</a>"
 
-#: thecartpress-dynamic-options/DynamicOptions.class.php:816
+#: thecartpress-dynamic-options/DynamicOptions.class.php:841
 #, php-format
 msgid "From %s"
 msgstr "ab %s"
