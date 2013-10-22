@@ -1,0 +1,666 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TheCartPress-DyamicOptions\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-10 10:49+0100\n"
+"PO-Revision-Date: 2013-08-12 22:42+0100\n"
+"Last-Translator: Angelo Giammarresi <info@wocmultimedia.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../../\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: thecartpress-dynamic-options\n"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:183
+msgid ""
+"<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress "
+"plugin activated."
+msgstr ""
+"<strong>Opzioni Dinamiche per TheCartPress</strong> richiede che sia "
+"attivato il plugin TheCartPress."
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:188
+msgid ""
+"<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress "
+"plugin"
+msgstr ""
+"<strong>Opzioni Dinamiche per TheCartPress</strong> richiede il plugin "
+"TheCartPress."
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:204
+#: thecartpress-dynamic-options/DynamicOptions.class.php:380
+#: thecartpress-dynamic-options/admin/AttributeSets.php:78
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:167
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:46
+msgid "Attribute Sets"
+msgstr "Set di Attributi"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:204
+msgid "Attributes Sets"
+msgstr "Set di Attributi"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:205
+#: thecartpress-dynamic-options/admin/AttributeList.php:68
+#: thecartpress-dynamic-options/admin/AttributeSets.php:81
+#: thecartpress-dynamic-options/admin/AttributeSets.php:92
+#: thecartpress-dynamic-options/admin/AttributeSets.php:104
+#: thecartpress-dynamic-options/admin/AttributeSets.php:120
+#: thecartpress-dynamic-options/admin/AttributeSets.php:128
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:39
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:55
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:51
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:81
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:89
+msgid "Attributes"
+msgstr "Attributi"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:206
+#: thecartpress-dynamic-options/DynamicOptions.class.php:207
+msgid "Option list"
+msgstr "Lista delle Opzioni"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:218
+msgid "Dynamic Option Settings"
+msgstr "Configurazione delle Opzioni Dinamiche"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:226
+msgid "Dynamic options type"
+msgstr "Tipo di Opzioni Dinamiche"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:230
+msgid "List"
+msgstr "Lista"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:231
+msgid "Single"
+msgstr "Singola"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:232
+msgid "Multiple"
+msgstr "Multiple"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:238
+msgid "Dynamic options order by"
+msgstr "Opzioni Dinamiche ordinate per"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:241
+msgid "Order field"
+msgstr "Campo Ordine"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:242
+#: thecartpress-dynamic-options/admin/AttributeSets.php:90
+#: thecartpress-dynamic-options/admin/AttributeSets.php:118
+#: thecartpress-dynamic-options/admin/AttributeSets.php:126
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:49
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:60
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:79
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:87
+msgid "Title"
+msgstr "Títolo"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:243
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:187
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:298
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:324
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:54
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsMetabox.class.php:48
+msgid "Price"
+msgstr "Prezzo"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:248
+msgid "Dynamic options order"
+msgstr "Ordine delle Opzioni Dinamiche"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:251
+msgid "Ascending"
+msgstr "Ascendente"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:252
+msgid "Descending"
+msgstr "Discendente"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:257
+msgid "Dynamic options calculate price"
+msgstr "Calcolare il prezzo per le Opzioni Dinamiche"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:260
+msgid "Individual"
+msgstr "Individuale"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:261
+msgid "Complex"
+msgstr "Complesso"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:262
+msgid ""
+"\"Individual\" value will return as the price of an option the price of the "
+"Product. \"Complex\" means that prices will be added."
+msgstr ""
+"Il valore \"Individuale \" mostrerà il prezzo di un'opzione come prezzo del "
+"prodotto.  \"Complesso \" significa invece che i prezzi delle opzioni  si "
+"aggiungeranno a quello di base."
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:272
+msgid "Parent"
+msgstr "Padre"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:273
+msgid "Attribute set"
+msgstr "Set di Attributi"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:358
+msgid "Parent: "
+msgstr "Padre:"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:369
+msgid "dynamic options"
+msgstr "opzioni dinamiche"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:385
+msgid "none"
+msgstr "nessuna"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:390
+msgid "Manage Attribute Sets"
+msgstr "Modifica i Set di Attributi"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:391
+msgid "This field helps us to join the product with its Dynamic Options"
+msgstr "Questo campo serve a unire il prodotto con le sue Opzioni dinamiche"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:418
+msgid "Dynamic options"
+msgstr "Opzioni Dinamiche"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:520
+msgid "Combination not valid"
+msgstr "Combinazione non valida"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:615
+#, php-format
+msgid "%s unit(s) <a href=\"%s\">in your cart</a>"
+msgstr "%s unità <a href=\"%s\">nel tuo carrello</a>"
+
+#: thecartpress-dynamic-options/DynamicOptions.class.php:816
+#, php-format
+msgid "From %s"
+msgstr "da %s"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:30
+msgid "The \"name\" field must be completed"
+msgstr "Il campo \"nome\" deve esssere completato"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:43
+#, php-format
+msgid "Search %s"
+msgstr "Cerca %s"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:44
+#, php-format
+msgid "All %s"
+msgstr "Tutto %s"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:47
+#, php-format
+msgid "Edit %s"
+msgstr "Modificare %s"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:48
+#, php-format
+msgid "Update %s"
+msgstr "Aggiornare %s"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:49
+#, php-format
+msgid "Add new %s"
+msgstr "Aggiungere Nuovo %s"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:50
+#, php-format
+msgid "New %s name"
+msgstr "Nuovo nome %s"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:57
+msgid "Taxonomy saved"
+msgstr "Tassonomia salvata"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:63
+msgid "The taxonomy has been deleted"
+msgstr "La Tassonomia è stata cancellata"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:70
+msgid "Return to Attributes Sets"
+msgstr "Ritorna ai Set di Attributi"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:74
+msgid "Create new attribute"
+msgstr "Crea Nuovo Attributo"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:79
+#: thecartpress-dynamic-options/admin/AttributeList.php:98
+#: thecartpress-dynamic-options/admin/AttributeList.php:106
+msgid "ID"
+msgstr "ID"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:80
+#: thecartpress-dynamic-options/admin/AttributeList.php:99
+#: thecartpress-dynamic-options/admin/AttributeList.php:107
+msgid "Name"
+msgstr "Nome"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:81
+#: thecartpress-dynamic-options/admin/AttributeList.php:100
+#: thecartpress-dynamic-options/admin/AttributeList.php:108
+#: thecartpress-dynamic-options/admin/AttributeSets.php:91
+#: thecartpress-dynamic-options/admin/AttributeSets.php:119
+#: thecartpress-dynamic-options/admin/AttributeSets.php:127
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:52
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:61
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:80
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:88
+msgid "Description"
+msgstr "Descrizione"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:87
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:224
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:235
+msgid "insert"
+msgstr "Inserire"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:120
+#: thecartpress-dynamic-options/admin/AttributeSets.php:141
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:67
+msgid "edit attribute"
+msgstr "Modifica Attributo"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:120
+#: thecartpress-dynamic-options/admin/AttributeSets.php:141
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:362
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:114
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsMetabox.class.php:68
+msgid "edit"
+msgstr "Modificare"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:121
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:68
+msgid "add terms"
+msgstr "Aggiungere dei Termini"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:122
+#: thecartpress-dynamic-options/admin/AttributeSets.php:146
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:394
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:114
+msgid "delete"
+msgstr "Cancellare"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:127
+msgid "Do you really want to delete this attribute?"
+msgstr "Vuoi davvero eliminare questo attributo?"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:128
+#: thecartpress-dynamic-options/admin/AttributeSets.php:152
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:401
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:120
+msgid "Yes"
+msgstr "Si"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:129
+#: thecartpress-dynamic-options/admin/AttributeSets.php:153
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:402
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:121
+msgid "No, I don't"
+msgstr "No"
+
+#: thecartpress-dynamic-options/admin/AttributeList.php:137
+msgid "The list is empty"
+msgstr "La lista è vuota"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:32
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:23
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:23
+msgid "The Set has not been inserted. The title has been omitted."
+msgstr "Il Set non è stato inserito. Il titolo è stato omesso"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:38
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:29
+msgid "The Set has not been inserted, it already exists."
+msgstr "Il Set non è stato inserito, perché esiste già"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:49
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:33
+msgid "The Set has been inserted sucesfuly."
+msgstr "Il Set è stato inserito con successo."
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:66
+msgid "The Sets have been updated sucesfuly."
+msgstr "Il Set è stato aggiornato con successo."
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:73
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:41
+msgid "The Set has been deleted sucesfuly."
+msgstr "Il Set è stato cancellato con successo."
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:85
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:55
+msgid "New Attribute Set"
+msgstr "Nuovo Set di Attributi"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:109
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:68
+msgid "Insert"
+msgstr "Inserire"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:112
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:74
+msgid "Current Attribute Set List"
+msgstr "Lista dei Set di Attributi attuali"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:148
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:116
+msgid "Do you really want to delete this Attribute Set?"
+msgstr "Vuoi davvero eliminare questo Set di attributi?"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:160
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:128
+msgid "The Attribute Sets list is empty"
+msgstr "La lista dei Set di Attributi è vuota"
+
+#: thecartpress-dynamic-options/admin/AttributeSets.php:166
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:80
+msgid "Save"
+msgstr "Salvare"
+
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:28
+msgid "The Set has been updated sucesfuly."
+msgstr "Il Set è stato aggiornato con successo."
+
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:35
+#, php-format
+msgid "Attribute Set: %s"
+msgstr "Set di attributi: %s"
+
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:37
+msgid "Return to Attribute Sets list"
+msgstr "Ritorna alla lista dei set di attributi"
+
+#: thecartpress-dynamic-options/admin/AttributeSetEdit.php:72
+#, php-format
+msgid ""
+"You need to create <a href=\"%s\">attributes</a> for Dynamic Options, as "
+"Colours, Sizes, etc."
+msgstr ""
+"È necessario creare <a href=\"%s\"> gli attributi </ a> per le Opzioni "
+"dinamiche, come colori, dimensioni, ecc."
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:25
+msgid ""
+"To create options, you need, first, to assign a Set of Attributes to the "
+"product. If you have assigned a set, ensure the set has attributes assigned."
+msgstr ""
+"Per creare delle opzioni è necessario assegnare prima un Set di Attributi al "
+"prodotto. Se hai già assegnato un set, assicurarsi allora che il set abbia "
+"degli attributi assegnati."
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:26
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:43
+#, php-format
+msgid "return to %s"
+msgstr "Ritornare a %s"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:37
+msgid "The term has been inserted"
+msgstr "Il termine è stato inserito"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:86
+msgid "The options have been modified"
+msgstr "Le opzioni sono state modificate"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:93
+msgid "The option has been inserted"
+msgstr "L'opzione è stata inserita"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:97
+msgid "The option has not been inserted. The option already exists."
+msgstr "L'opzione non è stata inserita. L'opzione esiste già"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:102
+msgid "The option has not been inserted."
+msgstr "L'opzione non è stata inserita"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:163
+#, php-format
+msgid "Options for %s"
+msgstr "Opzioni per %s"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:165
+#, php-format
+msgid "Return to %s"
+msgstr "Ritornare a %s"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:169
+msgid "Manage Attributes"
+msgstr "Gestire gli attributi"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:182
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:293
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:320
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsMetabox.class.php:44
+msgid "Edit attribute"
+msgstr "Modificare Attributo"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:191
+msgid "Sorting"
+msgstr "Ordine"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:198
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:30
+msgid "New Option"
+msgstr "Nuova Opzione"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:203
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:261
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:373
+msgid "No one"
+msgstr "Nessuna"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:225
+msgid "create all"
+msgstr "Creare tutti"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:225
+msgid "Create all attribute variations"
+msgstr "Creare tutte le variazioni degli attributi"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:230
+msgid "New terms"
+msgstr "Nuovo termine"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:279
+msgid "Filter"
+msgstr "Filtrare"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:302
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:328
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:64
+msgid "Order"
+msgstr "Ordine"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:305
+msgid ""
+"Options will be ordered by title or price, this field will not be considered."
+msgstr ""
+"Le opzioni saranno ordinate per titolo o prezzo, questo campo non verrà "
+"considerato."
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:306
+#, php-format
+msgid "To change the order, visit <a href=\"%s\">Theme compatibility</a> page."
+msgstr ""
+"Per cambiare l'ordine, visita la pagina <a href=\"%s\">Compatibilità con il "
+"tema</a>."
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:310
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:331
+msgid "Delete"
+msgstr "Cancellare"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:366
+msgid "Set featured image"
+msgstr "Imposta un'immagine di riferimento"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:396
+msgid "Do you really want to delete this option?"
+msgstr "Vuoi davvero eliminare questa opzione?"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:409
+msgid "save"
+msgstr "salva"
+
+#: thecartpress-dynamic-options/admin/DynamicOptionsList.php:410
+msgid "All the options with the delete checkbox checked will be deleted."
+msgstr ""
+"Tutte le opzioni con la casella di cancellazione selezionata saranno "
+"eliminate."
+
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:47
+msgid ""
+"Allows to create Attribute sets. These sets will contain attributes as "
+"\"colour\", \"size\". Each attribute will contain values, as \"red\", \"blue"
+"\", \"Large\", etc."
+msgstr ""
+"Permette di creare Set di Attributi. Questi Set conterranno gli attributi "
+"come \"colore\", \"taglia\". Ogni attributo conterrà valori, come \"rosso\","
+"\"azzurro\",\"Media\", etc."
+
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:48
+msgid ""
+"To create Color variations for a product (for example, for \"Cars\") you "
+"should create a set called \"Car variations\", then create an Attribute "
+"called \"Car Colours\", and finally add colours to the attribute."
+msgstr ""
+"Per creare delle variazioni di Colore per un prodotto (per esempio, per le "
+"\"Auto\") è necessario creare un Set di Attributi chiamato \"Opzioni Auto\", "
+"dopodiché si crea un attributo chiamato \"Colori delle auto\", e infine si "
+"aggiungeranno i colori a questo attributo."
+
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:49
+msgid ""
+"With all these options defined for a product, you should visit \"Dynamic "
+"Options\", for each product, and create variations for the different values "
+"and attributes defined."
+msgstr ""
+"Con tutte queste opzioni definite per un prodotto, vi consigliamo di "
+"visitare \"Opzioni dinamiche \", per ogni prodotto, e creare varianti per i "
+"diversi valori e attributi definiti."
+
+#: thecartpress-dynamic-options/admin/AttributeSetsList.php:110
+msgid "No Attributes"
+msgstr "Nessun Attributo"
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:27
+msgid "Option Custom Fields"
+msgstr "Campo personalizzato delle Opzioni"
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+msgid "return to options list"
+msgstr "Ritornare alla lista delle Opzioni"
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+msgid "Options list"
+msgstr "Lista delle Opzioni"
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:56
+msgid "This price will be added to the price of the parent."
+msgstr ""
+"Questo prezzo sarà aggiunto al prezzo del prodotto padre o prezzo di base."
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:59
+msgid "Weight"
+msgstr "Peso"
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:61
+msgid ""
+"If value is zero then the weight will be the weight of the parent. This "
+"weight will not be added to the weight of the parent anyway."
+msgstr ""
+"Se il valore è zero allora il peso sarà il peso del prodotto di base o "
+"padre. Questo peso non sarà aggiunto a quello del padre in ogni caso."
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:68
+msgid "Sku"
+msgstr "SKU/Ref."
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsMetabox.class.php:25
+msgid "Product Dynamic options"
+msgstr "Opzioni Dinamiche del Prodotto"
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "manage options list"
+msgstr "Configura la lista delle Opzioni"
+
+#: thecartpress-dynamic-options/metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "Manage Options list"
+msgstr "Configura la lista delle Opzioni"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:23
+msgid "Dynamic Options"
+msgstr "Opzioni Dinamiche"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:24
+msgid "Options for TheCartPress Dynamic Options"
+msgstr "Opzioni per TheCartPress Dynamic Options"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:26
+msgid "Option"
+msgstr "Opzione"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:27
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:28
+msgid "Add New"
+msgstr "Aggiungere Nuova"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:29
+msgid "Edit Option"
+msgstr "Modifica Opzione"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:31
+msgid "View Option"
+msgstr "Mostra Opzione"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:32
+msgid "Search Options"
+msgstr "Cerca Opzioni"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:33
+msgid "No options found"
+msgstr "Nessuna opzione trovata"
+
+#: thecartpress-dynamic-options/customposttypes/DynamicOptionPostType.class.php:34
+msgid "No options found in Trash"
+msgstr "Nessuna opzione trovata nel cestino"
+
+#~ msgid "Do you really want to delete this taxonomy?"
+#~ msgstr "¿Realmente quiere borrar esta categoría?"
+
+#~ msgid "add"
+#~ msgstr "Añadir"
+
+#~ msgid "Options"
+#~ msgstr "Opciones"
+
+#~ msgid "edit option"
+#~ msgstr "Editar Opción"
+
+#~ msgid "Attribute list"
+#~ msgstr "Lista de Atributos"
+
+#~ msgid "Double"
+#~ msgstr "Doble"
+
+#~ msgid "Manage attributes"
+#~ msgstr "Edite los atributos"

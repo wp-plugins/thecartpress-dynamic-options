@@ -1,0 +1,484 @@
+# Russian translation of TheCartPress and TheCartPress plugins.
+# This file is distributed under the same license as the TheCartPress package.
+# Vladimir Vasilenko <vladimir@shumbely.com>, 2013
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TheCartPress Dynamic Options\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-17 18:15+0300\n"
+"PO-Revision-Date: 2013-08-17 22:51+0300\n"
+"Last-Translator: jeltoesolnce <vladimir@shumbely.com>\n"
+"Language-Team: russian <ru@li.org>\n"
+"Language: russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../DynamicOptions.class.php:183
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin activated."
+msgstr "<strong>Динамические Опции для TheCartPress</strong> нуждаются в активированной TheCartPress."
+
+#: ../DynamicOptions.class.php:188
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin"
+msgstr "<strong>Для запуска Динамических Опций TheCartPress</strong>требуется TheCartPress"
+#: ../DynamicOptions.class.php:204 ../DynamicOptions.class.php:380
+#: ../admin/AttributeSets.php:78 ../admin/AttributeSetsList.php:46
+#: ../admin/DynamicOptionsList.php:167
+msgid "Attribute Sets"
+msgstr "Наборы аттрибутов"
+#: ../DynamicOptions.class.php:204
+msgid "Attributes Sets"
+msgstr "Наборы аттрибутов"
+#: ../DynamicOptions.class.php:205 ../admin/AttributeList.php:68
+#: ../admin/AttributeSetEdit.php:39 ../admin/AttributeSetEdit.php:55
+#: ../admin/AttributeSets.php:81 ../admin/AttributeSets.php:92
+#: ../admin/AttributeSets.php:104 ../admin/AttributeSets.php:120
+#: ../admin/AttributeSets.php:128 ../admin/AttributeSetsList.php:51
+#: ../admin/AttributeSetsList.php:81 ../admin/AttributeSetsList.php:89
+msgid "Attributes"
+msgstr "Аттрибуты"
+#: ../DynamicOptions.class.php:206 ../DynamicOptions.class.php:207
+msgid "Option list"
+msgstr "Список опций"
+#: ../DynamicOptions.class.php:218
+msgid "Dynamic Option Settings"
+msgstr "Настройки Динамических Опций"
+
+#: ../DynamicOptions.class.php:226
+msgid "Dynamic options type"
+msgstr "Тип Динамической Опции"
+
+#: ../DynamicOptions.class.php:230
+msgid "List"
+msgstr "Список"
+#: ../DynamicOptions.class.php:231
+msgid "Single"
+msgstr "Отдельная"
+
+#: ../DynamicOptions.class.php:232
+msgid "Multiple"
+msgstr "Мульти"
+
+#: ../DynamicOptions.class.php:238
+msgid "Dynamic options order by"
+msgstr "Динамические Опции сортируюстя по"
+
+#: ../DynamicOptions.class.php:241
+msgid "Order field"
+msgstr "полю Заказа"
+
+#: ../DynamicOptions.class.php:242 ../admin/AttributeSetEdit.php:49
+#: ../admin/AttributeSets.php:90 ../admin/AttributeSets.php:118
+#: ../admin/AttributeSets.php:126 ../admin/AttributeSetsList.php:60
+#: ../admin/AttributeSetsList.php:79 ../admin/AttributeSetsList.php:87
+msgid "Title"
+msgstr "Название"
+#: ../DynamicOptions.class.php:243 ../admin/DynamicOptionsList.php:187
+#: ../admin/DynamicOptionsList.php:298 ../admin/DynamicOptionsList.php:324
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:54
+#: ../metaboxes/DynamicOptionsMetabox.class.php:48
+msgid "Price"
+msgstr "Стоимость"
+#: ../DynamicOptions.class.php:248
+msgid "Dynamic options order"
+msgstr "Порядок Динамических Опций"
+
+#: ../DynamicOptions.class.php:251
+msgid "Ascending"
+msgstr "По возрастанию"
+
+#: ../DynamicOptions.class.php:252
+msgid "Descending"
+msgstr "По убыванию"
+
+#: ../DynamicOptions.class.php:257
+msgid "Dynamic options calculate price"
+msgstr "Расчёт цены Динамический Опций"
+
+#: ../DynamicOptions.class.php:260
+msgid "Individual"
+msgstr "Индивидуальный"
+
+#: ../DynamicOptions.class.php:261
+msgid "Complex"
+msgstr "Комплексный"
+
+#: ../DynamicOptions.class.php:262
+msgid "\"Individual\" value will return as the price of an option the price of the Product. \"Complex\" means that prices will be added."
+msgstr "\"Индивидуальный\" подразумевает полную стоимость, применяемую к товару. \"Комплексный\" - это надбавка, добавляемая к цене товара."
+
+#: ../DynamicOptions.class.php:272
+msgid "Parent"
+msgstr "Родитель"
+#: ../DynamicOptions.class.php:273
+msgid "Attribute set"
+msgstr "Установка аттрибута"
+#: ../DynamicOptions.class.php:358
+msgid "Parent: "
+msgstr "Родитель: "
+#: ../DynamicOptions.class.php:369
+msgid "dynamic options"
+msgstr "динамическая опция"
+#: ../DynamicOptions.class.php:385
+msgid "none"
+msgstr "нет"
+#: ../DynamicOptions.class.php:390
+msgid "Manage Attribute Sets"
+msgstr "Управление Наборами аттрибутов"
+
+#: ../DynamicOptions.class.php:391
+msgid "This field helps us to join the product with its Dynamic Options"
+msgstr "Эти поля помогут Вам связать товары с их Динамическими Опциями"
+
+#: ../DynamicOptions.class.php:418
+msgid "Dynamic options"
+msgstr "Динамические опции"
+#: ../DynamicOptions.class.php:521
+msgid "Combination not valid"
+msgstr "Комбинация недопустима"
+
+#: ../DynamicOptions.class.php:617
+#, php-format
+msgid "%s unit(s) <a href=\"%s\">in your cart</a>"
+msgstr "%s ед. <a href=\"%s\">в Вашей корзине</a>"
+#: ../DynamicOptions.class.php:822
+#, php-format
+msgid "From %s"
+msgstr "От %s"
+#: ../admin/AttributeList.php:30
+msgid "The \"name\" field must be completed"
+msgstr "Поле \"Наименование\" должно быть заполнено"
+
+#: ../admin/AttributeList.php:43
+#, php-format
+msgid "Search %s"
+msgstr "Поиск %s"
+#: ../admin/AttributeList.php:44
+#, php-format
+msgid "All %s"
+msgstr "Все %s"
+#: ../admin/AttributeList.php:47
+#, php-format
+msgid "Edit %s"
+msgstr "Править %s"
+#: ../admin/AttributeList.php:48
+#, php-format
+msgid "Update %s"
+msgstr "Обновить %s"
+#: ../admin/AttributeList.php:49
+#, php-format
+msgid "Add new %s"
+msgstr "Добавить новый %s"
+#: ../admin/AttributeList.php:50
+#, php-format
+msgid "New %s name"
+msgstr "Новое имя %s"
+#: ../admin/AttributeList.php:57
+msgid "Taxonomy saved"
+msgstr "Таксономия сохранена"
+#: ../admin/AttributeList.php:63
+msgid "The taxonomy has been deleted"
+msgstr "Таксономия удалена"
+
+#: ../admin/AttributeList.php:70
+msgid "Return to Attributes Sets"
+msgstr "Возврат к Наборам аттрибутов"
+
+#: ../admin/AttributeList.php:74
+msgid "Create new attribute"
+msgstr "Создание нового Аттрибута"
+
+#: ../admin/AttributeList.php:79 ../admin/AttributeList.php:98
+#: ../admin/AttributeList.php:106
+msgid "ID"
+msgstr "ID"
+#: ../admin/AttributeList.php:80 ../admin/AttributeList.php:99
+#: ../admin/AttributeList.php:107
+msgid "Name"
+msgstr "Название"
+#: ../admin/AttributeList.php:81 ../admin/AttributeList.php:100
+#: ../admin/AttributeList.php:108 ../admin/AttributeSetEdit.php:52
+#: ../admin/AttributeSets.php:91 ../admin/AttributeSets.php:119
+#: ../admin/AttributeSets.php:127 ../admin/AttributeSetsList.php:61
+#: ../admin/AttributeSetsList.php:80 ../admin/AttributeSetsList.php:88
+msgid "Description"
+msgstr "Описание"
+#: ../admin/AttributeList.php:87 ../admin/DynamicOptionsList.php:224
+#: ../admin/DynamicOptionsList.php:235
+msgid "insert"
+msgstr "вставить"
+
+#: ../admin/AttributeList.php:120 ../admin/AttributeSets.php:141
+#: ../admin/AttributeSetsList.php:114 ../admin/DynamicOptionsList.php:362
+#: ../metaboxes/DynamicOptionsMetabox.class.php:68
+msgid "edit"
+msgstr "правка"
+#: ../admin/AttributeList.php:120 ../admin/AttributeSetEdit.php:67
+#: ../admin/AttributeSets.php:141
+msgid "edit attribute"
+msgstr "править аттрибут"
+
+#: ../admin/AttributeList.php:121 ../admin/AttributeSetEdit.php:68
+msgid "add terms"
+msgstr "добавить терм"
+#: ../admin/AttributeList.php:122 ../admin/AttributeSets.php:146
+#: ../admin/AttributeSetsList.php:114 ../admin/DynamicOptionsList.php:394
+msgid "delete"
+msgstr "удалить"
+#: ../admin/AttributeList.php:127
+msgid "Do you really want to delete this attribute?"
+msgstr "Вы действительно хотите удалить этот Аттрибут?"
+
+#: ../admin/AttributeList.php:128 ../admin/AttributeSets.php:152
+#: ../admin/AttributeSetsList.php:120 ../admin/DynamicOptionsList.php:401
+msgid "Yes"
+msgstr "Да"
+#: ../admin/AttributeList.php:129 ../admin/AttributeSets.php:153
+#: ../admin/AttributeSetsList.php:121 ../admin/DynamicOptionsList.php:402
+msgid "No, I don't"
+msgstr "Нет, отказ"
+#: ../admin/AttributeList.php:137
+msgid "The list is empty"
+msgstr "Список пуст"
+#: ../admin/AttributeSetEdit.php:23 ../admin/AttributeSets.php:32
+#: ../admin/AttributeSetsList.php:23
+msgid "The Set has not been inserted. The title has been omitted."
+msgstr "Набор не был вставлен, его название игнорируется."
+
+#: ../admin/AttributeSetEdit.php:28
+msgid "The Set has been updated sucesfuly."
+msgstr "Набор обновлён."
+
+#: ../admin/AttributeSetEdit.php:35
+#, php-format
+msgid "Attribute Set: %s"
+msgstr "Набор аттрибутов: %s"
+#: ../admin/AttributeSetEdit.php:37
+msgid "Return to Attribute Sets list"
+msgstr "Возврат к списку Наборов аттрибутов"
+
+#: ../admin/AttributeSetEdit.php:72
+#, php-format
+msgid "You need to create <a href=\"%s\">attributes</a> for Dynamic Options, as Colours, Sizes, etc."
+msgstr "Вам необходимо создать <a href=\"%s\">аттрибуты</a> для Динамических Опций, такие как цвет, размер и т.д."
+#: ../admin/AttributeSetEdit.php:80 ../admin/AttributeSets.php:166
+msgid "Save"
+msgstr "Сохранить"
+#: ../admin/AttributeSets.php:38 ../admin/AttributeSetsList.php:29
+msgid "The Set has not been inserted, it already exists."
+msgstr "Набор не вставлен, он уже присутствует."
+
+#: ../admin/AttributeSets.php:49 ../admin/AttributeSetsList.php:33
+msgid "The Set has been inserted sucesfuly."
+msgstr "Набор внесён."
+
+#: ../admin/AttributeSets.php:66
+msgid "The Sets have been updated sucesfuly."
+msgstr "Набор обновлён."
+
+#: ../admin/AttributeSets.php:73 ../admin/AttributeSetsList.php:41
+msgid "The Set has been deleted sucesfuly."
+msgstr "Набор удалён."
+
+#: ../admin/AttributeSets.php:85 ../admin/AttributeSetsList.php:55
+msgid "New Attribute Set"
+msgstr "Новый Набор аттрибутов"
+
+#: ../admin/AttributeSets.php:109 ../admin/AttributeSetsList.php:68
+msgid "Insert"
+msgstr "Вставить"
+
+#: ../admin/AttributeSets.php:112 ../admin/AttributeSetsList.php:74
+msgid "Current Attribute Set List"
+msgstr "Текущий список Наборов"
+
+#: ../admin/AttributeSets.php:148 ../admin/AttributeSetsList.php:116
+msgid "Do you really want to delete this Attribute Set?"
+msgstr "Вы действительно хотите удалить этот набор Аттрибутов?"
+
+#: ../admin/AttributeSets.php:160 ../admin/AttributeSetsList.php:128
+msgid "The Attribute Sets list is empty"
+msgstr "Список Наборов пуст."
+
+#: ../admin/AttributeSetsList.php:47
+msgid "Allows to create Attribute sets. These sets will contain attributes as \"colour\", \"size\". Each attribute will contain values, as \"red\", \"blue\", \"Large\", etc."
+msgstr "Позволяет создать наборы Аттрибутов. Эти Наборы могут содержать такие аттрибуты, как, например, цвет или размер. Каждый аттрибут, затем, будет содержать значения (\"красный\", \"зелёный\" или \"большой\", например)."
+
+#: ../admin/AttributeSetsList.php:48
+msgid "To create Color variations for a product (for example, for \"Cars\") you should create a set called \"Car variations\", then create an Attribute called \"Car Colours\", and finally add colours to the attribute."
+msgstr "Для создания цветовых вариантов товара (напр., для автомобиля) Вам нужно создатьнабор, названный \"Варианты кузова\", затем создать Аттрибут, названный \"Цвета\", а затем назначить Аттрибуту цвета."
+
+#: ../admin/AttributeSetsList.php:49
+msgid "With all these options defined for a product, you should visit \"Dynamic Options\", for each product, and create variations for the different values and attributes defined."
+msgstr "С учётом всех этих опций, определённых для товара, Вам нужно будет посетить страницу \"Динамические Опции\", и создать варианты значений каждому товару для всех аттрибутов."
+
+#: ../admin/AttributeSetsList.php:110
+msgid "No Attributes"
+msgstr "Нет Аттрибутов"
+
+#: ../admin/DynamicOptionsList.php:25
+msgid "To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned."
+msgstr "Для создания опций Вам нужно будет, во первых, сопоставить Набор аттрибутов товару. Если Вы уже сопоставили Набор, то убедитесь, что набор содержит в себе Аттрибуты."
+
+#: ../admin/DynamicOptionsList.php:26
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:43
+#, php-format
+msgid "return to %s"
+msgstr "Вернуться к %s"
+#: ../admin/DynamicOptionsList.php:37
+msgid "The term has been inserted"
+msgstr "Терм был изменён"
+
+#: ../admin/DynamicOptionsList.php:86
+msgid "The options have been modified"
+msgstr "Опция была изменена"
+
+#: ../admin/DynamicOptionsList.php:93
+msgid "The option has been inserted"
+msgstr "Опция вставлена"
+
+#: ../admin/DynamicOptionsList.php:97
+msgid "The option has not been inserted. The option already exists."
+msgstr "Опция не вставлена. Опция уже существует."
+
+#: ../admin/DynamicOptionsList.php:102
+msgid "The option has not been inserted."
+msgstr "Опция не вставлена."
+
+#: ../admin/DynamicOptionsList.php:163
+#, php-format
+msgid "Options for %s"
+msgstr "Опции для %s"
+#: ../admin/DynamicOptionsList.php:165
+#, php-format
+msgid "Return to %s"
+msgstr "Возврат к %s"
+#: ../admin/DynamicOptionsList.php:169
+msgid "Manage Attributes"
+msgstr "Управление Аттрибутом"
+
+#: ../admin/DynamicOptionsList.php:182 ../admin/DynamicOptionsList.php:293
+#: ../admin/DynamicOptionsList.php:320
+#: ../metaboxes/DynamicOptionsMetabox.class.php:44
+msgid "Edit attribute"
+msgstr "Править Аттрибут"
+
+#: ../admin/DynamicOptionsList.php:191
+msgid "Sorting"
+msgstr "Сортировка"
+
+#: ../admin/DynamicOptionsList.php:198
+#: ../customposttypes/DynamicOptionPostType.class.php:30
+msgid "New Option"
+msgstr "Новая Опция"
+#: ../admin/DynamicOptionsList.php:203 ../admin/DynamicOptionsList.php:261
+#: ../admin/DynamicOptionsList.php:373
+msgid "No one"
+msgstr "Ни одного"
+#: ../admin/DynamicOptionsList.php:225
+msgid "Create all attribute variations"
+msgstr "Создайте все вариации аттрибутов"
+
+#: ../admin/DynamicOptionsList.php:225
+msgid "create all"
+msgstr "создать всё"
+
+#: ../admin/DynamicOptionsList.php:230
+msgid "New terms"
+msgstr "Новый терм"
+
+#: ../admin/DynamicOptionsList.php:279
+msgid "Filter"
+msgstr "Фильтр"
+#: ../admin/DynamicOptionsList.php:302 ../admin/DynamicOptionsList.php:328
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:64
+msgid "Order"
+msgstr "Заказ"
+#: ../admin/DynamicOptionsList.php:305
+msgid "Options will be ordered by title or price, this field will not be considered."
+msgstr "Опции будут упорядочены по названиям в алфавитном порядке или по стоимости."
+
+#: ../admin/DynamicOptionsList.php:306
+#, php-format
+msgid "To change the order, visit <a href=\"%s\">Theme compatibility</a> page."
+msgstr "Для изменения порядка посетите, пожалуйста, страницу <a href=\"%s\">Согласование с темой WordPress</a>."
+#: ../admin/DynamicOptionsList.php:310 ../admin/DynamicOptionsList.php:331
+msgid "Delete"
+msgstr "Удалить"
+#: ../admin/DynamicOptionsList.php:366
+msgid "Set featured image"
+msgstr "Установить изображение"
+
+#: ../admin/DynamicOptionsList.php:396
+msgid "Do you really want to delete this option?"
+msgstr "Действительно хотите удалить эту опцию?"
+#: ../admin/DynamicOptionsList.php:409
+msgid "save"
+msgstr "сохранить"
+#: ../admin/DynamicOptionsList.php:410
+msgid "All the options with the delete checkbox checked will be deleted."
+msgstr "Все опции с отмеченным на удаление чек-боксом будут удалены. Как это странно не звучит."
+
+#: ../customposttypes/DynamicOptionPostType.class.php:23
+msgid "Dynamic Options"
+msgstr "Динамические опции"
+#: ../customposttypes/DynamicOptionPostType.class.php:24
+msgid "Options for TheCartPress Dynamic Options"
+msgstr "Опции для Динамических Опций TheCartPress"
+#: ../customposttypes/DynamicOptionPostType.class.php:26
+msgid "Option"
+msgstr "Параметры"
+#: ../customposttypes/DynamicOptionPostType.class.php:27
+#: ../customposttypes/DynamicOptionPostType.class.php:28
+msgid "Add New"
+msgstr "Добавить Новый"
+#: ../customposttypes/DynamicOptionPostType.class.php:29
+msgid "Edit Option"
+msgstr "Править Опцию"
+#: ../customposttypes/DynamicOptionPostType.class.php:31
+msgid "View Option"
+msgstr "Просмотреть данные Опции"
+#: ../customposttypes/DynamicOptionPostType.class.php:32
+msgid "Search Options"
+msgstr "Искать Опцию"
+#: ../customposttypes/DynamicOptionPostType.class.php:33
+msgid "No options found"
+msgstr "Опция не найдена"
+#: ../customposttypes/DynamicOptionPostType.class.php:34
+msgid "No options found in Trash"
+msgstr "В Корзине Опция не найдена"
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:27
+msgid "Option Custom Fields"
+msgstr "Опция Дополнительных Полей"
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+msgid "Options list"
+msgstr "Список Опций"
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+msgid "return to options list"
+msgstr "возврат к списку опций"
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:56
+msgid "This price will be added to the price of the parent."
+msgstr "Эта стоимость будет добавлена к цене \"Родителя\"."
+
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:59
+msgid "Weight"
+msgstr "Вес"
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:61
+msgid "If value is zero then the weight will be the weight of the parent. This weight will not be added to the weight of the parent anyway."
+msgstr "Если значение нулевое, то тогда вес возьмётся от веса родителя. Вес родителя остаётся без изменений."
+
+#: ../metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:68
+msgid "Sku"
+msgstr "SKU"
+
+#: ../metaboxes/DynamicOptionsMetabox.class.php:25
+msgid "Product Dynamic options"
+msgstr "Динамические Опции товара"
+#: ../metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "Manage Options list"
+msgstr "Управление списком Опций"
+#: ../metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "manage options list"
+msgstr "управление списком опций"

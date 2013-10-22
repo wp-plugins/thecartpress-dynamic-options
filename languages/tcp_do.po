@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tcp_po\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-11 13:09+0100\n"
+"POT-Creation-Date: 2013-08-12 17:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: sensei <sensei@thecartpress.com>\n"
 "Language-Team: \n"
@@ -14,27 +14,27 @@ msgstr ""
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: DynamicOptions.class.php:183
+#: DynamicOptions.class.php:187
 msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin activated."
 msgstr ""
 
-#: DynamicOptions.class.php:188
+#: DynamicOptions.class.php:192
 msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin"
 msgstr ""
 
-#: DynamicOptions.class.php:204
-#: DynamicOptions.class.php:380
+#: DynamicOptions.class.php:208
+#: DynamicOptions.class.php:384
 #: admin/AttributeSets.php:78
 #: admin/DynamicOptionsList.php:167
 #: admin/AttributeSetsList.php:46
 msgid "Attribute Sets"
 msgstr ""
 
-#: DynamicOptions.class.php:204
+#: DynamicOptions.class.php:208
 msgid "Attributes Sets"
 msgstr ""
 
-#: DynamicOptions.class.php:205
+#: DynamicOptions.class.php:209
 #: admin/AttributeList.php:68
 #: admin/AttributeSets.php:81
 #: admin/AttributeSets.php:92
@@ -49,40 +49,40 @@ msgstr ""
 msgid "Attributes"
 msgstr ""
 
-#: DynamicOptions.class.php:206
-#: DynamicOptions.class.php:207
+#: DynamicOptions.class.php:210
+#: DynamicOptions.class.php:211
 msgid "Option list"
 msgstr ""
 
-#: DynamicOptions.class.php:218
+#: DynamicOptions.class.php:222
 msgid "Dynamic Option Settings"
 msgstr ""
 
-#: DynamicOptions.class.php:226
+#: DynamicOptions.class.php:230
 msgid "Dynamic options type"
 msgstr ""
 
-#: DynamicOptions.class.php:230
+#: DynamicOptions.class.php:234
 msgid "List"
 msgstr ""
 
-#: DynamicOptions.class.php:231
+#: DynamicOptions.class.php:235
 msgid "Single"
 msgstr ""
 
-#: DynamicOptions.class.php:232
+#: DynamicOptions.class.php:236
 msgid "Multiple"
 msgstr ""
 
-#: DynamicOptions.class.php:238
+#: DynamicOptions.class.php:242
 msgid "Dynamic options order by"
 msgstr ""
 
-#: DynamicOptions.class.php:241
+#: DynamicOptions.class.php:245
 msgid "Order field"
 msgstr ""
 
-#: DynamicOptions.class.php:242
+#: DynamicOptions.class.php:246
 #: admin/AttributeSets.php:90
 #: admin/AttributeSets.php:118
 #: admin/AttributeSets.php:126
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: DynamicOptions.class.php:243
+#: DynamicOptions.class.php:247
 #: admin/DynamicOptionsList.php:187
 #: admin/DynamicOptionsList.php:298
 #: admin/DynamicOptionsList.php:324
@@ -102,76 +102,76 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: DynamicOptions.class.php:248
+#: DynamicOptions.class.php:252
 msgid "Dynamic options order"
 msgstr ""
 
-#: DynamicOptions.class.php:251
+#: DynamicOptions.class.php:255
 msgid "Ascending"
 msgstr ""
 
-#: DynamicOptions.class.php:252
+#: DynamicOptions.class.php:256
 msgid "Descending"
 msgstr ""
 
-#: DynamicOptions.class.php:257
+#: DynamicOptions.class.php:261
 msgid "Dynamic options calculate price"
 msgstr ""
 
-#: DynamicOptions.class.php:260
+#: DynamicOptions.class.php:264
 msgid "Individual"
 msgstr ""
 
-#: DynamicOptions.class.php:261
+#: DynamicOptions.class.php:265
 msgid "Complex"
 msgstr ""
 
-#: DynamicOptions.class.php:262
+#: DynamicOptions.class.php:266
 msgid "\"Individual\" value will return as the price of an option the price of the Product. \"Complex\" means that prices will be added."
 msgstr ""
 
-#: DynamicOptions.class.php:272
+#: DynamicOptions.class.php:276
 msgid "Parent"
 msgstr ""
 
-#: DynamicOptions.class.php:273
+#: DynamicOptions.class.php:277
 msgid "Attribute set"
 msgstr ""
 
-#: DynamicOptions.class.php:358
+#: DynamicOptions.class.php:362
 msgid "Parent: "
 msgstr ""
 
-#: DynamicOptions.class.php:369
+#: DynamicOptions.class.php:373
 msgid "dynamic options"
 msgstr ""
 
-#: DynamicOptions.class.php:385
+#: DynamicOptions.class.php:389
 msgid "none"
 msgstr ""
 
-#: DynamicOptions.class.php:390
+#: DynamicOptions.class.php:394
 msgid "Manage Attribute Sets"
 msgstr ""
 
-#: DynamicOptions.class.php:391
+#: DynamicOptions.class.php:395
 msgid "This field helps us to join the product with its Dynamic Options"
 msgstr ""
 
-#: DynamicOptions.class.php:418
+#: DynamicOptions.class.php:422
 msgid "Dynamic options"
 msgstr ""
 
-#: DynamicOptions.class.php:520
+#: DynamicOptions.class.php:525
 msgid "Combination not valid"
 msgstr ""
 
-#: DynamicOptions.class.php:615
+#: DynamicOptions.class.php:636
 #, php-format
 msgid "%s unit(s) <a href=\"%s\">in your cart</a>"
 msgstr ""
 
-#: DynamicOptions.class.php:816
+#: DynamicOptions.class.php:841
 #, php-format
 msgid "From %s"
 msgstr ""

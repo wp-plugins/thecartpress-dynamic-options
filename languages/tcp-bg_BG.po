@@ -1,0 +1,595 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Dynamic Options\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-22 11:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: sensei <sensei@thecartpress.com>\n"
+"Language-Team: Geori Ivanov <georgitivanov@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x:2c,1\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"Language: Bulgarian\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: DynamicOptions.class.php:179
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin activated."
+msgstr "<strong>Динамични опции</strong> можете да използвате само с включен магазин."
+
+#: DynamicOptions.class.php:184
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin"
+msgstr "<strong>Динамични опции</strong> можете да използвате само с включен магазин."
+
+#: DynamicOptions.class.php:200
+#: DynamicOptions.class.php:376
+#: admin/AttributeSets.php:78
+#: admin/AttributeSetsList.php:46
+#: admin/DynamicOptionsList.php:164
+msgid "Attribute Sets"
+msgstr "Съвкупност от атрибути"
+
+#: DynamicOptions.class.php:200
+msgid "Attributes Sets"
+msgstr "Съвкупност от атрибути"
+
+#: DynamicOptions.class.php:201
+#: admin/AttributeList.php:68
+#: admin/AttributeSetEdit.php:39
+#: admin/AttributeSetEdit.php:55
+#: admin/AttributeSets.php:81
+#: admin/AttributeSets.php:92
+#: admin/AttributeSets.php:104
+#: admin/AttributeSets.php:120
+#: admin/AttributeSets.php:128
+#: admin/AttributeSetsList.php:51
+#: admin/AttributeSetsList.php:81
+#: admin/AttributeSetsList.php:89
+msgid "Attributes"
+msgstr "Атрибути"
+
+#: DynamicOptions.class.php:202
+#: DynamicOptions.class.php:203
+msgid "Option list"
+msgstr "Списък опции"
+
+#: DynamicOptions.class.php:214
+msgid "Dynamic Option Settings"
+msgstr "Динамични опции за продукти"
+
+#: DynamicOptions.class.php:222
+msgid "Dynamic options type"
+msgstr "Тип на динамични опции"
+
+#: DynamicOptions.class.php:226
+msgid "List"
+msgstr "Списък"
+
+#: DynamicOptions.class.php:227
+msgid "Single"
+msgstr "Единичен"
+
+#: DynamicOptions.class.php:228
+msgid "Multiple"
+msgstr "Множествп"
+
+#: DynamicOptions.class.php:234
+msgid "Dynamic options order by"
+msgstr "Сортиране на динамичните опции по"
+
+#: DynamicOptions.class.php:237
+msgid "Order field"
+msgstr "Поле за сортировка"
+
+#: DynamicOptions.class.php:238
+#: admin/AttributeSetEdit.php:49
+#: admin/AttributeSets.php:90
+#: admin/AttributeSets.php:118
+#: admin/AttributeSets.php:126
+#: admin/AttributeSetsList.php:60
+#: admin/AttributeSetsList.php:79
+#: admin/AttributeSetsList.php:87
+msgid "Title"
+msgstr "Заглавие"
+
+#: DynamicOptions.class.php:239
+#: admin/DynamicOptionsList.php:184
+#: admin/DynamicOptionsList.php:295
+#: admin/DynamicOptionsList.php:321
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:54
+#: metaboxes/DynamicOptionsMetabox.class.php:48
+msgid "Price"
+msgstr "Цена"
+
+#: DynamicOptions.class.php:244
+msgid "Dynamic options order"
+msgstr "Подредба на динамичните опции"
+
+#: DynamicOptions.class.php:247
+msgid "Ascending"
+msgstr "Нарастващ ред"
+
+#: DynamicOptions.class.php:248
+msgid "Descending"
+msgstr "Намаляващ ред"
+
+#: DynamicOptions.class.php:253
+msgid "Dynamic options calculate price"
+msgstr "Калкулиране на цената за динамични опции"
+
+#: DynamicOptions.class.php:256
+msgid "Individual"
+msgstr "Индивидуална цена"
+
+#: DynamicOptions.class.php:257
+msgid "Complex"
+msgstr "Сложна цена"
+
+#: DynamicOptions.class.php:258
+msgid "\"Individual\" value will return as the price of an option the price of the Product. \"Complex\" means that prices will be added."
+msgstr "\"Индивидуално\" като стойност ще върне цената на опцията като цена на продукта. \"Сложно\" означава, че цената на опцията ще бъде добавена към цената на продукта."
+
+#: DynamicOptions.class.php:268
+msgid "Parent"
+msgstr "Родител"
+
+#: DynamicOptions.class.php:269
+msgid "Attribute set"
+msgstr "Съвкупност от атрибути"
+
+#: DynamicOptions.class.php:354
+msgid "Parent: "
+msgstr "Родител:"
+
+#: DynamicOptions.class.php:365
+msgid "dynamic options"
+msgstr "динамични опции"
+
+#: DynamicOptions.class.php:381
+msgid "none"
+msgstr "никакви"
+
+#: DynamicOptions.class.php:386
+msgid "Manage Attribute Sets"
+msgstr "Управление на съвкупностите от атрибути"
+
+#: DynamicOptions.class.php:413
+msgid "Dynamic options"
+msgstr "Диинамични опции"
+
+#: DynamicOptions.class.php:472
+msgid "Options"
+msgstr "Опции"
+
+#: DynamicOptions.class.php:517
+msgid "Combination not valid"
+msgstr "Невалидна комбинация"
+
+#: DynamicOptions.class.php:612
+#, php-format
+msgid "%s unit(s) <a href=\"%s\">in your cart</a>"
+msgstr "%s артикул(а) <a href=\"%s\"> във Вашата кошница</a>"
+
+#: DynamicOptions.class.php:808
+#, php-format
+msgid "from %s"
+msgstr "от %s"
+
+#: admin/AttributeList.php:30
+msgid "The \"name\" field must be completed"
+msgstr "Полето \"име\" трябва да бъде попълнено"
+
+#: admin/AttributeList.php:43
+#, php-format
+msgid "Search %s"
+msgstr "Търсене %s"
+
+#: admin/AttributeList.php:44
+#, php-format
+msgid "All %s"
+msgstr "Всички %s"
+
+#: admin/AttributeList.php:47
+#, php-format
+msgid "Edit %s"
+msgstr "Редактиране %s"
+
+#: admin/AttributeList.php:48
+#, php-format
+msgid "Update %s"
+msgstr "Обновяване %s"
+
+#: admin/AttributeList.php:49
+#, php-format
+msgid "Add new %s"
+msgstr "Добави нов %s"
+
+#: admin/AttributeList.php:50
+#, php-format
+msgid "New %s name"
+msgstr "Ново %s име"
+
+#: admin/AttributeList.php:57
+msgid "Taxonomy saved"
+msgstr "Тасономията е запазена."
+
+#: admin/AttributeList.php:63
+msgid "The taxonomy has been deleted"
+msgstr "Талсономията е изтрита."
+
+#: admin/AttributeList.php:70
+msgid "Return to Attributes Sets"
+msgstr "Връшане към съвкупностите от атрибути"
+
+#: admin/AttributeList.php:74
+msgid "Create new attribute"
+msgstr "Създаване на нов атрибут"
+
+#: admin/AttributeList.php:79
+#: admin/AttributeList.php:98
+#: admin/AttributeList.php:106
+msgid "ID"
+msgstr "ID"
+
+#: admin/AttributeList.php:80
+#: admin/AttributeList.php:99
+#: admin/AttributeList.php:107
+msgid "Name"
+msgstr "Име"
+
+#: admin/AttributeList.php:81
+#: admin/AttributeList.php:100
+#: admin/AttributeList.php:108
+#: admin/AttributeSetEdit.php:52
+#: admin/AttributeSets.php:91
+#: admin/AttributeSets.php:119
+#: admin/AttributeSets.php:127
+#: admin/AttributeSetsList.php:61
+#: admin/AttributeSetsList.php:80
+#: admin/AttributeSetsList.php:88
+msgid "Description"
+msgstr "Описание"
+
+#: admin/AttributeList.php:87
+#: admin/DynamicOptionsList.php:221
+#: admin/DynamicOptionsList.php:232
+msgid "insert"
+msgstr "вмъкване"
+
+#: admin/AttributeList.php:120
+#: admin/AttributeSetEdit.php:61
+#: admin/AttributeSets.php:141
+msgid "edit attribute"
+msgstr "редактиране на атрибут"
+
+#: admin/AttributeList.php:120
+#: admin/AttributeSetEdit.php:61
+#: admin/AttributeSets.php:141
+#: admin/AttributeSetsList.php:114
+#: admin/DynamicOptionsList.php:359
+#: metaboxes/DynamicOptionsMetabox.class.php:68
+msgid "edit"
+msgstr "редактиране"
+
+#: admin/AttributeList.php:121
+#: admin/AttributeSetEdit.php:62
+msgid "add terms"
+msgstr "добавяне на правила"
+
+#: admin/AttributeList.php:122
+#: admin/AttributeSets.php:146
+#: admin/AttributeSetsList.php:114
+#: admin/DynamicOptionsList.php:391
+msgid "delete"
+msgstr "изтрий"
+
+#: admin/AttributeList.php:127
+msgid "Do you really want to delete this taxonomy?"
+msgstr "Наистина ли искате да изтриете тази таксономия?"
+
+#: admin/AttributeList.php:128
+#: admin/AttributeSets.php:152
+#: admin/AttributeSetsList.php:120
+#: admin/DynamicOptionsList.php:398
+msgid "Yes"
+msgstr "Да"
+
+#: admin/AttributeList.php:129
+#: admin/AttributeSets.php:153
+#: admin/AttributeSetsList.php:121
+#: admin/DynamicOptionsList.php:399
+msgid "No, I don't"
+msgstr "Не"
+
+#: admin/AttributeList.php:137
+msgid "The list is empty"
+msgstr "Списъкът е празен"
+
+#: admin/AttributeSetEdit.php:23
+#: admin/AttributeSets.php:32
+#: admin/AttributeSetsList.php:23
+msgid "The Set has not been inserted. The title has been omitted."
+msgstr "Съвкупността не е вмъкната. Заглавието е изпуснато"
+
+#: admin/AttributeSetEdit.php:28
+msgid "The Set has been updated sucesfuly."
+msgstr "Съвкупността е обновена успешно"
+
+#: admin/AttributeSetEdit.php:35
+#, php-format
+msgid "Attribute Set: %s"
+msgstr "Съвкупност от опции: %s"
+
+#: admin/AttributeSetEdit.php:37
+msgid "Return to Attribute Sets list"
+msgstr "Връщане към списъка с атрибути"
+
+#: admin/AttributeSetEdit.php:62
+msgid "add"
+msgstr "добави"
+
+#: admin/AttributeSetEdit.php:70
+#: admin/AttributeSets.php:166
+msgid "Save"
+msgstr "Запази"
+
+#: admin/AttributeSets.php:38
+#: admin/AttributeSetsList.php:29
+msgid "The Set has not been inserted, it already exists."
+msgstr "Съвкупността не е вмъкната, защото вече съществува такава."
+
+#: admin/AttributeSets.php:49
+#: admin/AttributeSetsList.php:33
+msgid "The Set has been inserted sucesfuly."
+msgstr "Съвкупоността е вмъкната успешно."
+
+#: admin/AttributeSets.php:66
+msgid "The Sets have been updated sucesfuly."
+msgstr "Съвкупността е обновена успешно"
+
+#: admin/AttributeSets.php:73
+#: admin/AttributeSetsList.php:41
+msgid "The Set has been deleted sucesfuly."
+msgstr "Съвкупността е  изтрита успешно."
+
+#: admin/AttributeSets.php:85
+#: admin/AttributeSetsList.php:55
+msgid "New Attribute Set"
+msgstr "Нова съвкупност от атрибути"
+
+#: admin/AttributeSets.php:109
+#: admin/AttributeSetsList.php:68
+msgid "Insert"
+msgstr "Вмъкни"
+
+#: admin/AttributeSets.php:112
+#: admin/AttributeSetsList.php:74
+msgid "Current Attribute Set List"
+msgstr "Избрана съкупност в момента"
+
+#: admin/AttributeSets.php:148
+#: admin/AttributeSetsList.php:116
+msgid "Do you really want to delete this Attribute Set?"
+msgstr "Наистина ли искате, да изтриете тази съвкупност от атрибути?"
+
+#: admin/AttributeSets.php:160
+#: admin/AttributeSetsList.php:128
+msgid "The Attribute Sets list is empty"
+msgstr "Сисъкът със съвкупонсти от атрибути е празен"
+
+#: admin/AttributeSetsList.php:47
+msgid "Allows to create Attribute sets. These sets will contain attributes as \"colour\", \"size\". Each attribute will contain values, as \"red\", \"blue\", \"Large\", etc."
+msgstr "Позволи създаването на съвкупности от атрибути. Тези съвкупности ще съдържат атрибути като \"цвят\", \"размер\". Всеки атрибут ще съдържа опции (стойности) като \"червен\", \"син\", \"голям\""
+
+#: admin/AttributeSetsList.php:48
+msgid "To create Color variations for a product (for example, for \"Cars\") you should create a set called \"Car variations\", then create an Attribute called \"Car Colours\", and finally add colours to the attribute."
+msgstr "За да създадете избор от цветове (например за  \"Коли\") трябва да създадете съвкупност наречена  \"Видове коли\", след това Атрибут наречен \"Цвят на колата\", и накрая да добавите цвят към атрибута (това вече е избираемата динамична опция)."
+
+#: admin/AttributeSetsList.php:49
+msgid "With all these options defined for a product, you should visit \"Dynamic Options\", for each product, and create variations for the different values ​​and attributes defined."
+msgstr "С свички тези дефинирани опции за продукт, трябва да посетите \"Динамични опции\" за всеки продук и да създадете вариации от различни стойности за дадените атрибути."
+
+#: admin/AttributeSetsList.php:110
+msgid "No Attributes"
+msgstr "Без атрибути"
+
+#: admin/DynamicOptionsList.php:25
+msgid "To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned."
+msgstr "За да създадете динамични опции, първо трябва да изберете съвкупност от атрибути за този продукт. Ако вече имате избрана съкупност, уверете в съвкупността има дефинирани атрибути."
+
+#: admin/DynamicOptionsList.php:26
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:43
+#, php-format
+msgid "return to %s"
+msgstr "връщане към %s"
+
+#: admin/DynamicOptionsList.php:37
+msgid "The term has been inserted"
+msgstr "Не бяха вмъкнати правила"
+
+#: admin/DynamicOptionsList.php:86
+msgid "The options have been modified"
+msgstr "Опциите бяха модифицирани"
+
+#: admin/DynamicOptionsList.php:93
+msgid "The option has been inserted"
+msgstr "Опцията е вмъкната"
+
+#: admin/DynamicOptionsList.php:97
+msgid "The option has not been inserted. The option already exists."
+msgstr "Опцията не е вмъкната, защото вече съществува такава."
+
+#: admin/DynamicOptionsList.php:102
+msgid "The option has not been inserted."
+msgstr "Опцията не е вмъкната."
+
+#: admin/DynamicOptionsList.php:160
+#, php-format
+msgid "Options for %s"
+msgstr "Опции за %s"
+
+#: admin/DynamicOptionsList.php:162
+#, php-format
+msgid "Return to %s"
+msgstr "Връшане към %s"
+
+#: admin/DynamicOptionsList.php:166
+msgid "Manage Attributes"
+msgstr "Управление на атрибутите"
+
+#: admin/DynamicOptionsList.php:179
+#: admin/DynamicOptionsList.php:290
+#: admin/DynamicOptionsList.php:317
+#: metaboxes/DynamicOptionsMetabox.class.php:44
+msgid "Edit attribute"
+msgstr "Редактиране на атрибут"
+
+#: admin/DynamicOptionsList.php:188
+msgid "Sorting"
+msgstr "Подреждане"
+
+#: admin/DynamicOptionsList.php:195
+#: customposttypes/DynamicOptionPostType.class.php:30
+msgid "New Option"
+msgstr "Нова опция"
+
+#: admin/DynamicOptionsList.php:200
+#: admin/DynamicOptionsList.php:258
+#: admin/DynamicOptionsList.php:370
+msgid "No one"
+msgstr "НИкакви"
+
+#: admin/DynamicOptionsList.php:222
+msgid "create all"
+msgstr "създай всички"
+
+#: admin/DynamicOptionsList.php:222
+msgid "Create all attribute variations"
+msgstr "Създаване на всички вариации за атрибутите"
+
+#: admin/DynamicOptionsList.php:227
+msgid "New terms"
+msgstr "Нови правила"
+
+#: admin/DynamicOptionsList.php:276
+msgid "Filter"
+msgstr "Филтър"
+
+#: admin/DynamicOptionsList.php:299
+#: admin/DynamicOptionsList.php:325
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:64
+msgid "Order"
+msgstr "Подредба"
+
+#: admin/DynamicOptionsList.php:302
+msgid "Options will be ordered by title or price, this field will not be considered."
+msgstr "Опциите ще бъдат сортирани по име и цена, това поле няма да бъде взето под внимание."
+
+#: admin/DynamicOptionsList.php:303
+#, php-format
+msgid "To change the order, visit <a href=\"%s\">Theme compatibility</a> page."
+msgstr "За да смените подредбата посетете страницата <a href=\"%s\">Съвместимост</a>."
+
+#: admin/DynamicOptionsList.php:307
+#: admin/DynamicOptionsList.php:328
+msgid "Delete"
+msgstr "Изтрии"
+
+#: admin/DynamicOptionsList.php:363
+msgid "Set featured image"
+msgstr "Настрой изображение за опцията"
+
+#: admin/DynamicOptionsList.php:393
+msgid "Do you really want to delete this option?"
+msgstr "Наистина ли искате да изтриете тази опция?"
+
+#: admin/DynamicOptionsList.php:406
+msgid "save"
+msgstr "запази"
+
+#: admin/DynamicOptionsList.php:407
+msgid "All the options with the delete checkbox checked will be deleted."
+msgstr "Всички опции с отметка на \"изтриване\" ще бъдат изтрити"
+
+#: customposttypes/DynamicOptionPostType.class.php:23
+msgid "Dynamic Options"
+msgstr "Динамични опции за продукти"
+
+#: customposttypes/DynamicOptionPostType.class.php:24
+msgid "Options for TheCartPress Dynamic Options"
+msgstr "Опции за Динамични опции за продукти"
+
+#: customposttypes/DynamicOptionPostType.class.php:26
+msgid "Option"
+msgstr "Опция"
+
+#: customposttypes/DynamicOptionPostType.class.php:27
+#: customposttypes/DynamicOptionPostType.class.php:28
+msgid "Add New"
+msgstr "Добавяне"
+
+#: customposttypes/DynamicOptionPostType.class.php:29
+msgid "Edit Option"
+msgstr "Редактиране на опция"
+
+#: customposttypes/DynamicOptionPostType.class.php:31
+msgid "View Option"
+msgstr "Преглед на опция"
+
+#: customposttypes/DynamicOptionPostType.class.php:32
+msgid "Search Options"
+msgstr "Търсене на опция"
+
+#: customposttypes/DynamicOptionPostType.class.php:33
+msgid "No options found"
+msgstr "Няма намерени опции"
+
+#: customposttypes/DynamicOptionPostType.class.php:34
+msgid "No options found in Trash"
+msgstr "Няма намерени опции в кошчето"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:27
+msgid "Option Custom Fields"
+msgstr "Свободни полета за опции"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+msgid "return to options list"
+msgstr "връшане към списъка с опции"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+msgid "Options list"
+msgstr "Списък с опции"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:56
+msgid "This price will be added to the price of the parent."
+msgstr "Цената ще бъде добавена към цената на основния продукт"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:59
+msgid "Weight"
+msgstr "Тегло"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:61
+msgid "If value is zero then the weight will be the weight of the parent. This weight will not be added to the weight of the parent anyway."
+msgstr "Ако стойността е 0, теглото няма да бъде добавено към теглото на основния продукт."
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:68
+msgid "Sku"
+msgstr "SKU"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:25
+msgid "Product Dynamic options"
+msgstr "Динамични опции за продукти"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "manage options list"
+msgstr "управление на списъци от опции"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:34
+msgid "Manage Options list"
+msgstr "Управление на списъци от опции"
+
+#~ msgid "edit option"
+#~ msgstr "редактиране на опция"

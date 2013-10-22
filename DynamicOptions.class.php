@@ -3,9 +3,11 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.2.2
+Version: 1.2.3
 Author: TheCartPress team
 Author URI: http://thecartpress.com
+Text Domain: tcp-do
+Domain Path: /languages/
 License: GPL
 Parent: thecartpress
 */
@@ -27,52 +29,68 @@ Parent: thecartpress
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define( 'TCP_DYNAMIC_OPTIONS_FOLDER', dirname( __FILE__ ) . '/' );
-define( 'TCP_DYNAMIC_OPTIONS_ADMIN_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'admin/' );
-define( 'TCP_DYNAMIC_OPTIONS_CLASSES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'classes/' );
-define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'customposttypes/' );
-define( 'TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'templates/' );
-define( 'TCP_DYNAMIC_OPTIONS_THEMES_TEMPLATES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'themes-templates/' );
-define( 'TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER', TCP_DYNAMIC_OPTIONS_FOLDER . 'metaboxes/' );
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
 
-define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE', 'tcp_dynamic_options' );
-define( 'TCP_DYNAMIC_OPTIONS_ADMIN_PATH', 'admin.php?page=' . plugin_basename( TCP_DYNAMIC_OPTIONS_FOLDER ) . '/admin/' );
+if ( ! class_exists( 'TCPDynamicOptions' ) ) {
+
+define( 'TCP_DYNAMIC_OPTIONS_FOLDER'					, dirname( __FILE__ ) . '/' );
+define( 'TCP_DYNAMIC_OPTIONS_ADMIN_FOLDER'				, TCP_DYNAMIC_OPTIONS_FOLDER . 'admin/' );
+define( 'TCP_DYNAMIC_OPTIONS_CLASSES_FOLDER'			, TCP_DYNAMIC_OPTIONS_FOLDER . 'classes/' );
+define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE_FOLDER'			, TCP_DYNAMIC_OPTIONS_FOLDER . 'customposttypes/' );
+define( 'TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER'			, TCP_DYNAMIC_OPTIONS_FOLDER . 'templates/' );
+define( 'TCP_DYNAMIC_OPTIONS_THEMES_TEMPLATES_FOLDER'	, TCP_DYNAMIC_OPTIONS_FOLDER . 'themes-templates/' );
+define( 'TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER'			, TCP_DYNAMIC_OPTIONS_FOLDER . 'metaboxes/' );
+
+define( 'TCP_DYNAMIC_OPTIONS_POST_TYPE'		, 'tcp_dynamic_options' );
+define( 'TCP_DYNAMIC_OPTIONS_ADMIN_PATH'	, 'admin.php?page=' . plugin_basename( TCP_DYNAMIC_OPTIONS_FOLDER ) . '/admin/' );
 
 require_once( TCP_DYNAMIC_OPTIONS_TEMPLATES_FOLDER . 'tcp_dynamic_options_templates.php' );
 
 class TCPDynamicOptions {
 
 	function __construct() {
-		add_action( 'init', array( $this, 'init' ) );
-		add_action( 'admin_init', array( $this, 'admin_init' ) );
-		add_action( 'admin_menu', array( &$this, 'admin_menu' ), 20 );
-		register_activation_hook( __FILE__, array( &$this, 'activate_plugin' ) );
-		add_filter( 'tcp_the_add_to_cart_items_in_the_cart', array( &$this, 'tcp_the_add_to_cart_items_in_the_cart' ), 10, 2 );
-		add_filter( 'tcp_get_the_tax_id', array( &$this, 'tcp_get_the_tax_id' ), 10, 2 );
-		add_filter( 'tcp_add_item_shopping_cart', array( &$this, 'tcp_add_item_shopping_cart' ) );
-		add_filter( 'tcp_get_discount_by_product', array( &$this, 'tcp_get_discount_by_product' ), 10, 3 );
-		add_filter( 'tcp_get_the_title', array( &$this, 'tcp_get_the_title' ), 10, 4 );
-		add_filter( 'tcp_get_the_sku', array( &$this, 'tcp_get_the_sku' ), 10, 2 );
-		add_filter( 'tcp_get_the_thumbnail', array( &$this, 'tcp_get_the_thumbnail'), 10, 3 );
-		add_filter( 'tcp_get_permalink', array( &$this, 'tcp_get_permalink'), 10, 2 );
-		add_filter( 'tcp_get_image_in_content', array( &$this, 'tcp_get_image_in_content' ), 10, 3 );
-		add_filter( 'tcp_get_image_in_excerpt', array( &$this, 'tcp_get_image_in_content' ), 10, 3 );
-		add_filter( 'tcp_get_image_in_grouped_buy_button', array( &$this, 'tcp_get_image_in_grouped' ), 10, 3 );
-		add_filter( 'tcp_get_the_product_price', array( &$this, 'tcp_get_the_product_price' ), 10, 2 );
-		add_filter( 'tcp_get_product_types', array( &$this, 'tcp_get_product_types' ) );
-		//add_filter( 'tcp_exclude_from_order_discount', array( &$this, 'tcp_exclude_from_order_discount' ), 10, 2 );
-		add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
-		add_filter( 'tcp_get_product_post_types', array( &$this, 'tcp_get_product_post_types' ) );
-		add_filter( 'tcp_the_tier_price', array( &$this, 'tcp_the_tier_price' ), 10, 2 );
-		add_filter( 'tcp_api_update_product_post', array( &$this, 'tcp_api_update_product_post' ), 10, 2 );
-		add_action( 'tcp_api_update_product', array( &$this, 'tcp_api_update_product' ), 10, 2 );
-		add_filter( 'tcp_get_the_total_sales', array( &$this, 'tcp_get_the_total_sales' ), 10, 2 );
-		add_filter( 'tcp_get_the_stock', array( &$this, 'tcp_get_the_stock' ), 10, 2 );
+		add_action( 'tcp_init'									, array( $this, 'tcp_init' ) );
+		add_filter( 'tcp_the_add_to_cart_items_in_the_cart'		, array( $this, 'tcp_the_add_to_cart_items_in_the_cart' ), 10, 2 );
+		add_filter( 'tcp_get_the_tax_id'						, array( $this, 'tcp_get_the_tax_id' ), 10, 2 );
+		add_filter( 'tcp_add_item_shopping_cart'				, array( $this, 'tcp_add_item_shopping_cart' ) );
+		//add_filter( 'tcp_add_item_wish_list'					, array( $this, 'tcp_add_item_shopping_cart' ) );
+		add_filter( 'tcp_add_wish_list'							, array( $this, 'tcp_add_wish_list' ), 10, 2 );
+
+		add_filter( 'tcp_get_discount_by_product'				, array( $this, 'tcp_get_discount_by_product' ), 10, 3 );
+		add_filter( 'tcp_get_discount_by_coupon_by_product'		, array( $this, 'tcp_get_discount_by_coupon_by_product' ), 10, 3 );
+
+		add_filter( 'tcp_get_the_title'							, array( $this, 'tcp_get_the_title' ), 10, 4 );
+		add_filter( 'tcp_get_the_sku'							, array( $this, 'tcp_get_the_sku' ), 10, 2 );
+		add_filter( 'tcp_get_the_thumbnail'						, array( $this, 'tcp_get_the_thumbnail'), 10, 3 );
+
+		add_filter( 'tcp_get_permalink'							, array( $this, 'tcp_get_permalink'), 10, 2 );
+		add_filter( 'post_type_link'							, array( $this, 'post_type_link' ), 10, 4 );
+
+		add_filter( 'tcp_get_image_in_content'					, array( $this, 'tcp_get_image_in_content' ), 10, 3 );
+		add_filter( 'tcp_get_image_in_excerpt'					, array( $this, 'tcp_get_image_in_content' ), 10, 3 );
+		add_filter( 'tcp_get_image_in_grouped_buy_button'		, array( $this, 'tcp_get_image_in_grouped' ), 10, 3 );
+		add_filter( 'tcp_get_the_product_price'					, array( $this, 'tcp_get_the_product_price' ), 10, 2 );
+		add_filter( 'tcp_get_product_types'						, array( $this, 'tcp_get_product_types' ) );
+		//add_filter( 'tcp_exclude_from_order_discount', array( $this, 'tcp_exclude_from_order_discount' ), 10, 2 );
+		add_filter( 'tcp_get_the_price_label'					, array( $this, 'tcp_get_the_price_label' ), 10, 3 );
+		add_filter( 'tcp_get_product_post_types'				, array( $this, 'tcp_get_product_post_types' ) );
+		add_filter( 'tcp_the_tier_price'						, array( $this, 'tcp_the_tier_price' ), 10, 2 );
+		add_filter( 'tcp_api_update_product_post'				, array( $this, 'tcp_api_update_product_post' ), 10, 2 );
+		add_action( 'tcp_api_update_product'					, array( $this, 'tcp_api_update_product' ), 10, 2 );
+		add_filter( 'tcp_get_the_total_sales'					, array( $this, 'tcp_get_the_total_sales' ), 10, 2 );
+		add_filter( 'tcp_get_the_stock'							, array( $this, 'tcp_get_the_stock' ), 10, 2 );
 		//Layered Navigation
-		add_filter( 'tcp_the_layered_navigation_get_posts_query', array( &$this, 'tcp_the_layered_navigation_get_posts_query' ), 10, 4 );
-		add_filter( 'tcp_the_layered_navigation_link', array( &$this, 'tcp_the_layered_navigation_link' ), 10, 4 );
-		add_filter( 'tcp_filter_navigation_get_filters_request', array( &$this, 'tcp_filter_navigation_get_filters_request' ) );
-		add_filter( 'tcp_filter_navigation_get_filter', array( &$this, 'tcp_filter_navigation_get_filter' ), 10, 2 );
+		add_filter( 'tcp_the_layered_navigation_get_posts_query', array( $this, 'tcp_the_layered_navigation_get_posts_query' ), 10, 4 );
+		add_filter( 'tcp_the_layered_navigation_link'			, array( $this, 'tcp_the_layered_navigation_link' ), 10, 4 );
+		add_filter( 'tcp_filter_navigation_get_filters_request'	, array( $this, 'tcp_filter_navigation_get_filters_request' ) );
+		add_filter( 'tcp_filter_navigation_get_filter'			, array( $this, 'tcp_filter_navigation_get_filter' ), 10, 2 );
+
+		if ( is_admin() ) {
+			add_action( 'admin_init'							, array( $this, 'admin_init' ) );
+			add_action( 'admin_menu'							, array( $this, 'admin_menu' ), 20 );
+			register_activation_hook( __FILE__					, array( $this, 'activate_plugin' ) );
+		}
 	}
 
 	function tcp_get_the_stock( $stock, $post_id ) {
@@ -139,20 +157,28 @@ class TCPDynamicOptions {
 	}
 
 	function init() {
-		if ( function_exists( 'load_plugin_textdomain' ) ) load_plugin_textdomain( 'tcp-do', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		if ( ! function_exists( 'is_plugin_active' ) ) require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-		if ( ! is_plugin_active( 'thecartpress/TheCartPress.class.php' ) ) {
+		if ( ! is_plugin_active( 'thecartpress/TheCartPress.class.php' ) )
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-		} else {
-			require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsCustomFieldsMetabox.class.php' );
-			require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsMetabox.class.php' );
-		}
+	}
+
+	function tcp_init( $thecartpress ) {
+		if ( function_exists( 'load_plugin_textdomain' ) )
+			load_plugin_textdomain( 'tcp-do', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		if ( ! function_exists( 'is_plugin_active' ) ) require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		
+		require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsCustomFieldsMetabox.class.php' );
+		require_once( TCP_DYNAMIC_OPTIONS_METABOXES_FOLDER . 'DynamicOptionsMetabox.class.php' );
+
+		wp_register_script( 'tcp_do_scripts', plugins_url( 'js/tcp_dinamic_options.js', __FILE__ ) );
+		wp_enqueue_script( 'tcp_do_scripts' );
+
 		$version = (int)get_option( 'tcp_dynamic_version' );
 		if ( $version < 113 ) {//move to activate_plugin
 			$args = array(
-				'post_type'		=> TCP_DYNAMIC_OPTIONS_POST_TYPE,
-				'numberposts'	=> -1,
-				'fields'		=> 'ids',
+				'post_type' => TCP_DYNAMIC_OPTIONS_POST_TYPE,
+				'numberposts' => -1,
+				'fields' => 'ids',
 			);
 			$posts = get_posts( $args );
 			foreach( $posts as $post_id ) {
@@ -160,23 +186,25 @@ class TCPDynamicOptions {
 				$stock = get_post_meta( $post_id, 'tcp_stock', true );
 				if ( $stock == '') update_post_meta( $post_id, 'tcp_stock', -1 );
 			}
+			update_option( 'tcp_dynamic_version', 113 );
 		}
-		update_option( 'tcp_dynamic_version', 113 );
 	}
 
 	function admin_init() {
-		add_action( 'tcp_product_metabox_toolbar', array( &$this, 'tcp_product_metabox_toolbar' ) );
-		add_action( 'tcp_product_metabox_custom_fields', array( &$this, 'tcp_product_metabox_custom_fields' ) );
-		add_action( 'tcp_product_metabox_save_custom_fields', array( &$this, 'tcp_product_metabox_save_custom_fields' ) );
-		add_action( 'tcp_product_metabox_delete_custom_fields', array( &$this, 'tcp_product_metabox_delete_custom_fields' ) );
-		add_filter( 'tcp_product_row_actions', array( &$this, 'tcp_product_row_actions' ) );
-		add_filter( 'tcp_theme_compatibility_unset_settings_action', array( &$this, 'tcp_theme_compatibility_unset_settings_action' ), 10, 2 );
-		add_filter( 'tcp_theme_compatibility_settings_action', array( &$this, 'tcp_theme_compatibility_settings_action' ), 10, 2 );
-		add_action( 'tcp_theme_compatibility_settings_page', array( &$this, 'tcp_theme_compatibility_settings_page' ) );
-		//CSV Loader
-		add_filter( 'tcp_csvl_option_columns', array( &$this, 'tcp_csvl_option_columns' ) );
-		add_filter( 'tcp_csv_loader_new_post', array( &$this, 'tcp_csv_loader_new_post' ), 10, 2 );
-		add_action( 'tcp_csv_loader_row', array( &$this, 'tcp_csv_loader_row' ), 10, 2 );
+		//add_action( 'tcp_product_metabox_toolbar'					, array( $this, 'tcp_product_metabox_toolbar' ) );//before 1.3.2
+		add_filter( 'tcp_product_custom_fields_links'				, array( $this, 'tcp_product_custom_fields_links' ), 10, 3 );//since 1.3.2
+
+		add_action( 'tcp_product_metabox_custom_fields'				, array( $this, 'tcp_product_metabox_custom_fields' ) );
+		add_action( 'tcp_product_metabox_save_custom_fields'		, array( $this, 'tcp_product_metabox_save_custom_fields' ) );
+		add_action( 'tcp_product_metabox_delete_custom_fields'		, array( $this, 'tcp_product_metabox_delete_custom_fields' ) );
+		add_filter( 'tcp_product_row_actions'						, array( $this, 'tcp_product_row_actions' ) );
+		add_filter( 'tcp_theme_compatibility_unset_settings_action'	, array( $this, 'tcp_theme_compatibility_unset_settings_action' ), 10, 2 );
+		add_filter( 'tcp_theme_compatibility_settings_action'		, array( $this, 'tcp_theme_compatibility_settings_action' ), 10, 2 );
+		add_action( 'tcp_theme_compatibility_settings_page'			, array( $this, 'tcp_theme_compatibility_settings_page' ), 50 );
+		//CSV Loader hooks
+		add_filter( 'tcp_csvl_option_columns'						, array( $this, 'tcp_csvl_option_columns' ), 10, 2 );
+		add_filter( 'tcp_csv_loader_new_post'						, array( $this, 'tcp_csv_loader_new_post' ), 10, 2 );
+		add_action( 'tcp_csv_loader_row'							, array( $this, 'tcp_csv_loader_row' ), 10, 2 );
 	}
 
 	function admin_notices() { ?>
@@ -210,9 +238,9 @@ class TCPDynamicOptions {
 	function tcp_theme_compatibility_settings_page( $suffix ) {
 		global $thecartpress;
 		if ( ! isset( $thecartpress ) ) return;
-		$dynamic_options_type		= $thecartpress->get_setting( 'dynamic_options_type' . $suffix, 'radio' );
-		$dynamic_options_order_by	= $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
-		$dynamic_options_order		= $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'ASC' );
+		$dynamic_options_type = $thecartpress->get_setting( 'dynamic_options_type' . $suffix, 'radio' );
+		$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
+		$dynamic_options_order = $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'ASC' );
 		$dynamic_options_calculate_price = $thecartpress->get_setting( 'dynamic_options_calculate_price' . $suffix, 'complex' ); ?>
 <a name="dynamic_options_settings"></a>
 <h3><?php _e( 'Dynamic Option Settings', 'tcp-do'); ?></h3>
@@ -238,9 +266,9 @@ class TCPDynamicOptions {
 		<label for="dynamic_options_order_by_order"><?php _e( 'Dynamic options order by', 'tcp-do' ); ?></label>
 		</th>
 		<td>
-			<input type="radio" id="dynamic_options_order_by_order" name="dynamic_options_order_by" value="order" <?php checked( 'order', $dynamic_options_order_by ); ?> /> <?php _e( 'Order field', 'tcp-do' ); ?><br/>
-			<input type="radio" id="dynamic_options_order_by_title" name="dynamic_options_order_by" value="title" <?php checked( 'title', $dynamic_options_order_by ); ?> /> <?php _e( 'Title', 'tcp-do' ); ?><br/>
-			<input type="radio" id="dynamic_options_order_by_price" name="dynamic_options_order_by" value="price" <?php checked( 'price', $dynamic_options_order_by ); ?> /> <?php _e( 'Price', 'tcp-do' ); ?>
+			<label><input type="radio" id="dynamic_options_order_by_order" name="dynamic_options_order_by" value="order" <?php checked( 'order', $dynamic_options_order_by ); ?> /> <?php _e( 'Order field', 'tcp-do' ); ?></label><br/>
+			<label><input type="radio" id="dynamic_options_order_by_title" name="dynamic_options_order_by" value="title" <?php checked( 'title', $dynamic_options_order_by ); ?> /> <?php _e( 'Title', 'tcp-do' ); ?></label><br/>
+			<label><input type="radio" id="dynamic_options_order_by_price" name="dynamic_options_order_by" value="price" <?php checked( 'price', $dynamic_options_order_by ); ?> /> <?php _e( 'Price', 'tcp-do' ); ?></label>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -248,8 +276,8 @@ class TCPDynamicOptions {
 		<label for="dynamic_options_order_asc"><?php _e( 'Dynamic options order', 'tcp-do' ); ?></label>
 		</th>
 		<td>
-			<input type="radio" id="dynamic_options_order_asc" name="dynamic_options_order" value="ASC" <?php checked( 'ASC', $dynamic_options_order ); ?> /> <?php _e( 'Ascending', 'tcp-do' ); ?><br/>
-			<input type="radio" id="dynamic_options_order_desc" name="dynamic_options_order" value="DESC" <?php checked( 'DESC', $dynamic_options_order ); ?> /> <?php _e( 'Descending', 'tcp-do' ); ?>
+			<label><input type="radio" id="dynamic_options_order_asc" name="dynamic_options_order" value="ASC" <?php checked( 'ASC', $dynamic_options_order ); ?> /> <?php _e( 'Ascending', 'tcp-do' ); ?></label><br/>
+			<label><input type="radio" id="dynamic_options_order_desc" name="dynamic_options_order" value="DESC" <?php checked( 'DESC', $dynamic_options_order ); ?> /> <?php _e( 'Descending', 'tcp-do' ); ?></label>
 		</td>
 	</tr>
 	<tr valign="top">
@@ -257,8 +285,8 @@ class TCPDynamicOptions {
 		<label for="dynamic_options_calculate_price_individual"><?php _e( 'Dynamic options calculate price', 'tcp-do' ); ?></label>
 		</th>
 		<td>
-			<input type="radio" id="dynamic_options_calculate_price_individual" name="dynamic_options_calculate_price" value="individual" <?php checked( 'individual', $dynamic_options_calculate_price ); ?> /> <?php _e( 'Individual', 'tcp-do' ); ?><br/>
-			<input type="radio" id="dynamic_options_calculate_price_complex" name="dynamic_options_calculate_price" value="complex" <?php checked( 'complex', $dynamic_options_calculate_price ); ?> /> <?php _e( 'Complex', 'tcp-do' ); ?>
+			<label><input type="radio" id="dynamic_options_calculate_price_individual" name="dynamic_options_calculate_price" value="individual" <?php checked( 'individual', $dynamic_options_calculate_price ); ?> /> <?php _e( 'Individual', 'tcp-do' ); ?></label><br/>
+			<label><input type="radio" id="dynamic_options_calculate_price_complex" name="dynamic_options_calculate_price" value="complex" <?php checked( 'complex', $dynamic_options_calculate_price ); ?> /> <?php _e( 'Complex', 'tcp-do' ); ?></label>
 			<p class="description"><?php _e( '"Individual" value will return as the price of an option the price of the Product. "Complex" means that prices will be added.', 'tcp-do' ); ?></p>
 		</td>
 	</tr>
@@ -273,7 +301,7 @@ class TCPDynamicOptions {
 		$options[] = array( 'tcp_do_att_set', strtoupper( $col ) == 'ATTRIBUTE SET', __( 'Attribute set', 'tcp-do' ) );
 		foreach( get_object_taxonomies( TCP_DYNAMIC_OPTIONS_POST_TYPE ) as $taxmy ) {
 			$tax = get_taxonomy( $taxmy );
-			$options[] = array( 'tcp_do_tax_' . $taxmy, $col == $tax->labels->name, 'Taxonomy: ' . $tax->labels->name . ' (' . $tax->labels->desc . ')' );
+			$options[] = array( 'tcp_do_tax_' . $taxmy, $col == $tax->labels->name, 'Taxonomy: ' . $tax->labels->name ); //. ' (' . $tax->labels->desc . ')' );
 		}
 		return $options;
 	}
@@ -349,7 +377,7 @@ class TCPDynamicOptions {
 		return $settings;
 	}
 
-	function tcp_product_metabox_toolbar( $post_id ) {
+	/*function tcp_product_metabox_toolbar( $post_id ) {
 		if ( ! current_user_can( 'tcp_edit_product' ) ) return;
 		$post_type = get_post_type( $post_id );
 		if ( $post_type == TCP_DYNAMIC_OPTIONS_POST_TYPE ) {
@@ -369,6 +397,35 @@ class TCPDynamicOptions {
 				echo '<li><a href="', $admin_path, 'DynamicOptionsList.php&post_id=', $post_id, '">', __( 'dynamic options', 'tcp-do' ), $count, '</a></li>';
 			}
 		}
+	}*/
+
+	function tcp_product_custom_fields_links( $links, $post_id, $post ) {
+		if ( ! current_user_can( 'tcp_edit_product' ) ) return;
+		$post_type = get_post_type( $post_id );
+		if ( $post_type == TCP_DYNAMIC_OPTIONS_POST_TYPE ) {
+			$post = get_post( $post->post_parent );
+			$links[] = array(
+				'url'	=> get_edit_post_link( $post->ID ),
+				'title'	=> '',
+				'label'	=> __( 'Parent', 'tcp-do' ) .': ' . $post->post_title
+			);
+		} else {
+			$type = tcp_get_the_product_type( $post_id );
+			if ( strlen( $type ) == 0 ) return;
+			$types = tcp_get_product_types();
+			$type = $types[$type];
+			if ( isset( $type['tcp_dynamic_options_supported'] ) && $type['tcp_dynamic_options_supported'] ) {
+				$count = tcp_count_dynamic_options( $post_id, false );
+				$count = ( $count > 0 ) ? ' (' . $count . ')' : '';
+				$admin_path = 'admin.php?page=' . plugin_basename( TCP_DYNAMIC_OPTIONS_FOLDER ) . '/admin/';
+				$links[] = array(
+					'url'	=> $admin_path . 'DynamicOptionsList.php&post_id=' . $post_id,
+					'title'	=> '',
+					'label'	=> __( 'dynamic options', 'tcp-do' ) . $count
+				);
+			}
+		}
+		return $links;
 	}
 
 	function tcp_product_metabox_custom_fields( $post_id ) {
@@ -421,7 +478,7 @@ class TCPDynamicOptions {
 	}
 
 	function tcp_the_add_to_cart_unit_field( $out, $post_id ) {
-		remove_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
+		remove_filter( 'tcp_get_the_price_label', array( $this, 'tcp_get_the_price_label' ), 10, 2 );
 		if ( tcp_exists_dynamic_option( array( 'parent_id' => $post_id ) ) ) {
 			global $thecartpress;
 			if ( ! isset( $thecartpress ) ) return;
@@ -475,7 +532,7 @@ class TCPDynamicOptions {
 				</script>
 			<?php elseif ( 'single' == $dynamic_options_type ) : ?>
 				<div class="tcp_dynamic_option_panel">
-				<select name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $post_id; ?>" class="tcp_dynamic_options_<?php echo $post_id; ?>" onchange="tcp_set_price_<?php echo $post_id; ?>(this);">
+				<select name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $post_id; ?>" class="tcp_dynamic_options_select tcp_dynamic_options_<?php echo $post_id; ?>" onchange="tcp_set_price_<?php echo $post_id; ?>(this);">
 				<?php if ( isset( $_REQUEST['tcp_dynamic_option'] ) ) {
 					$option_id = $_REQUEST['tcp_dynamic_option'][0];
 					$_REQUEST['tcp_dynamic_option'] = array_shift( $_REQUEST['tcp_dynamic_option'] );
@@ -568,39 +625,54 @@ jQuery(document).ready(function() {
 			set_not_valid_<?php echo $post_id; ?>();
 		}
 	});
-	jQuery('.tcp_dynamic_options_<?php echo $post_id; ?>').trigger('change');//with only one would be enough TODO
+	jQuery('.tcp_dynamic_options_<?php echo $post_id; ?>').trigger('change');//TODO with only one would be enough
 });
 </script>
 				<input type="hidden" name="tcp_dynamic_option_<?php echo $post_id; ?>[]" id="tcp_dynamic_option_<?php echo $post_id; ?>"/>
 				<?php foreach( $attributes as $attribute ) : ?>
 					<div class="tcp_dynamic_option_panel">
-					<label><?php echo $attribute->labels->name; ?>:
-					<?php $terms = array();
-					foreach( $options as $id ) {
-						//$terms = array_merge( wp_get_object_terms( $id, $attribute->name ), $terms );
-						$terms_to_add = wp_get_object_terms( $id, $attribute->name );
-						foreach( $terms_to_add as $term_to_add ) {
-							$term_id = tcp_get_current_id( $term_to_add->term_id, $attribute->name );
-							if ( $term_id != $term_to_add->term_id ) {
-								$translated_term_to_add = get_term( $term_id, $attribute->name );
-								$term_to_add->name = $translated_term_to_add->name;
+						<label><?php echo $attribute->labels->name; ?>:
+						<?php $terms = array();
+						foreach( $options as $id ) {
+							//$terms = array_merge( wp_get_object_terms( $id, $attribute->name ), $terms );
+							$terms_to_add = wp_get_object_terms( $id, $attribute->name );
+							foreach( $terms_to_add as $term_to_add ) {
+								$term_id = tcp_get_current_id( $term_to_add->term_id, $attribute->name );
+								if ( $term_id != $term_to_add->term_id ) {
+									$translated_term_to_add = get_term( $term_id, $attribute->name );
+									$term_to_add->name = $translated_term_to_add->name;
+								}
+								if ( ! isset( $terms[$term_to_add->term_id] ) ) $terms[$term_to_add->term_id] = $term_to_add;
 							}
-							if ( ! isset( $terms[$term_to_add->term_id] ) ) $terms[$term_to_add->term_id] = $term_to_add;
-						}
-					} 
-					$default_post_id = tcp_get_default_id( $post_id ); ?>
-					<select name="tcp_dynamic_option_<?php echo $default_post_id; ?>_<?php echo $attribute->name; ?>[]" id="tcp_dynamic_option_<?php echo $attribute->name; ?>_<?php echo $default_post_id; ?>" class="tcp_dynamic_options_<?php echo $default_post_id; ?>">
-					<?php foreach( $terms as $term ) : ?>
-						<option value="<?php echo $term->slug; ?>"><?php echo $term->name; ?></option>
-					<?php endforeach; ?>
-					</select>
-					</label>
-					</div>
+						} 
+						$default_post_id = tcp_get_default_id( $post_id ); ?>
+						<select name="tcp_dynamic_option_<?php echo $default_post_id; ?>_<?php echo $attribute->name; ?>[]" id="tcp_dynamic_option_<?php echo $attribute->name; ?>_<?php echo $default_post_id; ?>" class="tcp_dynamic_options_select tcp_dynamic_options_<?php echo $default_post_id; ?>">
+						<?php foreach( $terms as $term ) : ?>
+							<option value="<?php echo $term->slug; ?>"><?php echo $term->name; ?></option>
+						<?php endforeach; ?>
+						</select>
+						</label>
+					</div><!-- .tcp_dynamic_option_panel -->
 				<?php endforeach;
 			endif;
+	global $thecartpress;
+	$suffix = '';
+	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by' . $suffix, 'title' );
+	if ( $dynamic_options_order_by == 'title' ) { 
+		$dynamic_options_order = $thecartpress->get_setting( 'dynamic_options_order' . $suffix, 'ASC' ); ?>
+<script>
+jQuery( function() {
+	<?php if ( $dynamic_options_order == 'ASC' ) { ?>
+		tcp_sortDropDownListByTextAsc();
+	<?php } else { ?>
+		tcp_sortDropDownListByTextDsc();
+	<?php } ?>
+} );
+</script>
+			<?php }
 			$out .= ob_get_clean();
 		}
-		add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
+		add_filter( 'tcp_get_the_price_label', array( $this, 'tcp_get_the_price_label' ), 10, 2 );
 		return $out;
 	}
 
@@ -632,9 +704,9 @@ jQuery(document).ready(function() {
 		if ( ! isset( $_REQUEST['tcp_dynamic_option_' . $post_id][$i] ) ) {
 			if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
 				$dynamic_option_id	= $post_id;
-				$post_id = tcp_get_parent_from_dynamic_option( $post_id );
-				$unit_price = tcp_get_the_price( $post_id );
-				$unit_weight = tcp_get_the_weight( $post_id );
+				$post_id		= tcp_get_parent_from_dynamic_option( $post_id );
+				$unit_price		= tcp_get_the_price( $post_id );
+				$unit_weight	= tcp_get_the_weight( $post_id );
 			} else {
 				return $args;
 			}
@@ -655,6 +727,18 @@ jQuery(document).ready(function() {
 		return $args;
 	}
 
+	/**
+	 * If a product with dynamic options is added to the wish list,
+	 * added the dynamic option, not the product
+	 */
+	function tcp_add_wish_list( $post_id, $i ) {
+		if ( isset( $_REQUEST['tcp_dynamic_option_' . $post_id][$i] ) ) {
+			return $_REQUEST['tcp_dynamic_option_' . $post_id][$i];
+		} else {
+			return $post_id;
+		}
+	}
+
 	function tcp_get_discount_by_product( $discounts_by_product, $discounts, $product_id ) {
 		if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $product_id ) ) {
 			$post_id = tcp_get_parent_from_dynamic_option( $product_id );
@@ -670,14 +754,27 @@ jQuery(document).ready(function() {
 		return $discounts_by_product;
 	}
 
+	function tcp_get_discount_by_coupon_by_product( $discounts, $coupon, $product_id ) {
+		if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $product_id ) ) {
+			$post_id = tcp_get_parent_from_dynamic_option( $product_id );
+			if ( $coupon['product_id'] == $post_id ) {
+				$discounts[] = array(
+					'type'	=> $coupon['coupon_type'],
+					'value'	=> $coupon['coupon_value'],
+				);
+			}
+		}
+		return $discounts;
+	}
+
 	function tcp_get_the_title( $title, $post_id, $html, $show_parent ) {
 		if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
-			$parent_id = tcp_get_parent_from_dynamic_option( $post_id );
-			$title = get_the_title( $parent_id );
-			$attributes = tcp_get_attributes( 'objects' );
+			$parent_id	= tcp_get_parent_from_dynamic_option( $post_id );
+			$title		= get_the_title( $parent_id );
+			$attributes	= tcp_get_attributes( 'objects' );
 			foreach( $attributes as $attribute ) {
-				$terms = wp_get_object_terms( $post_id, $attribute->name ); 
-				$term = isset( $terms[0]->name ) ? $terms[0]->name : false;
+				$terms	= wp_get_object_terms( $post_id, $attribute->name ); 
+				$term	= isset( $terms[0]->name ) ? $terms[0]->name : false;
 				if ( $term !== false ) $title .= ', ' . $attribute->labels->name . ': ' . $term;
 				//else break;
 			}
@@ -700,13 +797,17 @@ jQuery(document).ready(function() {
 		return $url;
 	}
 
+	function post_type_link( $post_link, $post, $leavename, $sample ) {
+		return $this->tcp_get_permalink( $post_link, $post->ID );
+	}
+
 	function tcp_get_the_thumbnail( $image, $post_id, $size ) {
 		if ( strlen( $image ) == 0 ) {
 			if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
-				$parent_id = tcp_get_parent_from_dynamic_option( $post_id );
-				//$image = tcp_get_the_thumbnail( $image, $parent_id, $size );
-				$image = tcp_get_the_thumbnail( $parent_id, 0, 0, $size );
-				//$image = str_replace( 'tcp_image_' . $parent_id, 'tcp_image_' . $post_id, $image );
+				$parent_id	= tcp_get_parent_from_dynamic_option( $post_id );
+				//$image	= tcp_get_the_thumbnail( $image, $parent_id, $size );
+				$image		= tcp_get_the_thumbnail( $parent_id, 0, 0, $size );
+				//$image	= str_replace( 'tcp_image_' . $parent_id, 'tcp_image_' . $post_id, $image );
 				return $image;
 			}
 		}
@@ -787,8 +888,19 @@ jQuery(document).ready(function() {
 		return $post_types;
 	}
 
-	function tcp_get_the_price_label( $label, $post_id ) {
+	function tcp_get_the_price_label( $label, $post_id, $price = false ) {
+		if ( TCP_DYNAMIC_OPTIONS_POST_TYPE == get_post_type( $post_id ) ) {
+			global $thecartpress;
+			if ( 'complex' == $thecartpress->get_setting( 'dynamic_options_calculate_price', 'complex' ) ) {
+				if ( $price === false ) $price = tcp_get_the_price( $post_id );
+				$parent_id = tcp_get_parent_from_dynamic_option( $post_id );
+				$price += tcp_get_the_price( $parent_id );
+			}
+			return tcp_get_the_price_label( $parent_id, $price, false );
+		}
+
 		if ( 'SIMPLE' != tcp_get_the_product_type( $post_id ) ) return $label;
+
 		$options = tcp_get_dynamic_options( $post_id );
 		if ( is_array( $options ) && count( $options ) ) {
 			$min_price = 999999999;
@@ -815,9 +927,9 @@ jQuery(document).ready(function() {
 		}
 		$price = tcp_get_the_price_to_show( $post_id, $price );
 		//$label = tcp_format_the_price( $price );
-remove_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
+remove_filter( 'tcp_get_the_price_label', array( $this, 'tcp_get_the_price_label' ), 10, 2 );
 $label = tcp_get_the_price_label( '', $price );
-add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' ), 10, 2 );
+add_filter( 'tcp_get_the_price_label', array( $this, 'tcp_get_the_price_label' ), 10, 2 );
 		if ( $equal !== false ) return $label;
 		else return sprintf( __( 'From %s', 'tcp-do' ), $label );
 	}
@@ -903,4 +1015,4 @@ add_filter( 'tcp_get_the_price_label', array( &$this, 'tcp_get_the_price_label' 
 
 require_once( TCP_DYNAMIC_OPTIONS_POST_TYPE_FOLDER . 'DynamicOptionPostType.class.php' );
 $tcp_dynamic_options = new TCPDynamicOptions();
-?>
+} // class_exists check
