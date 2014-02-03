@@ -16,12 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+if ( ! class_exists( 'TCPDynamicOptionPostType' ) ) :
+
 class TCPDynamicOptionPostType {
 
 	static function create_default_custom_post_type_and_taxonomies() {
 		$def = array(
 			'name'					=> __( 'Dynamic Options', 'tcp-do' ),
-			'desc'					=> __( 'Options for TheCartPress Dynamic Options'),
+			'desc'					=> __( 'Options for TheCartPress Dynamic Options', 'tcp-do' ),
 			'activate'				=> true,
 			'singular_name'			=> __( 'Option', 'tcp-do' ),
 			'add_new'				=> __( 'Add New', 'tcp-do' ),
@@ -46,4 +51,4 @@ class TCPDynamicOptionPostType {
 		tcp_create_custom_post_type( TCP_DYNAMIC_OPTIONS_POST_TYPE, $def );
 	}
 }
-?>
+endif; // class_exists check

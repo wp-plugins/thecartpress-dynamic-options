@@ -95,8 +95,9 @@ function tcp_update_dynamic_option( $args ) {
 	wp_delete_object_term_relationships( $post_id, get_taxonomies() );
 	if ( isset( $args['terms'] ) && is_array( $args['terms'] ) ) {
 		$terms = $args['terms'];
-		foreach( $terms as $taxonomy => $term )
+		foreach( $terms as $taxonomy => $term ) {
 			wp_set_object_terms( $post_id, $term, $taxonomy, true );
+		}
 	}
 	$post = array(
 		'ID'			=> $post_id, 
@@ -206,13 +207,19 @@ function tcp_get_attributes( $type = 'names' ) {
 function tcp_get_attributes_by_product( $post_id = 0 ) {
 	if ( $post_id == 0 ) $post_id = get_the_ID();
 	$attributes = array();
+
+	//get attribute Set
 	$product_attribute_sets = get_post_meta( $post_id, 'tcp_attribute_sets', true );
-	if ( ! is_array( $product_attribute_sets ) ) $product_attribute_sets = array( $product_attribute_sets );
-	if ( count( $product_attribute_sets ) == 0 ) {
+	if ( ! is_array( $product_attribute_sets ) ) $product_attribute_sets = array();
+
+	//if not attribute Set, get attribute Set from default product (main language product)
+	if ( is_array( $product_attribute_sets ) && count( $product_attribute_sets ) == 0 ) {
 		$default_id = tcp_get_default_id( $post_id, get_post_type( $post_id ) );
 		$product_attribute_sets = get_post_meta( $default_id, 'tcp_attribute_sets', true );
 		if ( ! is_array( $product_attribute_sets ) ) $product_attribute_sets = array();
 	}
+
+	//if attribute Sets, get attributes (taxonomies)
 	if ( is_array( $product_attribute_sets ) && count( $product_attribute_sets ) > 0 ) {
 		$attribute_sets = get_option( 'tcp_attribute_sets', array() );
 		foreach( $product_attribute_sets as $id ) {
@@ -223,6 +230,7 @@ function tcp_get_attributes_by_product( $post_id = 0 ) {
 			}
 		}
 	}
+
 	return $attributes;
 }
 
@@ -328,4 +336,3 @@ function tcp_delete_attribute_set( $id ) {
 	unset( $attribute_sets[$id] );
 	update_option( 'tcp_attribute_sets', $attribute_sets);
 }
-?>
