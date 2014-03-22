@@ -138,7 +138,14 @@ function tcp_get_dynamic_options( $post_id, $p_args = array(), $filters = true )
 	);
 	foreach( $p_args as $key => $arg ) $args[$key] = $arg;
 	global $thecartpress;
-	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );
+
+	// Loading specific post_type settings
+	$post_type = get_post_type( $post_id );
+	$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by-' . $post_type, '' );
+	if ( empty( $dynamic_options_order_by ) ) {
+		$dynamic_options_order_by = $thecartpress->get_setting( 'dynamic_options_order_by', 'title' );
+	}
+
 	if ( 'title' == $dynamic_options_order_by ) {
 		$args['orderby'] = 'title';
 	} elseif ( 'price' == $dynamic_options_order_by ) {
