@@ -16,15 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /*tcp_delete_custom_taxonomy( 'compass-rose-50-gallon-corner-aquarium-with-aquarium-kit' );
 tcp_delete_custom_taxonomy( 'compass-rose-36-gallon-corner-fish-tank-with-aquarium-kit' );
 tcp_delete_custom_taxonomy( 'compass-rose-36-gallon-corner-fish-tank-beech' );*/
 
 if ( isset( $_REQUEST['tcp_insert'] ) ) :
 	$name = trim( $_REQUEST['tcp_name'] );
-	$key = trim( $_REQUEST['tcp_key'] );
+	$key  = trim( $_REQUEST['tcp_key'] );
 	if ( $key == '' ) $key = $name;
-	$key = str_replace( '-', '_', $key );
+	$key  = str_replace( '-', '_', $key );
 	if ( strlen( $name ) == 0 ) : ?>
 		<div id="message" class="error"><p>
 			<?php _e( 'The "name" field must be completed', 'tcp-do' );?>
@@ -72,6 +75,7 @@ endif;
 <div class="clear"></div>
 
 <h3><?php _e( 'Create new attribute', 'tcp-do' ); ?></h3>
+
 <form method="post">
 <table class="widefat fixed" cellspacing="0">
 <thead>
@@ -79,12 +83,15 @@ endif;
 	<th scope="col" class="manage-column"><?php _e( 'ID', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Name', 'tcp-do' ); ?></th>
 	<th scope="col" class="manage-column"><?php _e( 'Description', 'tcp-do' ); ?></th>
+	<th scope="col" class="manage-column" style="width: 20%;">&nbsp;</th>
 </tr>
+</thead>
 <tbody>
 <tr>
 	<td><input type="text" name="tcp_key" size="20" maxlength="255" /></td>
 	<td><input type="text" name="tcp_name" size="20" maxlength="255" /></td>
-	<td><textarea name="tcp_desc" cols="25" rows="2"></textarea><input type="submit" name="tcp_insert" value="<?php _e( 'insert', 'tcp-do' ); ?>" class="button-primary" /></td>
+	<td><textarea name="tcp_desc" cols="25" rows="2"></textarea></td>
+	<td><input type="submit" name="tcp_insert" value="<?php _e( 'insert', 'tcp-do' ); ?>" class="button-primary" /></td>
 </tr>
 </tbody>
 </table>

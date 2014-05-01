@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.3.1
+Version: 1.3.2
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 Text Domain: tcp-do
@@ -606,7 +606,8 @@ function tcp_set_price_<?php echo $post_id; ?>(e) {
 <script>
 function set_not_valid_<?php echo $post_id; ?>() {
 	jQuery('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php _e( 'Combination not valid', 'tcp-do' ); ?>');
-	jQuery('#tcp_add_product_<?php echo $post_id; ?>').hide();
+	jQuery('#tcp_add_product_<?php echo $post_id; ?>').hide(); // Old version, now is "tcp_add_to_shopping_cart_""
+	jQuery('#tcp_add_to_shopping_cart_<?php echo $post_id; ?>').hide();
 	jQuery('#tcp_dynamic_option_<?php echo $post_id; ?>').val(0);
 }
 
@@ -626,7 +627,8 @@ valid_values_<?php echo $post_id; ?>.push('<?php echo $id, ':', $valid; ?>');
 function tcp_set_price_<?php echo $id; ?>(e) {
 	var	form = jQuery(e).closest('form');
 	form.find('#tcp_unit_price_<?php echo $post_id; ?>').html('<?php echo tcp_get_the_price_label( $post_id, $product_price + $price, true ); ?>');
-	form.find('#tcp_add_product_<?php echo $post_id; ?>').show();
+	form.find('#tcp_add_product_<?php echo $post_id; ?>').show(); // Old version, now is "tcp_add_to_shopping_cart_""
+	form.find('#tcp_add_to_shopping_cart_<?php echo $post_id; ?>').show();
 	form.find('#tcp_dynamic_option_<?php echo $post_id; ?>').val(<?php echo $id; ?>);
 	jQuery('.tcp_thumbnail_<?php echo $post_id; ?>').hide();
 	jQuery('.tcp_thumbnail_option_<?php echo $id; ?>').show();
