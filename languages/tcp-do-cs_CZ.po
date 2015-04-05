@@ -1,0 +1,750 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TheCartPress Dynamic Options v1.3.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-12-11 12:27:02+0000\n"
+"Last-Translator: admin <jakub.ka@seznam.cz>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#. translators: plugin header field 'Name'
+#: DynamicOptions.class.php:0
+#@ tcp-do
+msgid "TheCartPress Dynamic Options"
+msgstr "TheCartPress Dynamic Options "
+
+#. translators: plugin header field 'PluginURI'
+#: DynamicOptions.class.php:0
+#@ tcp-do
+msgid "http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/"
+msgstr "http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/"
+
+#. translators: plugin header field 'Description'
+#: DynamicOptions.class.php:0
+#@ tcp-do
+msgid "Adds Dynamic Options to TheCartPress"
+msgstr "Přidat  Dynamic Options  to TheCartPress"
+
+#. translators: plugin header field 'Author'
+#: DynamicOptions.class.php:0
+#@ tcp-do
+msgid "TheCartPress team"
+msgstr "TheCartPress tým"
+
+#. translators: plugin header field 'AuthorURI'
+#: DynamicOptions.class.php:0
+#@ tcp-do
+msgid "http://thecartpress.com"
+msgstr "http://thecartpress.com"
+
+#. translators: plugin header field 'Version'
+#: DynamicOptions.class.php:0
+#@ tcp-do
+msgid "1.3.2"
+msgstr "1.3.2"
+
+#: DynamicOptions.class.php:219
+#@ tcp-do
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin activated."
+msgstr "<strong>Dynamic Options pro TheCartPress</strong> vyžaduje aktivovaný TheCartPress plugin."
+
+#: DynamicOptions.class.php:225
+#@ tcp-do
+msgid "<strong>Dynamic Options for TheCartPress</strong> requires TheCartPress plugin"
+msgstr "<strong>Dynamic Options pro TheCartPress</strong> vyžaduje TheCartPress plugin."
+
+#: DynamicOptions.class.php:243
+#: DynamicOptions.class.php:448
+#: admin/AttributeSets.php:78
+#: admin/AttributeSetsList.php:46
+#: admin/DynamicOptionsList.php:166
+#@ tcp-do
+msgid "Attribute Sets"
+msgstr "Sady vlastnosti"
+
+#: DynamicOptions.class.php:243
+#@ tcp-do
+msgid "Attributes Sets"
+msgstr "Sady vlastností"
+
+#: DynamicOptions.class.php:244
+#: admin/AttributeList.php:71
+#: admin/AttributeSetEdit.php:39
+#: admin/AttributeSetEdit.php:55
+#: admin/AttributeSets.php:81
+#: admin/AttributeSets.php:92
+#: admin/AttributeSets.php:104
+#: admin/AttributeSets.php:120
+#: admin/AttributeSets.php:128
+#: admin/AttributeSetsList.php:51
+#: admin/AttributeSetsList.php:81
+#: admin/AttributeSetsList.php:89
+#@ tcp-do
+msgid "Attributes"
+msgstr "Vlastnosti"
+
+#: DynamicOptions.class.php:245
+#: DynamicOptions.class.php:246
+#@ tcp-do
+msgid "Option list"
+msgstr "Seznam voleb"
+
+#: DynamicOptions.class.php:257
+#@ tcp-do
+msgid "Dynamic Option Settings"
+msgstr "Nastavení Dynamic Option"
+
+#: DynamicOptions.class.php:265
+#@ tcp-do
+msgid "Dynamic options type"
+msgstr "Typy dynamických voleb"
+
+#: DynamicOptions.class.php:269
+#@ tcp-do
+msgid "List"
+msgstr "Seznam"
+
+#: DynamicOptions.class.php:270
+#@ tcp-do
+msgid "Single"
+msgstr "Jednoduchý"
+
+#: DynamicOptions.class.php:271
+#@ tcp-do
+msgid "Multiple"
+msgstr "Mnohonásobný"
+
+#: DynamicOptions.class.php:277
+#@ tcp-do
+msgid "Dynamic options order by"
+msgstr "Seřadit dynamické volby podle"
+
+#: DynamicOptions.class.php:280
+#@ tcp-do
+msgid "Order field"
+msgstr "Pořadí pole"
+
+#: DynamicOptions.class.php:281
+#: admin/AttributeSetEdit.php:49
+#: admin/AttributeSets.php:90
+#: admin/AttributeSets.php:118
+#: admin/AttributeSets.php:126
+#: admin/AttributeSetsList.php:60
+#: admin/AttributeSetsList.php:79
+#: admin/AttributeSetsList.php:87
+#@ tcp-do
+msgid "Title"
+msgstr "Titulek"
+
+#: DynamicOptions.class.php:282
+#: admin/DynamicOptionsList.php:186
+#: admin/DynamicOptionsList.php:297
+#: admin/DynamicOptionsList.php:320
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:54
+#: metaboxes/DynamicOptionsMetabox.class.php:48
+#@ tcp-do
+msgid "Price"
+msgstr "Cena"
+
+#: DynamicOptions.class.php:287
+#@ tcp-do
+msgid "Dynamic options order"
+msgstr "Seřadit dynamické volby"
+
+#: DynamicOptions.class.php:290
+#@ tcp-do
+msgid "Ascending"
+msgstr "Vzestupně"
+
+#: DynamicOptions.class.php:291
+#@ tcp-do
+msgid "Descending"
+msgstr "Sestupně"
+
+#: DynamicOptions.class.php:296
+#@ tcp-do
+msgid "Dynamic options calculate price"
+msgstr "Dynamické možnosti vypočítají cenu"
+
+#: DynamicOptions.class.php:299
+#@ tcp-do
+msgid "Individual"
+msgstr "Individuální"
+
+#: DynamicOptions.class.php:300
+#@ tcp-do
+msgid "Complex"
+msgstr "Komplexní"
+
+#: DynamicOptions.class.php:301
+#@ tcp-do
+msgid "\"Individual\" value will return as the price of an option the price of the Product. \"Complex\" means that prices will be added."
+msgstr "Volba \"Individuální \" vrátí jako cenu volby cenu výrobku. \"Komplexní\" znamená, že ceny budou přidány."
+
+#: DynamicOptions.class.php:311
+#: DynamicOptions.class.php:421
+#@ tcp-do
+msgid "Parent"
+msgstr "Riodič"
+
+#: DynamicOptions.class.php:312
+#@ tcp-do
+msgid "Attribute set"
+msgstr "Sada vlastností"
+
+#: DynamicOptions.class.php:435
+#@ tcp-do
+msgid "dynamic options"
+msgstr "Dynamické nastavení"
+
+#: DynamicOptions.class.php:453
+#@ tcp-do
+msgid "none"
+msgstr "žádný"
+
+#: DynamicOptions.class.php:458
+#@ tcp-do
+msgid "Manage Attribute Sets"
+msgstr "Upravit sady vlastnosti"
+
+#: DynamicOptions.class.php:459
+#@ tcp-do
+msgid "This field helps us to join the product with its Dynamic Options"
+msgstr "Toto pole nám pomáhá spojit produkt s jeho dynamickýmimožnostmi"
+
+#: DynamicOptions.class.php:486
+#@ tcp_op
+#@ tcp-do
+msgid "Dynamic options"
+msgstr "Dynamické možnosti"
+
+#: DynamicOptions.class.php:608
+#@ tcp-do
+msgid "Combination not valid"
+msgstr "Kombinace není platná"
+
+#: DynamicOptions.class.php:729
+#, php-format
+#@ tcp-do
+msgid "<span class=\"tcp_units\">%s</span> <a href=\"%s\" class=\"alert-link\">in your cart</a>"
+msgstr "<span class=\"tcp_units\">%s</span> <a href=\"%s\" class=\"alert-link\">v košíku</a>"
+
+#: DynamicOptions.class.php:1016
+#, php-format
+#@ tcp-do
+msgid "From %s"
+msgstr "Z %s"
+
+#: admin/AttributeList.php:33
+#@ tcp-do
+msgid "The \"name\" field must be completed"
+msgstr "Pole \"jméno\" musí být hotové"
+
+#: admin/AttributeList.php:46
+#, php-format
+#@ tcp-do
+msgid "Search %s"
+msgstr "Hledat %s"
+
+#: admin/AttributeList.php:47
+#, php-format
+#@ tcp-do
+msgid "All %s"
+msgstr "Vše %s"
+
+#: admin/AttributeList.php:50
+#, php-format
+#@ tcp-do
+msgid "Edit %s"
+msgstr "Upravit %s"
+
+#: admin/AttributeList.php:51
+#, php-format
+#@ tcp-do
+msgid "Update %s"
+msgstr "Aktualizovat %s"
+
+#: admin/AttributeList.php:52
+#, php-format
+#@ tcp-do
+msgid "Add new %s"
+msgstr "Přidat nový %s"
+
+#: admin/AttributeList.php:53
+#, php-format
+#@ tcp-do
+msgid "New %s name"
+msgstr "Nový %s název"
+
+#: admin/AttributeList.php:60
+#@ tcp-do
+msgid "Taxonomy saved"
+msgstr "Struktura uložena"
+
+#: admin/AttributeList.php:66
+#@ tcp-do
+msgid "The taxonomy has been deleted"
+msgstr "Struktura byla smazána"
+
+#: admin/AttributeList.php:73
+#@ tcp-do
+msgid "Return to Attributes Sets"
+msgstr "Návrat na sady vlastností"
+
+#: admin/AttributeList.php:77
+#@ tcp-do
+msgid "Create new attribute"
+msgstr "Vytvořit novou vlastnost"
+
+#: admin/AttributeList.php:83
+#: admin/AttributeList.php:105
+#: admin/AttributeList.php:113
+#@ tcp-do
+msgid "ID"
+msgstr "ID"
+
+#: admin/AttributeList.php:84
+#: admin/AttributeList.php:106
+#: admin/AttributeList.php:114
+#@ tcp-do
+msgid "Name"
+msgstr "Jméno"
+
+#: admin/AttributeList.php:85
+#: admin/AttributeList.php:107
+#: admin/AttributeList.php:115
+#: admin/AttributeSetEdit.php:52
+#: admin/AttributeSets.php:91
+#: admin/AttributeSets.php:119
+#: admin/AttributeSets.php:127
+#: admin/AttributeSetsList.php:61
+#: admin/AttributeSetsList.php:80
+#: admin/AttributeSetsList.php:88
+#@ tcp-do
+msgid "Description"
+msgstr "Popis"
+
+#: admin/AttributeList.php:94
+#: admin/DynamicOptionsList.php:223
+#: admin/DynamicOptionsList.php:234
+#@ tcp-do
+msgid "insert"
+msgstr "vložit"
+
+#: admin/AttributeList.php:127
+#: admin/AttributeSetEdit.php:67
+#: admin/AttributeSets.php:141
+#@ tcp-do
+msgid "edit attribute"
+msgstr "upravit vlastnosti"
+
+#: admin/AttributeList.php:127
+#: admin/AttributeSets.php:141
+#: admin/AttributeSetsList.php:114
+#: admin/DynamicOptionsList.php:360
+#: metaboxes/DynamicOptionsMetabox.class.php:68
+#@ tcp-do
+msgid "edit"
+msgstr "upravit"
+
+#: admin/AttributeList.php:128
+#: admin/AttributeSetEdit.php:68
+#@ tcp-do
+msgid "add terms"
+msgstr "přidat termíny"
+
+#: admin/AttributeList.php:129
+#: admin/AttributeSets.php:146
+#: admin/AttributeSetsList.php:114
+#: admin/DynamicOptionsList.php:392
+#@ tcp-do
+msgid "delete"
+msgstr "smazat"
+
+#: admin/AttributeList.php:134
+#@ tcp-do
+msgid "Do you really want to delete this attribute?"
+msgstr "Opravdu chcete smazat tuto vlastnost?"
+
+#: admin/AttributeList.php:135
+#: admin/AttributeSets.php:152
+#: admin/AttributeSetsList.php:120
+#: admin/DynamicOptionsList.php:399
+#@ tcp-do
+msgid "Yes"
+msgstr "Ano"
+
+#: admin/AttributeList.php:136
+#: admin/AttributeSets.php:153
+#: admin/AttributeSetsList.php:121
+#: admin/DynamicOptionsList.php:400
+#@ tcp-do
+msgid "No, I don't"
+msgstr "Ne, nechci"
+
+#: admin/AttributeList.php:144
+#@ tcp-do
+msgid "The list is empty"
+msgstr "Seznam je prázdný"
+
+#: admin/AttributeSetEdit.php:23
+#: admin/AttributeSets.php:32
+#: admin/AttributeSetsList.php:23
+#@ tcp-do
+msgid "The Set has not been inserted. The title has been omitted."
+msgstr "Sada nebyla přidána. Titulek byl vynechán."
+
+#: admin/AttributeSetEdit.php:28
+#@ tcp-do
+msgid "The Set has been updated sucesfuly."
+msgstr "Sada byla úspěšně aktualizována."
+
+#: admin/AttributeSetEdit.php:35
+#, php-format
+#@ tcp-do
+msgid "Attribute Set: %s"
+msgstr "Sada vlastnosti %s"
+
+#: admin/AttributeSetEdit.php:37
+#@ tcp-do
+msgid "Return to Attribute Sets list"
+msgstr "Návrat na seznam Vlastnosti sad"
+
+#: admin/AttributeSetEdit.php:72
+#, php-format
+#@ tcp-do
+msgid "You need to create <a href=\"%s\">attributes</a> for Dynamic Options, as Colours, Sizes, etc."
+msgstr "Musíte vytvořit <a href=\"%s\">vlastnosti</a> pro Dynamic Options, jako barva, velikost aj."
+
+#: admin/AttributeSetEdit.php:80
+#: admin/AttributeSets.php:166
+#@ tcp-do
+msgid "Save"
+msgstr "Uložit"
+
+#: admin/AttributeSets.php:38
+#: admin/AttributeSetsList.php:29
+#@ tcp-do
+msgid "The Set has not been inserted, it already exists."
+msgstr "Sada nebyla vložena, protože již existuje"
+
+#: admin/AttributeSets.php:49
+#: admin/AttributeSetsList.php:33
+#@ tcp-do
+msgid "The Set has been inserted sucesfuly."
+msgstr "Sada byla úspěšně vložena"
+
+#: admin/AttributeSets.php:66
+#@ tcp-do
+msgid "The Sets have been updated sucesfuly."
+msgstr "Sady byly úspěšně zaktualizovány"
+
+#: admin/AttributeSets.php:73
+#: admin/AttributeSetsList.php:41
+#@ tcp-do
+msgid "The Set has been deleted sucesfuly."
+msgstr "Sady byly úspěšně smazány."
+
+#: admin/AttributeSets.php:85
+#: admin/AttributeSetsList.php:55
+#@ tcp-do
+msgid "New Attribute Set"
+msgstr "Nová sada vlastností"
+
+#: admin/AttributeSets.php:109
+#: admin/AttributeSetsList.php:68
+#@ tcp-do
+msgid "Insert"
+msgstr "Vložit"
+
+#: admin/AttributeSets.php:112
+#: admin/AttributeSetsList.php:74
+#@ tcp-do
+msgid "Current Attribute Set List"
+msgstr "Aktuální seznam vlastností sad"
+
+#: admin/AttributeSets.php:148
+#: admin/AttributeSetsList.php:116
+#@ tcp-do
+msgid "Do you really want to delete this Attribute Set?"
+msgstr "Opravdu chcete smazat tuto sadu vlastností?"
+
+#: admin/AttributeSets.php:160
+#: admin/AttributeSetsList.php:128
+#@ tcp-do
+msgid "The Attribute Sets list is empty"
+msgstr "Sady vlastnosti jsou prázdné"
+
+#: admin/AttributeSetsList.php:47
+#@ tcp-do
+msgid "Allows to create Attribute sets. These sets will contain attributes as \"colour\", \"size\". Each attribute will contain values, as \"red\", \"blue\", \"Large\", etc."
+msgstr "Dovolí vytvořit Vlastnost sad. Tyto sady budou obsahovat vlastnosti jako \"barva\", \"velikost\\\"\\. Každá vlastnost bude obsahovat hodnoty jako \"červená\", \"modrá\", \"velikost\", aj."
+
+#: admin/AttributeSetsList.php:48
+#@ tcp-do
+msgid "To create Color variations for a product (for example, for \"Cars\") you should create a set called \"Car variations\", then create an Attribute called \"Car Colours\", and finally add colours to the attribute."
+msgstr "Pro vytvoření variant barvy  k produktu (například pro \"Auta'\"), byste měli vytvořit sadu nazvanou \"Varianty auta\" a pak vytvořit vlastnost nazvanou \"Barvy auta\". A nakonec přidat barvy k vlastnosti."
+
+#: admin/AttributeSetsList.php:49
+#@ tcp-do
+msgid "With all these options defined for a product, you should visit \"Dynamic Options\", for each product, and create variations for the different values and attributes defined."
+msgstr "Se všemi těmito nastaveními definovanými pro produkt byste měli navštívit  \"Dynamic Options\" pro každý produkt, a vytvořit varianty pro různé hodnoty a definované vlastnosti."
+
+#: admin/AttributeSetsList.php:110
+#@ tcp-do
+msgid "No Attributes"
+msgstr "Žádné vlastnosti"
+
+#: admin/DynamicOptionsList.php:25
+#@ tcp-do
+msgid "To create options, you need, first, to assign a Set of Attributes to the product. If you have assigned a set, ensure the set has attributes assigned."
+msgstr "Pro vytvoření nastavení nejdříve potřebujete připojit Sadu vlastností k produktu. Pokud máte sadu připojenou, zjistěte připojené vlastnosti."
+
+#: admin/DynamicOptionsList.php:26
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:43
+#, php-format
+#@ tcp-do
+msgid "return to %s"
+msgstr "návrat do %s"
+
+#: admin/DynamicOptionsList.php:37
+#@ tcp-do
+msgid "The term has been inserted"
+msgstr "Termín byl vložen"
+
+#: admin/DynamicOptionsList.php:85
+#@ tcp-do
+msgid "The options have been modified"
+msgstr "Možnosti byly upraveny"
+
+#: admin/DynamicOptionsList.php:92
+#@ tcp-do
+msgid "The option has been inserted"
+msgstr "Možnost byla vložena"
+
+#: admin/DynamicOptionsList.php:96
+#@ tcp-do
+msgid "The option has not been inserted. The option already exists."
+msgstr "Možnost nebyla vložena. Možnost již existuje."
+
+#: admin/DynamicOptionsList.php:101
+#@ tcp-do
+msgid "The option has not been inserted."
+msgstr "Možnost nebyla vložena."
+
+#: admin/DynamicOptionsList.php:162
+#, php-format
+#@ tcp-do
+msgid "Options for %s"
+msgstr "Možnost pro %s"
+
+#: admin/DynamicOptionsList.php:164
+#, php-format
+#@ tcp-do
+msgid "Return to %s"
+msgstr "Návrat k %s"
+
+#: admin/DynamicOptionsList.php:168
+#@ tcp-do
+msgid "Manage Attributes"
+msgstr "Upravit vlastnosti"
+
+#: admin/DynamicOptionsList.php:181
+#: admin/DynamicOptionsList.php:292
+#: admin/DynamicOptionsList.php:316
+#: metaboxes/DynamicOptionsMetabox.class.php:44
+#@ tcp-do
+msgid "Edit attribute"
+msgstr "Upravit vlastnost"
+
+#: admin/DynamicOptionsList.php:190
+#@ tcp-do
+msgid "Sorting"
+msgstr "Třídění"
+
+#: admin/DynamicOptionsList.php:197
+#: customposttypes/DynamicOptionPostType.class.php:35
+#@ tcp-do
+msgid "New Option"
+msgstr "Nová volba"
+
+#: admin/DynamicOptionsList.php:202
+#: admin/DynamicOptionsList.php:260
+#: admin/DynamicOptionsList.php:371
+#@ tcp-do
+msgid "No one"
+msgstr "Žádný"
+
+#: admin/DynamicOptionsList.php:224
+#@ tcp-do
+msgid "create all"
+msgstr "vytvořit vše"
+
+#: admin/DynamicOptionsList.php:224
+#@ tcp-do
+msgid "Create all attribute variations"
+msgstr "Vytvořit všechny varianty vlastnosti"
+
+#: admin/DynamicOptionsList.php:229
+#@ tcp-do
+msgid "New terms"
+msgstr "Nové termíny"
+
+#: admin/DynamicOptionsList.php:278
+#@ tcp-do
+msgid "Filter"
+msgstr "Filtr"
+
+#: admin/DynamicOptionsList.php:301
+#: admin/DynamicOptionsList.php:324
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:64
+#@ tcp-do
+msgid "Order"
+msgstr "Pořadí"
+
+#: admin/DynamicOptionsList.php:306
+#: admin/DynamicOptionsList.php:329
+#@ tcp-do
+msgid "Delete"
+msgstr "Smazat"
+
+#: admin/DynamicOptionsList.php:364
+#@ tcp-do
+msgid "Set featured image"
+msgstr "Nastavit vzhled obrázku"
+
+#: admin/DynamicOptionsList.php:394
+#@ tcp-do
+msgid "Do you really want to delete this option?"
+msgstr "Opravdu chcete smazat tuto volbu?"
+
+#: admin/DynamicOptionsList.php:410
+#@ tcp-do
+msgid "Options will be ordered by title or price, this field will not be considered."
+msgstr "Volby budou seřazeny podle názvu nebo ceny, nebude bráno v úvahu toto pole."
+
+#: admin/DynamicOptionsList.php:411
+#, php-format
+#@ tcp-do
+msgid "To change the order, visit <a href=\"%s\">Theme compatibility</a> page."
+msgstr "Pro změnu pořadí navštivte stránku <a href=\"%s\">Kompatibilita šablony</a>."
+
+#: admin/DynamicOptionsList.php:414
+#@ tcp-do
+msgid "save"
+msgstr "uložit"
+
+#: admin/DynamicOptionsList.php:415
+#@ tcp-do
+msgid "All the options with the delete checkbox checked will be deleted."
+msgstr "Všechny možnosti se zaškrtnutým políčkem smazat, budou smazány."
+
+#: customposttypes/DynamicOptionPostType.class.php:28
+#@ tcp-do
+msgid "Dynamic Options"
+msgstr "Dynamic Options"
+
+#: customposttypes/DynamicOptionPostType.class.php:29
+#@ tcp-do
+msgid "Options for TheCartPress Dynamic Options"
+msgstr "Možnosti pro  TheCartPress Dynamic Options"
+
+#: customposttypes/DynamicOptionPostType.class.php:31
+#@ tcp-do
+msgid "Option"
+msgstr "Možnosti"
+
+#: customposttypes/DynamicOptionPostType.class.php:32
+#: customposttypes/DynamicOptionPostType.class.php:33
+#@ tcp-do
+msgid "Add New"
+msgstr "Přidat nový"
+
+#: customposttypes/DynamicOptionPostType.class.php:34
+#@ tcp-do
+msgid "Edit Option"
+msgstr "Upravit Možnosti"
+
+#: customposttypes/DynamicOptionPostType.class.php:36
+#@ tcp-do
+msgid "View Option"
+msgstr "Zobrazit Možnosti"
+
+#: customposttypes/DynamicOptionPostType.class.php:37
+#@ tcp-do
+msgid "Search Options"
+msgstr "Hledat Možnosti"
+
+#: customposttypes/DynamicOptionPostType.class.php:38
+#@ tcp-do
+msgid "No options found"
+msgstr "Nenalezena žádná možnost"
+
+#: customposttypes/DynamicOptionPostType.class.php:39
+#@ tcp-do
+msgid "No options found in Trash"
+msgstr "V koši nebyly nalezeny žádné možnosti"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:27
+#@ tcp-do
+msgid "Option Custom Fields"
+msgstr "Volba vlastních polí"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+#@ tcp-do
+msgid "return to options list"
+msgstr "návrat na seznam voleb"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:46
+#@ tcp-do
+msgid "Options list"
+msgstr "Seznam voleb"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:56
+#@ tcp-do
+msgid "This price will be added to the price of the parent."
+msgstr "Tato cena bude přidána k ceně rodiče."
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:59
+#@ tcp-do
+msgid "Weight"
+msgstr "Váha"
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:61
+#@ tcp-do
+msgid "If value is zero then the weight will be the weight of the parent. This weight will not be added to the weight of the parent anyway."
+msgstr "Pokud je hodnota nula, bude nastavena váha  rodiče. Tato váha nebude v žádném případě přiřazena rodiči."
+
+#: metaboxes/DynamicOptionsCustomFieldsMetabox.class.php:68
+#@ tcp-do
+msgid "Sku"
+msgstr "Skladová jednotka"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:25
+#@ tcp-do
+msgid "Product Dynamic options"
+msgstr "Produkt Dynamic options"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:34
+#@ tcp-do
+msgid "manage options list"
+msgstr "upravit seznam vlastností"
+
+#: metaboxes/DynamicOptionsMetabox.class.php:34
+#@ tcp-do
+msgid "Manage Options list"
+msgstr "Upravit seznam vlastností"
+

@@ -16,6 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 $original_post_id = isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : 0;
 $post_id = tcp_get_default_id( $original_post_id );
 $post = get_post( $post_id );
@@ -28,7 +31,11 @@ if ( count( $attributes ) == 0 ) { ?>
 	<?php //exit;
 }
 
-if ( isset( $_REQUEST['tcp_add_term'] ) ) {
+if ( isset( $_REQUEST['tcp_delete_options'] ) ) {
+	foreach( $_REQUEST['tcp_delete'] as $post_id_to_delete ) {
+		tcp_delete_dynamic_option( $post_id_to_delete );
+	}
+} else if ( isset( $_REQUEST['tcp_add_term'] ) ) {
 	foreach( $_REQUEST['tcp_add_term'] as $taxonomy => $value ) {
 		$term = trim( $_REQUEST['tcp_term'][$taxonomy] );
 		if ( strlen( $term ) > 0 ) {
@@ -411,8 +418,13 @@ if ( $thecartpress && 'order' != $thecartpress->get_setting( 'dynamic_options_or
 &nbsp;<?php printf( __( 'To change the order, visit <a href="%s">Theme compatibility</a> page.', 'tcp-do' ), get_admin_url() . 'admin.php?page=thecartpress/TheCartPress.class.php/appearance#dynamic_options_settings' ); ?>
 </span>
 <?php } ?>
-<p><input type="submit" name="tcp_save" value="<?php _e( 'save', 'tcp-do' ); ?>" class="button-primary"/>
-<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp-do' ); ?></span></p>
+<p>
+	<input type="submit" name="tcp_save" value="<?php _e( 'save', 'tcp-do' ); ?>" class="button-primary"/>
+	<!--<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp-do' ); ?></span>-->
+
+	<input type="submit" name="tcp_delete_options" value="<?php _e( 'delete', 'tcp-do' ); ?>" class="button-secondary"/>
+	<span class="description"><?php _e( 'All the options with the delete checkbox checked will be deleted.', 'tcp-do' ); ?></span>
+</p>
 </form>
 
 </div><!-- .wrap -->

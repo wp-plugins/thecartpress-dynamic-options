@@ -136,7 +136,9 @@ function tcp_get_dynamic_options( $post_id, $p_args = array(), $filters = true )
 		'numberposts'	=> -1,
 		'fields'		=> 'ids',
 	);
-	foreach( $p_args as $key => $arg ) $args[$key] = $arg;
+	foreach( $p_args as $key => $arg ) {
+		$args[$key] = $arg;
+	}
 	global $thecartpress;
 
 	// Loading specific post_type settings

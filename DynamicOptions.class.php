@@ -3,7 +3,7 @@
 Plugin Name: TheCartPress Dynamic Options
 Plugin URI: http://extend.thecartpress.com/ecommerce-plugins/dynamic-options/
 Description: Adds Dynamic Options to TheCartPress
-Version: 1.3.2
+Version: 1.3.3
 Author: TheCartPress team
 Author URI: http://thecartpress.com
 Text Domain: tcp-do
